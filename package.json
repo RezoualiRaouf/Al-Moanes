@@ -1,0 +1,24 @@
+{
+  "name": "al-moanes",
+  "version": "1.0.0",
+  "description": "web app that uses a Quran API to display verses and play audio recitations. Built with  JS.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RezoualiRaouf/Al-Moanes.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/RezoualiRaouf/Al-Moanes/issues"
+  },
+  "homepage": "https://github.com/RezoualiRaouf/Al-Moanes#readme",
+  "devDependencies": {
+    "parcel": "^2.16.1"
+  },
+  "scripts": {
+    "dev": "parcel index.html",
+    "build": "parcel build index.html"
+  }
+}
