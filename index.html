@@ -1,22 +1,60 @@
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles/style.css" />
-    <title>Al-Moanes</title>
+    <title>AL-Moanes - Listen to Beautiful Quran Recitations</title>
+    <link rel="stylesheet" href="./style.scss" />
   </head>
   <body>
-    <div class="conatiner">
-      <audio controls>
-        <source
-          class="fetch-audio"
-          src="https://server6.mp3quran.net/akdr/001.mp3"
-          type="audio/mpeg"
-        />
-        Your browser does not support audio playback.
-      </audio>
-    </div>
 
-    <script type="module" src="scripts/script.js"></script>
+    <div class="container">
+    <nav class="nav__section">
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#quran">quran</a></li>
+        <li><a href="#hadith">Hadith</a></li>
+        <li><a href="#live">Live</a></li>
+      </ul>
+    </nav>
+
+    <section class="hero__section">
+      <div class="hero__content">
+        <h1>Al-Moanes</h1>
+        <p>
+          Listen to beautiful Quran recitations from your favorite readers with
+          access to over 250 trusted reciters and multiple recitations from
+          across the Islamic world.
+        </p>
+        <button class="hero__content_btn">Start Listening</button>
+      </div>
+
+      <div class="hero__logo">
+        <img class="hero__logo_img" src="assets/Al-Moanes.png" alt="AL-Moanes logo">
+    </section>
+
+    <section class="search-section">
+      <div class="search-box">
+        <input type="text" placeholder="Search" />
+        <button class="clear-btn"></button>
+      </div>
+      <div class="search-box">
+        <input type="text" placeholder="Search" />
+        <button class="clear-btn"></button>
+      </div>
+      <div class="search-box">
+        <input type="text" placeholder="Search" />
+        <button class="clear-btn"></button>
+      </div>
+    </section>
+
+  </div>
+    <footer>
+      <div class="copyright">© Raouf Rezouali</div>
+      <div class="footer-icons">
+        <div class="footer-icon"></div>
+        <div class="footer-icon"></div>
+      </div>
+    </footer>
   </body>
 </html>
