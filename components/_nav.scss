@@ -1,0 +1,33 @@
+/* Navigation */
+.nav__section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 3rem;
+  position: relative;
+  z-index: 100;
+}
+.nav-links {
+  align-self: center;
+  justify-content: center;
+  display: flex;
+  gap: 2rem;
+  margin-left: 3rem;
+  list-style: none;
+}
+
+.nav-links a {
+  color: #2d6b5a;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+}
+
+.nav-links a:hover {
+  background: rgba(255, 255, 255, 0.3);
+}

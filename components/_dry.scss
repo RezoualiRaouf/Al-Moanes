@@ -1,0 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, sans-serif;
+  background: linear-gradient(
+    135deg,
+    #d4f1e8 0%,
+    #a8dcc9 40%,
+    #7bc9a8 70%,
+    #5eb89a 100%
+  );
+  min-height: 100vh;
+  overflow-x: hidden;
+}
