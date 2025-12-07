@@ -1,0 +1,218 @@
+:root {
+  --container-width: 119rem;
+  --gutter: 2rem;
+  --section-max-width: 1400px;
+  --section-gutter: 3rem;
+  /* Brand Colors - Your Logo Palette */
+  --color-primary: #066b50;
+  --color-primary-light: #088567;
+  --color-primary-dark: #044d39;
+
+  --color-secondary: #acd481;
+  --color-secondary-light: #c5e39f;
+  --color-secondary-dark: #8fb968;
+
+  --color-accent: #cbeab2;
+  --color-accent-light: #e3f4d7;
+  --color-accent-dark: #b3d999;
+
+  --color-cream: #fffdf8;
+
+  /* Light Mode Colors */
+  --bg-primary: #fffdf8;
+  --bg-secondary: #f5f9f0;
+  --bg-tertiary: #e8f3e0;
+  --bg-card: rgba(255, 253, 248, 0.95);
+  --bg-hover: rgba(203, 234, 178, 0.2);
+
+  --text-primary: #1a3329;
+  --text-secondary: #044d39;
+  --text-tertiary: #066b50;
+  --text-muted: #5a7a6d;
+  --text-inverse: #fffdf8;
+
+  --border-color: rgba(6, 107, 80, 0.15);
+  --border-hover: rgba(6, 107, 80, 0.3);
+  --divider: rgba(172, 212, 129, 0.3);
+
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(6, 107, 80, 0.08);
+  --shadow-md: 0 4px 12px rgba(6, 107, 80, 0.12);
+  --shadow-lg: 0 8px 24px rgba(6, 107, 80, 0.15);
+  --shadow-xl: 0 12px 40px rgba(6, 107, 80, 0.2);
+
+  /* Gradient Backgrounds */
+  --gradient-main: linear-gradient(
+    to bottom,
+    #fffdf8 0%,
+    #fffdf8 10%,
+    #cbeab2 30%,
+    #acd481 60%,
+    #066b50 90%
+  );
+  --gradient-overlay: linear-gradient(
+    135deg,
+    rgba(203, 234, 178, 0.8) 0%,
+    rgba(172, 212, 129, 0.6) 50%,
+    rgba(6, 107, 80, 0.9) 100%
+  );
+  --gradient-card: linear-gradient(
+    to bottom right,
+    rgba(255, 253, 248, 0.95),
+    rgba(203, 234, 178, 0.3)
+  );
+  --gradient-button: linear-gradient(135deg, #066b50 0%, #088567 100%);
+  --gradient-button-hover: linear-gradient(135deg, #088567 0%, #0aa07a 100%);
+
+  /* Status Colors */
+  --success: #4caf50;
+  --warning: #ff9800;
+  --error: #f44336;
+  --info: #2196f3;
+
+  /* Spacing Scale */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  /* Typography */
+  --font-body: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  --font-arabic: "Traditional Arabic", "Noto Naskh Arabic", serif;
+  --font-heading: "Amiri", "Georgia", serif;
+
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  --font-size-hero-header: 4rem;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+  --line-height-loose: 2;
+
+  /* Transitions */
+  --transition-fast: 150ms ease-in-out;
+  --transition-base: 250ms ease-in-out;
+  --transition-slow: 400ms ease-in-out;
+
+  /* Z-index Scale */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+}
+
+/* Dark Mode */
+[data-theme="dark"] {
+  --bg-primary: #0d1f1a;
+  --bg-secondary: #132822;
+  --bg-tertiary: #1a3329;
+  --bg-card: rgba(19, 40, 34, 0.95);
+  --bg-hover: rgba(172, 212, 129, 0.1);
+
+  --text-primary: #fffdf8;
+  --text-secondary: #cbeab2;
+  --text-tertiary: #acd481;
+  --text-muted: #7a9b8a;
+  --text-inverse: #0d1f1a;
+
+  --border-color: rgba(172, 212, 129, 0.15);
+  --border-hover: rgba(172, 212, 129, 0.3);
+  --divider: rgba(172, 212, 129, 0.2);
+
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 12px 40px rgba(0, 0, 0, 0.6);
+
+  --gradient-main: linear-gradient(
+    to bottom,
+    #0d1f1a 0%,
+    #132822 10%,
+    #1a3329 30%,
+    #066b50 60%,
+    #088567 90%
+  );
+  --gradient-overlay: linear-gradient(
+    135deg,
+    rgba(6, 107, 80, 0.9) 0%,
+    rgba(4, 77, 57, 0.8) 50%,
+    rgba(13, 31, 26, 0.95) 100%
+  );
+  --gradient-card: linear-gradient(
+    to bottom right,
+    rgba(19, 40, 34, 0.95),
+    rgba(6, 107, 80, 0.2)
+  );
+  --gradient-button: linear-gradient(135deg, #088567 0%, #0aa07a 100%);
+  --gradient-button-hover: linear-gradient(135deg, #0aa07a 0%, #0cb88d 100%);
+}
+
+/* Auto Dark Mode (based on system preference) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg-primary: #0d1f1a;
+    --bg-secondary: #132822;
+    --bg-tertiary: #1a3329;
+    --bg-card: rgba(19, 40, 34, 0.95);
+    --bg-hover: rgba(172, 212, 129, 0.1);
+
+    --text-primary: #fffdf8;
+    --text-secondary: #cbeab2;
+    --text-tertiary: #acd481;
+    --text-muted: #7a9b8a;
+    --text-inverse: #0d1f1a;
+
+    --border-color: rgba(172, 212, 129, 0.15);
+    --border-hover: rgba(172, 212, 129, 0.3);
+    --divider: rgba(172, 212, 129, 0.2);
+
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+    --shadow-xl: 0 12px 40px rgba(0, 0, 0, 0.6);
+
+    --gradient-main: linear-gradient(
+      to bottom,
+      #0d1f1a 0%,
+      #132822 10%,
+      #1a3329 30%,
+      #066b50 60%,
+      #088567 90%
+    );
+    --gradient-overlay: linear-gradient(
+      135deg,
+      rgba(6, 107, 80, 0.9) 0%,
+      rgba(4, 77, 57, 0.8) 50%,
+      rgba(13, 31, 26, 0.95) 100%
+    );
+    --gradient-card: linear-gradient(
+      to bottom right,
+      rgba(19, 40, 34, 0.95),
+      rgba(6, 107, 80, 0.2)
+    );
+  }
+}

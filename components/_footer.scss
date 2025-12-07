@@ -8,23 +8,6 @@ footer {
   margin: 0 auto;
 }
 
-.status {
-  background: rgba(45, 107, 90, 0.2);
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.9rem;
-  color: #2d6b5a;
-}
-
-.status::before {
-  content: "●";
-  color: #4ade80;
-  font-size: 1.2rem;
-}
-
 .copyright {
   color: #5a9b85;
   font-size: 0.9rem;
@@ -33,21 +16,4 @@ footer {
 .footer-icons {
   display: flex;
   gap: 1rem;
-}
-
-.footer-icon {
-  width: 36px;
-  height: 36px;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.footer-icon:hover {
-  background: rgba(255, 255, 255, 0.5);
-  transform: translateY(-2px);
 }

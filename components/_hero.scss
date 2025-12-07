@@ -1,34 +1,36 @@
 /* Hero Section */
+
 .hero__section {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
-  padding: 4rem 3rem;
+  padding: 4rem var(--section-gutter);
   align-items: center;
-  max-width: 1400px;
+  max-width: var(--section-max-width);
   margin: 0 auto;
 }
 
 .hero__content h1 {
-  font-size: 4rem;
-  color: #1a4d3e;
+  font-size: var(--font-size-hero-header);
+  color: var(--color-primary-dark);
   margin-bottom: 1.5rem;
-  font-weight: 700;
+  font-weight: 400;
+  font-family: "The Seasons";
 }
 
 .hero__content p {
-  font-size: 1.4rem;
-  color: #2d6b5a;
+  font-size: var(--font-size-2xl);
+  color: var(--color-primary-dark);
   line-height: 1.7;
   margin-bottom: 2rem;
 }
 
 .hero__content_btn {
-  background: #2d6b5a;
+  background: var(--color-primary-dark);
   color: white;
   border: none;
   padding: 1rem 2rem;
-  font-size: 1rem;
+  font-size: var(--font-size-lg);
   border-radius: 50px;
   cursor: pointer;
   display: inline-flex;
@@ -46,12 +48,11 @@
 
 .hero__content_btn::after {
   content: "›";
-  font-size: 1.5rem;
+  font-size: var(--font-size-2xl);
 }
 
-/* Hero Logo */
 .hero__logo {
-  padding: 3rem;
+  padding: 3rem 0rem 3rem 3rem;
   position: relative;
 }
 

@@ -1,19 +1,50 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+body {
+  background: linear-gradient(
+    to bottom,
+    #fffdf8 0%,
+    #fffdf8 10%,
+    #cbeab2 30%,
+    #acd481 60%,
+    #066b50 90%
+  );
 }
 
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, sans-serif;
-  background: linear-gradient(
-    135deg,
-    #d4f1e8 0%,
-    #a8dcc9 40%,
-    #7bc9a8 70%,
-    #5eb89a 100%
-  );
-  min-height: 100vh;
-  overflow-x: hidden;
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: var(--container-width);
+  padding: 0 var(--gutter);
+}
+
+.back_to_top {
+  position: fixed;
+  color: var(--color-white);
+  background-color: var(--color-btn);
+  padding: 15px 20px;
+  border-radius: 3px;
+  bottom: 60px;
+  right: 20px;
+  transition: all ease 0.3s;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none; /* prevents clicking when the btn is hidden */
+}
+
+.back_to_top.show {
+  opacity: 1;
+  pointer-events: auto; /* enable clicks when visible */
+}
+.back_to_top:hover {
+  transform: scale3d(1.1, 1.1, 1.1);
+  transition: all ease 0.3s;
+}
+
+.back_to_top::before {
+  content: "\2191";
+  font-size: 20px;
 }

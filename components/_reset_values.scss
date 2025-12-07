@@ -1,0 +1,33 @@
+/* Reset default values*/
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
+*::after,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+section {
+  scroll-margin-top: var(--scroll-margin-top);
+}
+
+a {
+  position: relative;
+  color: inherit;
+  display: inline-block;
+  text-decoration: none;
+}
+button {
+  border: none;
+  cursor: pointer;
+}
+ul,
+ol {
+  list-style: none;
+}
