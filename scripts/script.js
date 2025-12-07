@@ -1,5 +1,9 @@
-async function fetchAudio() {
-  try {
-    const res = await fetch("https://server6.mp3quran.net/akdr/001.mp3");
-  } catch {}
-}
+window.addEventListener("scroll", () => {
+  const nav = document.querySelector(".nav__section");
+
+  if (window.scrollY > 50) {
+    nav.classList.add("scrolled");
+  } else {
+    nav.classList.remove("scrolled");
+  }
+});
