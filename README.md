@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./assets/Al-Moanes-mini-logo.png" alt="Al-Moanes logo" width="250"/>
+  <img src="./assets/Al-Moanes-mini-logo.png" alt="Al-Moanes logo" width="350"/>
 </p>
 
 # Al-Moanes
