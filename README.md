@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./assets/Al-Moanes.png" alt="WP Email Restriction Logo" width="350"/>
+  <img src="./assets/Al-Moanes-mini-logo.png" alt="Al-Moanes logo" width="250"/>
 </p>
 
 # Al-Moanes
