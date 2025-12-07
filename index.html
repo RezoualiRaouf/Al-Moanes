@@ -3,19 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AL-Moanes - Listen to Beautiful Quran Recitations</title>
+    <title>AL-Moanes</title>
     <link rel="stylesheet" href="./style.scss" />
   </head>
   <body>
 
     <div class="container">
     <nav class="nav__section">
-      <ul class="nav-links">
+      
+      <ul class="nav__links">
         <li><a href="#home">Home</a></li>
         <li><a href="#quran">quran</a></li>
         <li><a href="#hadith">Hadith</a></li>
         <li><a href="#live">Live</a></li>
       </ul>
+
+      <img class="nav__logo" src="assets/Al-Moanes-mini-logo.png" alt="Al Moanes mini logo">
+ 
+      <label class="switch" >
+        <input type="checkbox" id="theme-toggle">
+        <span class="slider"></span>
+      </label>    
+
     </nav>
 
     <section class="hero__section">
@@ -34,27 +43,12 @@
     </section>
 
     <section class="search-section">
-      <div class="search-box">
-        <input type="text" placeholder="Search" />
-        <button class="clear-btn"></button>
-      </div>
-      <div class="search-box">
-        <input type="text" placeholder="Search" />
-        <button class="clear-btn"></button>
-      </div>
-      <div class="search-box">
-        <input type="text" placeholder="Search" />
-        <button class="clear-btn"></button>
-      </div>
     </section>
 
-  </div>
     <footer>
       <div class="copyright">© Raouf Rezouali</div>
-      <div class="footer-icons">
-        <div class="footer-icon"></div>
-        <div class="footer-icon"></div>
-      </div>
     </footer>
+    </div>
+    <script src="scripts/script.js" type="module"></script>
   </body>
 </html>
