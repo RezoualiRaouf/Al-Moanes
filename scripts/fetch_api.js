@@ -25,6 +25,15 @@ function formatTime(seconds) {
 
 const audioPlayer = document.getElementById("audioPlayer");
 const playBtn = document.getElementById("playBtn");
+const muteBtn = document.getElementById("muteBtn");
+const skipSecBtn = document.getElementById("skipSecBtn");
+const prevSecBtn = document.getElementById("prevSecBtn");
+
+muteBtn.addEventListener("click", () => {
+  audioPlayer.muted = !audioPlayer.muted;
+
+  muteBtn.innerText = audioPlayer.muted ? "Mute" : "Unmute";
+});
 
 playBtn.addEventListener("click", () => {
   if (audioPlayer.paused) {
@@ -43,4 +52,15 @@ audioPlayer.addEventListener("timeupdate", () => {
   progressBar.value = percentage;
   surahCurrentTime.innerText = formatTime(audioPlayer.currentTime);
   surahDuration.innerText = formatTime(audioPlayer.duration);
+});
+
+skipSecBtn.addEventListener("click", () => {
+  audioPlayer.currentTime = Math.min(
+    (audioPlayer.currentTime || 0) + 10,
+    audioPlayer.duration || Infinity
+  );
+});
+
+prevSecBtn.addEventListener("click", () => {
+  audioPlayer.currentTime = Math.max(0, (audioPlayer.currentTime || 0) - 10);
 });
