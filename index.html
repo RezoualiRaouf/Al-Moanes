@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AL-Moanes</title>
     <link rel="stylesheet" href="./style.scss" />
-  </head>
+ </head>
   <body>
 
     <div class="container">
@@ -84,16 +84,30 @@
       <div class="silten__surah">
         
         <audio id="audioPlayer" >
-          <source src="#" type="audio/mpeg">
+          
+        <source src="https://server6.mp3quran.net/kurdi/002.mp3" type="audio/mpeg">
           Your browser does not support the audio element.
         </audio>
-        <button id="playBtn"></button>
+        
+        <button id="playBtn">
+           <span>▶️ Play</span>
+        </button>
+        
         <input type="range" min="0" max="100" id="progressBar">
+        
         <button id="muteBtn"></button>
+        
         <button id="nextSurah"></button>
+        
         <button id="prevSurah"></button>
+        
         <button id="skipSec"></button>
+
         <button id="prevSec"></button>
+
+        <div id="surahCurrentTime">0:00</div> 
+        
+        <div id="surahDuration">0:00</div>
       </div>
     </section>
 
@@ -101,6 +115,8 @@
       <div class="copyright">Raouf Rezouali©</div>
     </footer>
     </div>
-    <script src="scripts/script.js" type="module"></script>
+      <script src="scripts/script.js" type="module"></script>
+      <script src="scripts/fetch_api.js" type="module"></script>
+ 
   </body>
 </html>
