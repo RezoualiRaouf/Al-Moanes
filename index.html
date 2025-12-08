@@ -13,7 +13,8 @@
       
       <ul class="nav__links">
         <li><a href="#home">Home</a></li>
-        <li><a href="#quran">quran</a></li>
+        <li><a href="#recitation">Recitation</a></li>
+        <li><a href="#quran">Quran</a></li>
         <li><a href="#hadith">Hadith</a></li>
         <li><a href="#live">Live</a></li>
       </ul>
@@ -42,11 +43,62 @@
         <img class="hero__logo_img" src="assets/Al-Moanes.png" alt="AL-Moanes logo">
     </section>
 
-    <section class="search-section">
+    <section class="listen__section">
+      <div class="select__reciter listen__el">
+        <form >
+        <label for="reciter">Select a reciter:</label>
+
+        <select id="reciter">
+          <option value="1">Value 1</option>
+          <option value="2">Value 2</option>
+          <option value="3">Value 3</option>
+        </select>
+        </form>
+      </div>
+
+      <div class="select__narration listen__el">
+        <form >
+        <label for="narration">Select a Narration/Rewaya:</label>
+
+        <select id="reciter">
+          <option value="1">Value 1</option>
+          <option value="2">Value 2</option>
+          <option value="3">Value 3</option>
+        </select>
+        </form>
+      </div>
+
+      <div class="select__surah listen__el">
+
+        <form >
+        <label for="reciter">Select a reciter:</label>
+
+        <select id="reciter">
+          <option value="1">Value 1</option>
+          <option value="2">Value 2</option>
+          <option value="3">Value 3</option>
+        </select>
+        </form>
+      </div>
+
+      <div class="silten__surah">
+        
+        <audio id="audioPlayer" >
+          <source src="#" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+        <button id="playBtn"></button>
+        <input type="range" min="0" max="100" id="progressBar">
+        <button id="muteBtn"></button>
+        <button id="nextSurah"></button>
+        <button id="prevSurah"></button>
+        <button id="skipSec"></button>
+        <button id="prevSec"></button>
+      </div>
     </section>
 
     <footer>
-      <div class="copyright">© Raouf Rezouali</div>
+      <div class="copyright">Raouf Rezouali©</div>
     </footer>
     </div>
     <script src="scripts/script.js" type="module"></script>
