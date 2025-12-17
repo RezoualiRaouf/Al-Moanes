@@ -1,34 +1,75 @@
-/* Search Section */
-.listen__section {
-  padding: 3rem;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 2;
-  gap: 2rem;
-  max-width: 1400px;
-  margin: 0 auto;
-}
+/* Listen section effects and animations only */
 
 .listen__el {
-  backdrop-filter: blur(10px);
-  border-radius: 15px;
-  padding: 1rem 1.5rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
   transition: all 0.3s ease;
   border: 2px solid transparent;
 }
 
-.listen__el input {
-  border: none;
-  background: transparent;
-  outline: none;
-  flex: 1;
-  font-size: 1rem;
-  color: #2d6b5a;
+.listen__el:hover {
+  border-color: rgba(6, 107, 80, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(6, 107, 80, 0.15);
+}
+
+.listen__el input,
+.listen__el select {
+  transition: all 0.3s ease;
 }
 
 .listen__el input::placeholder {
   color: #5a9b85;
+}
+
+/* Audio player button effects */
+button {
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+/* Progress bar styling */
+#progressBar {
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  border-radius: 4px;
+  background: rgba(6, 107, 80, 0.2);
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+#progressBar::-webkit-slider-thumb {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#progressBar::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 10px rgba(6, 107, 80, 0.5);
+}
+
+#progressBar::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+#progressBar::-moz-range-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 10px rgba(6, 107, 80, 0.5);
 }

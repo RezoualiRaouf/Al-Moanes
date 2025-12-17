@@ -1,18 +1,4 @@
-/* Navigation */
-
-.nav__section {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: relative;
-  z-index: 100;
-  max-width: var(--section-max-width);
-  width: 100%;
-  padding: 3rem var(--section-gutter);
-  margin: 0 auto;
-  position: sticky;
-  top: 0;
-}
+/* Navigation effects and animations only */
 
 .scrolled {
   background: rgba(255, 255, 255, 0.62);
@@ -24,27 +10,16 @@
   margin-top: 30px;
 }
 
-.nav__links {
-  align-self: center;
-  justify-content: center;
-  display: flex;
-  gap: 1.5rem;
-  font-family: var(--font-body);
-  font-weight: var(--font-weight-medium);
-  margin: 0;
-}
-
 .nav__links a {
   color: var(--color-primary-light);
   text-decoration: none;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.95rem;
+  font-size: var(--font-size-lg);
   transition: all 0.3s ease;
   padding: 0.5rem 1rem;
   border-radius: 6px;
-  font-size: var(--font-size-lg);
   position: relative;
   background: linear-gradient(var(--bg-hover), var(--bg-hover)) no-repeat;
   background-size: 0% 100%;
@@ -89,15 +64,8 @@
   opacity: 1;
 }
 
-.nav__logo {
-  width: 250px;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
+/* Switch theme toggle styles */
 .switch {
-  display: block;
   --width-of-switch: 3.5em;
   --height-of-switch: 2em;
   --size-of-icon: 1.4em;
@@ -105,11 +73,7 @@
   position: relative;
   width: var(--width-of-switch);
   height: var(--height-of-switch);
-  cursor: pointer;
-  order: 3;
 }
-
-/* The switch theme*/
 
 .slider {
   position: absolute;
@@ -124,10 +88,9 @@
   box-shadow: inset 0 2px 4px rgba(6, 107, 80, 0.1),
     0 2px 8px rgba(6, 107, 80, 0.15);
   border: 1.5px solid rgba(6, 107, 80, 0.2);
-  margin-left: auto;
 }
 
-/* Sun icon (light mode) */
+/* Sun icon */
 .slider:before {
   position: absolute;
   content: "";
@@ -144,7 +107,7 @@
   border: 2px solid rgba(255, 253, 248, 0.9);
 }
 
-/* sun rays */
+/* Sun rays */
 .slider:after {
   content: "";
   position: absolute;
@@ -161,7 +124,7 @@
   pointer-events: none;
 }
 
-/* Dark mode checked */
+/* Dark mode */
 input:checked + .slider {
   background: linear-gradient(135deg, #066b50 0%, #044d39 100%);
   border-color: rgba(172, 212, 129, 0.3);
@@ -169,24 +132,20 @@ input:checked + .slider {
     0 2px 8px rgba(6, 107, 80, 0.3);
 }
 
-/* Moon icon (dark mode) */
 input:checked + .slider:before {
   left: calc(100% - (var(--size-of-icon, 1.4em) + var(--slider-offset, 0.3em)));
   background: linear-gradient(135deg, #e8f3e0 0%, #cbeab2 100%);
   border-color: rgba(203, 234, 178, 0.5);
-  /* Crescent moon effect */
   box-shadow: inset -6px -3px 0 0 #066b50, 0 0 12px rgba(203, 234, 178, 0.5),
     0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* Remove sun glow in dark mode */
 input:checked + .slider:after {
   left: calc(100% - (var(--size-of-icon, 1.4em) + var(--slider-offset, 0.3em)));
   opacity: 0;
   box-shadow: none;
 }
 
-/* Hover effects */
 .slider:hover {
   box-shadow: inset 0 2px 4px rgba(6, 107, 80, 0.15),
     0 4px 12px rgba(6, 107, 80, 0.25);
@@ -198,12 +157,10 @@ input:checked + .slider:hover {
     0 4px 12px rgba(6, 107, 80, 0.4);
 }
 
-/* Active state */
 .slider:active {
   transform: scale(0.98);
 }
 
-/* stars effect in dark mode (optional) */
 input:checked + .slider::before {
   animation: twinkle 2s infinite ease-in-out;
 }
