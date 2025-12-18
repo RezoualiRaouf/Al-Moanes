@@ -8,14 +8,14 @@
     <link rel="stylesheet" href="style.scss" />
   </head>
   <body>
-    <!-- Container: max width + padding -->
+    <!-- Container -->
     <div class="max-w-7xl mx-auto px-6">
-      <!-- Navigation: flex + sticky -->
+      <!-- Navigation -->
       <nav
         class="nav__section flex items-center justify-between sticky top-0 z-50 py-12"
       >
-        <!-- Links: flex with gap -->
-        <ul class="nav__links flex gap-6">
+        <!-- Links -->
+        <ul class="nav__links flex gap-3">
           <li><a href="#home">Home</a></li>
           <li><a href="#recitation">Recitation</a></li>
           <li><a href="#quran">Quran</a></li>
@@ -23,25 +23,23 @@
           <li><a href="#live">Live</a></li>
         </ul>
 
-        <!-- Centered logo -->
         <img
           class="nav__logo w-64 absolute left-1/2 -translate-x-1/2"
           src="assets/Al-Moanes-mini-logo.png"
           alt="Al Moanes mini logo"
         />
 
-        <!-- Theme toggle -->
         <label class="switch">
           <input type="checkbox" id="theme-toggle" />
           <span class="slider"></span>
         </label>
       </nav>
 
-      <!-- Hero Section: 2 columns on large screens -->
+      <!-- Hero Section -->
       <section
         class="hero__section grid grid-cols-1 lg:grid-cols-2 gap-16 py-16 items-center"
       >
-        <!-- Left: Content -->
+        <!-- Left -->
         <div class="hero__content">
           <h1 class="hero__title mb-6">AL-Moanes</h1>
           <p class="hero__text mb-8">
@@ -52,7 +50,7 @@
           <button class="hero__btn">Start Listening</button>
         </div>
 
-        <!-- Right: Logo -->
+        <!-- Logo -->
         <div class="p-12">
           <img
             class="hero__logo_img"
@@ -62,7 +60,7 @@
         </div>
       </section>
 
-      <!-- Listen Section: 3 columns grid -->
+      <!-- Listen Section -->
       <section
         class="listen__section grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 py-12"
       >
