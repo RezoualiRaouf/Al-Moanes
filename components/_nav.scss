@@ -1,71 +1,7 @@
 /* Navigation section */
 
-// Link hover effects
-.nav__links a {
-  color: var(--color-primary-light);
-  text-decoration: none;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  position: relative;
-
-  // Background slide animation
-  background: linear-gradient(
-      rgba(203, 234, 178, 0.2),
-      rgba(203, 234, 178, 0.2)
-    )
-    no-repeat;
-  background-size: 0% 100%;
-  background-position: left center;
-
-  &:hover {
-    background-size: 100% 100%;
-    color: var(--color-primary);
-    border-radius: 8px;
-  }
-
-  // Animated corner borders
-  &::before,
-  &::after {
-    content: "";
-    position: absolute;
-    width: 0;
-    height: 0;
-    opacity: 0;
-    transition: all 0.4s ease;
-  }
-
-  &::before {
-    top: 0;
-    left: 0;
-    border-top: 2px solid var(--color-primary);
-    border-left: 2px solid var(--color-primary);
-  }
-
-  &::after {
-    bottom: 0;
-    right: 0;
-    border-bottom: 2px solid var(--color-primary);
-    border-right: 2px solid var(--color-primary);
-  }
-
-  &:hover::before,
-  &:hover::after {
-    width: 100%;
-    height: 100%;
-    opacity: 1;
-  }
-}
-
-.nav__section.scrolled {
-  background: rgba(255, 255, 255, 0.62);
-  border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 0.5px solid rgba(255, 255, 255, 0.8);
-  margin-top: 30px;
+.nav__links li {
+  width: 24px;
 }
 
 .switch {
