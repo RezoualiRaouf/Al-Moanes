@@ -7,7 +7,6 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // custom colors from _var.scss
         'primary': '#066b50',
         'primary-light': '#088567',
         'primary-dark': '#044d39',
