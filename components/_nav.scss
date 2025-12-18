@@ -1,6 +1,6 @@
-/* Navigation effects and animations only */
+/* Navigation section */
 
-.scrolled {
+.nav__section.scrolled {
   background: rgba(255, 255, 255, 0.62);
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -10,61 +10,6 @@
   margin-top: 30px;
 }
 
-.nav__links a {
-  color: var(--color-primary-light);
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: var(--font-size-lg);
-  transition: all 0.3s ease;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  position: relative;
-  background: linear-gradient(var(--bg-hover), var(--bg-hover)) no-repeat;
-  background-size: 0% 100%;
-  background-position: left center;
-}
-
-.nav__links a:hover {
-  background-size: 100% 100%;
-  color: var(--color-primary);
-  border-radius: 8px;
-}
-
-/* Animated border corners */
-.nav__links a::before,
-.nav__links a::after {
-  content: "";
-  position: absolute;
-  width: 0;
-  height: 0;
-  opacity: 0;
-  transition: all 0.4s ease;
-}
-
-.nav__links a::before {
-  top: 0;
-  left: 0;
-  border-top: 2px solid var(--color-primary);
-  border-left: 2px solid var(--color-primary);
-}
-
-.nav__links a::after {
-  bottom: 0;
-  right: 0;
-  border-bottom: 2px solid var(--color-primary);
-  border-right: 2px solid var(--color-primary);
-}
-
-.nav__links a:hover::before,
-.nav__links a:hover::after {
-  width: 100%;
-  height: 100%;
-  opacity: 1;
-}
-
-/* Switch theme toggle styles */
 .switch {
   --width-of-switch: 3.5em;
   --height-of-switch: 2em;
@@ -73,6 +18,12 @@
   position: relative;
   width: var(--width-of-switch);
   height: var(--height-of-switch);
+
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
 }
 
 .slider {
@@ -88,79 +39,138 @@
   box-shadow: inset 0 2px 4px rgba(6, 107, 80, 0.1),
     0 2px 8px rgba(6, 107, 80, 0.15);
   border: 1.5px solid rgba(6, 107, 80, 0.2);
+
+  // Sun icon
+  &:before {
+    position: absolute;
+    content: "";
+    height: var(--size-of-icon, 1.4em);
+    width: var(--size-of-icon, 1.4em);
+    border-radius: 50%;
+    left: var(--slider-offset, 0.3em);
+    top: 50%;
+    transform: translateY(-50%);
+    background: linear-gradient(135deg, #fffdf8 0%, #cbeab2 100%);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 10px rgba(255, 253, 248, 0.8),
+      0 0 20px rgba(203, 234, 178, 0.4), 0 2px 4px rgba(6, 107, 80, 0.2);
+    border: 2px solid rgba(255, 253, 248, 0.9);
+  }
+
+  // Sun rays
+  &:after {
+    content: "";
+    position: absolute;
+    width: var(--size-of-icon, 1.4em);
+    height: var(--size-of-icon, 1.4em);
+    border-radius: 50%;
+    left: var(--slider-offset, 0.3em);
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    box-shadow: 0 0 15px 3px rgba(255, 253, 248, 0.3);
+    opacity: 1;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+  }
+
+  &:hover {
+    box-shadow: inset 0 2px 4px rgba(6, 107, 80, 0.15),
+      0 4px 12px rgba(6, 107, 80, 0.25);
+    transform: scale(1.02);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
 }
 
-/* Sun icon */
-.slider:before {
-  position: absolute;
-  content: "";
-  height: var(--size-of-icon, 1.4em);
-  width: var(--size-of-icon, 1.4em);
-  border-radius: 50%;
-  left: var(--slider-offset, 0.3em);
-  top: 50%;
-  transform: translateY(-50%);
-  background: linear-gradient(135deg, #fffdf8 0%, #cbeab2 100%);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 0 10px rgba(255, 253, 248, 0.8),
-    0 0 20px rgba(203, 234, 178, 0.4), 0 2px 4px rgba(6, 107, 80, 0.2);
-  border: 2px solid rgba(255, 253, 248, 0.9);
-}
-
-/* Sun rays */
-.slider:after {
-  content: "";
-  position: absolute;
-  width: var(--size-of-icon, 1.4em);
-  height: var(--size-of-icon, 1.4em);
-  border-radius: 50%;
-  left: var(--slider-offset, 0.3em);
-  top: 50%;
-  transform: translateY(-50%);
-  background: transparent;
-  box-shadow: 0 0 15px 3px rgba(255, 253, 248, 0.3);
-  opacity: 1;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  pointer-events: none;
-}
-
-/* Dark mode */
+// Dark mode
 input:checked + .slider {
   background: linear-gradient(135deg, #066b50 0%, #044d39 100%);
   border-color: rgba(172, 212, 129, 0.3);
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2),
     0 2px 8px rgba(6, 107, 80, 0.3);
+
+  &:before {
+    left: calc(
+      100% - (var(--size-of-icon, 1.4em) + var(--slider-offset, 0.3em))
+    );
+    background: linear-gradient(135deg, #e8f3e0 0%, #cbeab2 100%);
+    border-color: rgba(203, 234, 178, 0.5);
+    box-shadow: inset -6px -3px 0 0 #066b50, 0 0 12px rgba(203, 234, 178, 0.5),
+      0 2px 4px rgba(0, 0, 0, 0.3);
+    animation: twinkle 2s infinite ease-in-out;
+  }
+
+  &:after {
+    left: calc(
+      100% - (var(--size-of-icon, 1.4em) + var(--slider-offset, 0.3em))
+    );
+    opacity: 0;
+    box-shadow: none;
+  }
+
+  &:hover {
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3),
+      0 4px 12px rgba(6, 107, 80, 0.4);
+  }
 }
 
-input:checked + .slider:before {
-  left: calc(100% - (var(--size-of-icon, 1.4em) + var(--slider-offset, 0.3em)));
-  background: linear-gradient(135deg, #e8f3e0 0%, #cbeab2 100%);
-  border-color: rgba(203, 234, 178, 0.5);
-  box-shadow: inset -6px -3px 0 0 #066b50, 0 0 12px rgba(203, 234, 178, 0.5),
-    0 2px 4px rgba(0, 0, 0, 0.3);
-}
+// Link hover effects
+.nav__links a {
+  color: var(--color-primary-light);
+  text-decoration: none;
+  font-size: var(--font-size-lg);
+  transition: all 0.3s ease;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  position: relative;
 
-input:checked + .slider:after {
-  left: calc(100% - (var(--size-of-icon, 1.4em) + var(--slider-offset, 0.3em)));
-  opacity: 0;
-  box-shadow: none;
-}
+  // Background slide animation
+  background: linear-gradient(
+      rgba(203, 234, 178, 0.2),
+      rgba(203, 234, 178, 0.2)
+    )
+    no-repeat;
+  background-size: 0% 100%;
+  background-position: left center;
 
-.slider:hover {
-  box-shadow: inset 0 2px 4px rgba(6, 107, 80, 0.15),
-    0 4px 12px rgba(6, 107, 80, 0.25);
-  transform: scale(1.02);
-}
+  &:hover {
+    background-size: 100% 100%;
+    color: var(--color-primary);
+    border-radius: 8px;
+  }
 
-input:checked + .slider:hover {
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3),
-    0 4px 12px rgba(6, 107, 80, 0.4);
-}
+  // Animated corner borders
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    transition: all 0.4s ease;
+  }
 
-.slider:active {
-  transform: scale(0.98);
-}
+  &::before {
+    top: 0;
+    left: 0;
+    border-top: 2px solid var(--color-primary);
+    border-left: 2px solid var(--color-primary);
+  }
 
-input:checked + .slider::before {
-  animation: twinkle 2s infinite ease-in-out;
+  &::after {
+    bottom: 0;
+    right: 0;
+    border-bottom: 2px solid var(--color-primary);
+    border-right: 2px solid var(--color-primary);
+  }
+
+  &:hover::before,
+  &:hover::after {
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+  }
 }

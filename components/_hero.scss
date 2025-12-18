@@ -1,37 +1,24 @@
 /* Hero Section */
-
-.hero__section {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  padding: 4rem var(--section-gutter);
-  align-items: center;
-  max-width: var(--section-max-width);
-  margin: 0 auto;
-}
-
-.hero__content h1 {
-  font-size: var(--font-size-hero-header);
+.hero__title {
+  font-size: 4rem;
   color: var(--color-primary-dark);
-  margin-bottom: 1.5rem;
   font-weight: 700;
-  font-family: "The Seasons";
+  font-family: "The Seasons", serif;
 }
 
-.hero__content p {
-  font-size: var(--font-size-2xl);
+.hero__text {
+  font-size: 1.5rem;
   color: var(--color-primary-dark);
   line-height: 1.7;
-  margin-bottom: 2rem;
-  font-family: "The Seasons";
+  font-family: "The Seasons", serif;
 }
 
-.hero__content_btn {
+.hero__btn {
   background: var(--color-primary-dark);
   color: white;
   border: none;
   padding: 1rem 2rem;
-  font-size: var(--font-size-lg);
+  font-size: 1.125rem;
   border-radius: 50px;
   cursor: pointer;
   display: inline-flex;
@@ -39,22 +26,17 @@
   gap: 0.5rem;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(45, 107, 90, 0.3);
-}
 
-.hero__content_btn:hover {
-  background: #1f4d3f;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(45, 107, 90, 0.4);
-}
+  &:hover {
+    background: #1f4d3f;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(45, 107, 90, 0.4);
+  }
 
-.hero__content_btn::after {
-  content: "›";
-  font-size: var(--font-size-2xl);
-}
-
-.hero__logo {
-  padding: 3rem 0rem 3rem 3rem;
-  position: relative;
+  &::after {
+    content: "›";
+    font-size: 1.5rem;
+  }
 }
 
 .hero__logo_img {

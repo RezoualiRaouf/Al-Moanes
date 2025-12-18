@@ -1,17 +1,13 @@
-// Import Tailwind
-// Import SCSS components for animations, fonts, and effects
 @use "components/font";
 @use "components/animation";
 @use "components/reset_values";
 @use "components/var";
 
-// Import component-specific styles (hover effects, transitions, etc.)
 @use "components/nav";
 @use "components/hero";
 @use "components/listen";
 @use "components/footer";
 
-// Keep the body background gradient
 body {
   background: linear-gradient(
     to bottom,
@@ -24,11 +20,10 @@ body {
   min-height: 100vh;
 }
 
-// Global utility: back to top button
 .back_to_top {
   position: fixed;
-  color: var(--color-white);
-  background-color: var(--color-btn);
+  color: white;
+  background-color: var(--color-primary);
   padding: 15px 20px;
   border-radius: 3px;
   bottom: 60px;
@@ -36,18 +31,18 @@ body {
   transition: all ease 0.3s;
   opacity: 0;
   pointer-events: none;
-}
 
-.back_to_top.show {
-  opacity: 1;
-  pointer-events: auto;
-}
+  &.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
 
-.back_to_top:hover {
-  transform: scale3d(1.1, 1.1, 1.1);
-}
+  &:hover {
+    transform: scale3d(1.1, 1.1, 1.1);
+  }
 
-.back_to_top::before {
-  content: "\2191";
-  font-size: 20px;
+  &::before {
+    content: "\2191";
+    font-size: 20px;
+  }
 }

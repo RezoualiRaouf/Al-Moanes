@@ -1,19 +1,6 @@
 /* Footer */
-footer {
-  padding: 2rem 3rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1400px;
-  margin: 0 auto;
-}
 
 .copyright {
-  color: #5a9b85;
+  color: var(--color-primary-light);
   font-size: 0.9rem;
-}
-
-.footer-icons {
-  display: flex;
-  gap: 1rem;
 }

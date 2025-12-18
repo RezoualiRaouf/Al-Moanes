@@ -4,124 +4,102 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AL-Moanes</title>
-    <link rel="stylesheet" href="tailwind.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.scss" />
   </head>
   <body>
-    <div class="container mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+    <!-- Container: max width + padding -->
+    <div class="max-w-7xl mx-auto px-6">
+      <!-- Navigation: flex + sticky -->
       <nav
-        class="nav__section flex items-center justify-between sticky top-0 z-50 py-6 lg:py-12"
+        class="nav__section flex items-center justify-between sticky top-0 z-50 py-12"
       >
-        <ul class="nav__links flex gap-4 lg:gap-6 m-0">
-          <li><a href="#home" class="nav__link">Home</a></li>
-          <li><a href="#recitation" class="nav__link">Recitation</a></li>
-          <li><a href="#quran" class="nav__link">Quran</a></li>
-          <li><a href="#hadith" class="nav__link">Hadith</a></li>
-          <li><a href="#live" class="nav__link">Live</a></li>
+        <!-- Links: flex with gap -->
+        <ul class="nav__links flex gap-6">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#recitation">Recitation</a></li>
+          <li><a href="#quran">Quran</a></li>
+          <li><a href="#hadith">Hadith</a></li>
+          <li><a href="#live">Live</a></li>
         </ul>
 
+        <!-- Centered logo -->
         <img
-          class="nav__logo w-32 sm:w-48 lg:w-64 absolute left-1/2 -translate-x-1/2"
+          class="nav__logo w-64 absolute left-1/2 -translate-x-1/2"
           src="assets/Al-Moanes-mini-logo.png"
           alt="Al Moanes mini logo"
         />
 
-        <label class="switch block ml-auto cursor-pointer">
-          <input type="checkbox" id="theme-toggle" class="opacity-0 w-0 h-0" />
+        <!-- Theme toggle -->
+        <label class="switch">
+          <input type="checkbox" id="theme-toggle" />
           <span class="slider"></span>
         </label>
       </nav>
 
+      <!-- Hero Section: 2 columns on large screens -->
       <section
-        class="hero__section grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 py-8 lg:py-16 items-center"
+        class="hero__section grid grid-cols-1 lg:grid-cols-2 gap-16 py-16 items-center"
       >
-        <div class="hero__content text-center lg:text-left">
-          <h1
-            class="text-4xl md:text-5xl lg:text-6xl text-primary-dark mb-6 font-bold font-seasons"
-          >
-            AL-Moanes
-          </h1>
-          <p
-            class="text-lg md:text-xl lg:text-2xl text-primary-dark leading-relaxed mb-8 font-seasons"
-          >
+        <!-- Left: Content -->
+        <div class="hero__content">
+          <h1 class="hero__title mb-6">AL-Moanes</h1>
+          <p class="hero__text mb-8">
             Listen to beautiful Quran recitations from your favorite readers
             with access to over 250 trusted reciters and multiple recitations
             from across the Islamic world.
           </p>
-          <button class="hero__content_btn">Start Listening</button>
+          <button class="hero__btn">Start Listening</button>
         </div>
 
-        <div class="hero__logo p-8 lg:p-12">
+        <!-- Right: Logo -->
+        <div class="p-12">
           <img
-            class="hero__logo_img rounded-2xl w-full"
+            class="hero__logo_img"
             src="assets/Al-Moanes.png"
             alt="AL-Moanes logo"
           />
         </div>
       </section>
 
+      <!-- Listen Section: 3 columns grid -->
       <section
-        class="listen__section grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 py-8 lg:py-12"
+        class="listen__section grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 py-12"
       >
-        <div
-          class="listen__el backdrop-blur-md rounded-2xl p-6 flex items-center gap-4"
-        >
-          <form class="w-full">
-            <label
-              for="reciter"
-              class="block mb-2 text-primary-dark font-medium"
-              >Select a reciter:</label
-            >
-            <select
-              id="reciter"
-              class="w-full p-3 rounded-lg border-2 border-transparent focus:border-primary transition-all"
-            >
-              <option value="1">Value 1</option>
-              <option value="2">Value 2</option>
-              <option value="3">Value 3</option>
-            </select>
-          </form>
+        <!-- Reciter Dropdown -->
+        <div class="listen__card">
+          <label for="reciter" class="listen__label">Select a reciter:</label>
+          <select id="reciter" class="listen__select">
+            <option value="1">Value 1</option>
+            <option value="2">Value 2</option>
+            <option value="3">Value 3</option>
+          </select>
         </div>
 
-        <div
-          class="listen__el backdrop-blur-md rounded-2xl p-6 flex items-center gap-4"
-        >
-          <form class="w-full">
-            <label
-              for="narration"
-              class="block mb-2 text-primary-dark font-medium"
-              >Select a Narration/Rewaya:</label
-            >
-            <select
-              id="narration"
-              class="w-full p-3 rounded-lg border-2 border-transparent focus:border-primary transition-all"
-            >
-              <option value="1">Value 1</option>
-              <option value="2">Value 2</option>
-              <option value="3">Value 3</option>
-            </select>
-          </form>
+        <!-- Narration Dropdown -->
+        <div class="listen__card">
+          <label for="narration" class="listen__label"
+            >Select a Narration/Rewaya:</label
+          >
+          <select id="narration" class="listen__select">
+            <option value="1">Value 1</option>
+            <option value="2">Value 2</option>
+            <option value="3">Value 3</option>
+          </select>
         </div>
 
-        <div
-          class="listen__el backdrop-blur-md rounded-2xl p-6 flex items-center gap-4"
-        >
-          <form class="w-full">
-            <label for="surah" class="block mb-2 text-primary-dark font-medium"
-              >Select a Surah:</label
-            >
-            <select
-              id="surah"
-              class="w-full p-3 rounded-lg border-2 border-transparent focus:border-primary transition-all"
-            >
-              <option value="1">Value 1</option>
-              <option value="2">Value 2</option>
-              <option value="3">Value 3</option>
-            </select>
-          </form>
+        <!-- Surah Dropdown -->
+        <div class="listen__card">
+          <label for="surah" class="listen__label">Select a Surah:</label>
+          <select id="surah" class="listen__select">
+            <option value="1">Value 1</option>
+            <option value="2">Value 2</option>
+            <option value="3">Value 3</option>
+          </select>
         </div>
 
-        <div class="col-span-full backdrop-blur-md rounded-2xl p-6 lg:p-8">
+        <!-- Audio Player: spans all columns -->
+        <div class="col-span-full listen__player">
           <audio id="audioPlayer">
             <source
               src="https://server6.mp3quran.net/kurdi/002.mp3"
@@ -130,46 +108,24 @@
             Your browser does not support the audio element.
           </audio>
 
+          <!-- Player controls: flex layout -->
           <div class="flex flex-wrap items-center gap-4 justify-center">
-            <button
-              id="playBtn"
-              class="px-6 py-3 bg-primary hover:bg-primary-light text-white rounded-full transition-all"
-            >
+            <button id="playBtn" class="player__btn">
               <span>▶️ Play</span>
             </button>
 
-            <button
-              id="prevSecBtn"
-              class="px-4 py-3 bg-primary hover:bg-primary-light text-white rounded-full transition-all"
-            >
-              ↶
-            </button>
+            <button id="prevSecBtn" class="player__btn-small">↶</button>
 
             <div class="flex-1 min-w-[200px]">
-              <input
-                type="range"
-                min="0"
-                max="100"
-                id="progressBar"
-                class="w-full"
-              />
+              <input type="range" min="0" max="100" id="progressBar" />
             </div>
 
-            <button
-              id="skipSecBtn"
-              class="px-4 py-3 bg-primary hover:bg-primary-light text-white rounded-full transition-all"
-            >
-              ↷
-            </button>
+            <button id="skipSecBtn" class="player__btn-small">↷</button>
 
-            <button
-              id="muteBtn"
-              class="px-6 py-3 bg-primary hover:bg-primary-light text-white rounded-full transition-all"
-            >
-              Mute
-            </button>
+            <button id="muteBtn" class="player__btn">Mute</button>
 
-            <div class="flex gap-2 text-primary-dark font-medium">
+            <!-- Time display -->
+            <div class="flex gap-2 player__time">
               <div id="surahCurrentTime">0:00</div>
               <span>/</span>
               <div id="surahDuration">0:00</div>
@@ -178,16 +134,13 @@
         </div>
       </section>
 
-      <footer
-        class="py-8 flex flex-col sm:flex-row justify-between items-center gap-4"
-      >
-        <div class="copyright text-primary text-sm">Raouf Rezouali©</div>
+      <!-- Footer -->
+      <footer class="py-8 flex justify-between items-center">
+        <div class="copyright">Raouf Rezouali©</div>
       </footer>
     </div>
 
-    <script src="scripts/script.js" type="module">
-      </link>
-          <script src="scripts/fetch_api.js" type="module">
-    </script>
+    <script src="scripts/script.js" type="module"></script>
+    <script src="scripts/fetch_api.js" type="module"></script>
   </body>
 </html>
