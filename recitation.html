@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AL-Moanes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.scss" />
+  </head>
+  <body>
+    <!-- Container -->
+    <div class="max-w-7xl mx-auto px-6">
+      <li><a href="index.html">Home</a></li>
+
+      <!-- Listen Section -->
+      <section
+        class="listen__section grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 py-12"
+      >
+        <!-- Reciter Dropdown -->
+        <div class="listen__card">
+          <label for="reciter" class="listen__label">Select a reciter:</label>
+          <select id="reciter" class="listen__select">
+            <option value="1">Value 1</option>
+            <option value="2">Value 2</option>
+            <option value="3">Value 3</option>
+          </select>
+        </div>
+
+        <!-- Narration Dropdown -->
+        <div class="listen__card">
+          <label for="narration" class="listen__label"
+            >Select a Narration/Rewaya:</label
+          >
+          <select id="narration" class="listen__select">
+            <option value="1">Value 1</option>
+            <option value="2">Value 2</option>
+            <option value="3">Value 3</option>
+          </select>
+        </div>
+
+        <!-- Surah Dropdown -->
+        <div class="listen__card">
+          <label for="surah" class="listen__label">Select a Surah:</label>
+          <select id="surah" class="listen__select">
+            <option value="1">Value 1</option>
+            <option value="2">Value 2</option>
+            <option value="3">Value 3</option>
+          </select>
+        </div>
+
+        <!-- Audio Player: spans all columns -->
+        <div class="col-span-full listen__player">
+          <audio id="audioPlayer">
+            <source
+              src="https://server6.mp3quran.net/kurdi/002.mp3"
+              type="audio/mpeg"
+            />
+            Your browser does not support the audio element.
+          </audio>
+
+          <!-- Player controls: flex layout -->
+          <div class="flex flex-wrap items-center gap-4 justify-center">
+            <button id="playBtn" class="player__btn">
+              <span>▶️ Play</span>
+            </button>
+
+            <button id="prevSecBtn" class="player__btn-small">↶</button>
+
+            <div class="flex-1 min-w-[200px]">
+              <input type="range" min="0" max="100" id="progressBar" />
+            </div>
+
+            <button id="skipSecBtn" class="player__btn-small">↷</button>
+
+            <button id="muteBtn" class="player__btn">Mute</button>
+
+            <!-- Time display -->
+            <div class="flex gap-2 player__time">
+              <div id="surahCurrentTime">0:00</div>
+              <span>/</span>
+              <div id="surahDuration">0:00</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="py-8 flex justify-between items-center">
+        <div class="copyright">Raouf Rezouali©</div>
+      </footer>
+    </div>
+
+    <script src="scripts/script.js" type="module"></script>
+  </body>
+</html>
