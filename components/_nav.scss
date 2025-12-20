@@ -1,9 +1,5 @@
 /* Navigation section */
 
-.nav__links li {
-  width: 24px;
-}
-
 .switch {
   --width-of-switch: 3.5em;
   --height-of-switch: 2em;
@@ -109,4 +105,118 @@ input:checked + .slider {
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3),
       0 4px 12px rgba(6, 107, 80, 0.4);
   }
+}
+
+/* toggle arrow */
+
+.sideBar-toggle-btn img {
+  display: block;
+  transform-origin: center;
+  transition: transform 0.18s ease;
+  transform: rotate(45deg);
+}
+
+/* side bar navigation */
+
+#sideBar {
+  background-color: var(--color-white);
+  border-right: 2px solid var(--bg-hover);
+}
+
+#sideBar a {
+  border-radius: 0.5rem;
+  padding: 0.85rem;
+  color: var(--color-primary);
+  align-items: center;
+  gap: 1rem;
+}
+
+#sideBar img {
+  flex-shrink: 0;
+  fill: var(--color-primary);
+}
+
+#sideBar a span,
+#sideBar .dropDown-btn span {
+  flex-grow: 1;
+}
+
+#sideBar .sub-menu {
+  display: none;
+}
+
+#sideBar .sub-menu.show {
+  display: block;
+}
+
+.dropDown-btn span {
+  border-radius: 0.5rem;
+  padding: 0.85rem;
+  color: var(--color-primary);
+  align-items: center;
+  padding-right: 40px;
+}
+
+#dropDone-arrow {
+  display: block;
+  transform-origin: center;
+  transform: rotate(-45deg);
+  padding-bottom: 8px;
+}
+
+/* hover efect*/
+
+.nav-links a {
+  color: var(--color-primary-light);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: var(--font-size-lg);
+  position: relative;
+  background: linear-gradient(var(--bg-hover), var(--bg-hover)) no-repeat;
+  background-size: 0% 100%;
+  background-position: left center;
+}
+
+.nav-links a:hover {
+  background-size: 100% 100%;
+  color: var(--color-primary);
+  border-radius: 8px;
+}
+
+/* Animated border corners */
+.nav-links a::before,
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+
+.nav-links a::before {
+  top: 0;
+  left: 0;
+  border-top: 2px solid var(--color-primary);
+  border-left: 2px solid var(--color-primary);
+}
+
+.nav-links a::after {
+  bottom: 0;
+  right: 0;
+  border-bottom: 2px solid var(--color-primary);
+  border-right: 2px solid var(--color-primary);
+}
+
+.nav-links a:hover::before,
+.nav-links a:hover::after {
+  width: 100%;
+  height: 100%;
+  opacity: 1;
 }

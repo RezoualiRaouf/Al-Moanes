@@ -1,9 +1,9 @@
-window.addEventListener("scroll", () => {
-  const nav = document.querySelector(".nav__section");
+const sideBar = document.querySelector(".dropDown-btn");
+const submenu = document.querySelector(".sub-menu");
 
-  if (window.scrollY > 50) {
-    nav.classList.add("scrolled");
-  } else {
-    nav.classList.remove("scrolled");
-  }
+console.log(sideBar);
+console.log(submenu);
+
+sideBar.addEventListener("click", () => {
+  submenu.classList.toggle("show");
 });

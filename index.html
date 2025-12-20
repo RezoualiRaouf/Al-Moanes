@@ -11,7 +11,7 @@
     <!-- Container -->
     <div class="max-w-7xl mx-auto px-6">
       <nav
-        class="nav__section flex items-center justify-between top-0 z-50 py-12"
+        class="nav__section flex items-center flex-row-reverse justify-between top-0 z-50 py-12"
       >
         <!-- Links -->
 
@@ -28,23 +28,52 @@
       </nav>
 
       <!-- side bar navigation -->
-      <div class="top-0 left-0 absolute p-10 h-screen">
-        <ul class="nav__links flex flex-col gap-3">
-          <li>
-            <a class="" href="#home"><span>Home</span></a
-            ><img src="assets/home.svg" alt="home icon" />
+      <div
+        class="top-0 left-0 absolute p-10 h-screen box-border w-64"
+        id="sideBar"
+      >
+        <div class="sideBar-toggle-btn w-8 mt-2">
+          <img src="assets/arrow-bottom-left-5-circle-fill.svg" alt="" />
+        </div>
+
+        <ul class="nav-links flex flex-col justify-end mb-4 mt-4 gap-3">
+          <li class="w-6 flex">
+            <img src="assets/home.svg" />
+            <a href="#home"><span>Home</span></a>
           </li>
-          <li>
-            <a href="recitation.html"><span>Recitation</span></a
-            ><img src="assets/headphone.svg" alt="headphones icon" />
+          <li class="w-6 flex">
+            <img src="assets/headphones-16-solid.svg" />
+            <a href="recitation.html"><span>Recitation</span></a>
           </li>
-          <li>
-            <a href="#quran"><span>Quran</span></a
-            ><img src="assets/quran.svg" alt="quran icon" />
+          <li class="w-6 flex">
+            <img src="assets/quran.svg" />
+            <a href="#quran"><span>Quran</span></a>
           </li>
-          <li>
-            <a href="#hadith"><span>Hadith</span></a
-            ><img src="assets/hadith.svg" alt="paper icon" />
+          <li class="w-6 flex">
+            <img src="assets/hadith.svg" />
+            <a href="#hadith"><span>Hadith</span></a>
+          </li>
+
+          <li class="w-6">
+            <button class="dropDown-btn flex flex-1 w-full">
+              <img src="assets/toggle_them.svg" />
+              <span>Theme</span>
+              <img
+                id="dropDone-arrow"
+                src="assets/arrow-bottom-left-2-bold.svg"
+              />
+            </button>
+            <ul class="sub-menu flex flex-col w-6">
+              <button class="flex flex-1">
+                <img src="assets/light.svg" /> <span>Light</span>
+              </button>
+              <button class="flex flex-1">
+                <img src="assets/dark.svg" /><span>Dark</span>
+              </button>
+              <button class="flex flex-1">
+                <img src="assets/monitor.svg" /> <span>System</span>
+              </button>
+            </ul>
           </li>
         </ul>
       </div>
@@ -81,6 +110,5 @@
     </div>
 
     <script src="scripts/script.js" type="module"></script>
-    <script src="scripts/fetch_api.js" type="module"></script>
   </body>
 </html>
