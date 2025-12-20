@@ -30,7 +30,6 @@
     0 2px 8px rgba(6, 107, 80, 0.15);
   border: 1.5px solid rgba(6, 107, 80, 0.2);
 
-  // Sun icon
   &:before {
     position: absolute;
     content: "";
@@ -47,7 +46,6 @@
     border: 2px solid rgba(255, 253, 248, 0.9);
   }
 
-  // Sun rays
   &:after {
     content: "";
     position: absolute;
@@ -75,7 +73,6 @@
   }
 }
 
-// Dark mode
 input:checked + .slider {
   background: linear-gradient(135deg, #066b50 0%, #044d39 100%);
   border-color: rgba(172, 212, 129, 0.3);
@@ -125,7 +122,6 @@ input:checked + .slider {
 
 #sideBar a {
   border-radius: 0.5rem;
-  padding: 0.85rem;
   color: var(--color-primary);
   align-items: center;
   gap: 1rem;
@@ -138,7 +134,7 @@ input:checked + .slider {
 
 #sideBar a span,
 #sideBar .dropDown-btn span {
-  flex-grow: 1;
+  flex-grow: 0;
 }
 
 #sideBar .sub-menu {
@@ -147,14 +143,71 @@ input:checked + .slider {
 
 #sideBar .sub-menu.show {
   display: block;
+  border-left: #044d39 solid 2px;
+}
+
+.dropDown-btn {
+  gap: 0.5rem;
+  align-items: center;
+  width: fit-content;
+  display: inline-flex;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  position: relative;
+  background: linear-gradient(var(--bg-hover), var(--bg-hover)) no-repeat;
+  background-size: 0% 100%;
+  background-position: left center;
+  transition: all 0.3s ease;
+  color: var(--color-primary-light);
+  border: none;
+  cursor: pointer;
+}
+
+.dropDown-btn:hover {
+  background-size: 100% 100%;
+  border-radius: 8px;
+  color: var(--color-primary);
+}
+
+.dropDown-btn::before,
+.dropDown-btn::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+
+.dropDown-btn::before {
+  top: 0;
+  left: 0;
+  border-top: 2px solid var(--color-primary);
+  border-left: 2px solid var(--color-primary);
+}
+
+.dropDown-btn::after {
+  bottom: 0;
+  right: 0;
+  border-bottom: 2px solid var(--color-primary);
+  border-right: 2px solid var(--color-primary);
+}
+
+.dropDown-btn:hover::before,
+.dropDown-btn:hover::after {
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+}
+
+.dropDown-btn img {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex-shrink: 0;
 }
 
 .dropDown-btn span {
-  border-radius: 0.5rem;
-  padding: 0.85rem;
-  color: var(--color-primary);
-  align-items: center;
-  padding-right: 40px;
+  flex-grow: 0;
 }
 
 #dropDone-arrow {
@@ -164,34 +217,62 @@ input:checked + .slider {
   padding-bottom: 8px;
 }
 
-/* hover efect*/
+/* hover effect */
 
-.nav-links a {
-  color: var(--color-primary-light);
-  text-decoration: none;
-  display: flex;
+.nav-links li {
+  width: fit-content;
+  display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.95rem;
-  transition: all 0.3s ease;
   padding: 0.5rem 1rem;
   border-radius: 6px;
-  font-size: var(--font-size-lg);
   position: relative;
   background: linear-gradient(var(--bg-hover), var(--bg-hover)) no-repeat;
   background-size: 0% 100%;
   background-position: left center;
+  transition: all 0.3s ease;
 }
 
-.nav-links a:hover {
+/* Exclude the theme dropdown li from hover effects */
+.nav-links li:has(.dropDown-btn) {
+  width: 100%;
+  display: block;
+  padding: 0;
+  background: none;
+}
+
+.nav-links li:has(.dropDown-btn)::before,
+.nav-links li:has(.dropDown-btn)::after {
+  display: none;
+}
+
+.nav-links li:hover {
   background-size: 100% 100%;
-  color: var(--color-primary);
   border-radius: 8px;
 }
 
-/* Animated border corners */
-.nav-links a::before,
-.nav-links a::after {
+.nav-links li img {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+}
+
+.nav-links a {
+  color: var(--color-primary-light);
+  text-decoration: none;
+  align-items: center;
+  font-size: 0.95rem;
+  font-size: var(--font-size-lg);
+  transition: color 0.3s ease;
+}
+
+.nav-links li:hover a {
+  color: var(--color-primary);
+}
+
+/* Animated border corners on li */
+.nav-links li::before,
+.nav-links li::after {
   content: "";
   position: absolute;
   width: 0;
@@ -200,23 +281,113 @@ input:checked + .slider {
   transition: all 0.4s ease;
 }
 
-.nav-links a::before {
+.nav-links li::before {
   top: 0;
   left: 0;
   border-top: 2px solid var(--color-primary);
   border-left: 2px solid var(--color-primary);
 }
 
-.nav-links a::after {
+.nav-links li::after {
   bottom: 0;
   right: 0;
   border-bottom: 2px solid var(--color-primary);
   border-right: 2px solid var(--color-primary);
 }
 
-.nav-links a:hover::before,
-.nav-links a:hover::after {
+.nav-links li:hover::before,
+.nav-links li:hover::after {
   width: 100%;
   height: 100%;
   opacity: 1;
+}
+
+/* Sub-menu styling to match nav links */
+.sub-menu {
+  margin-top: 0.5rem;
+  margin-left: 20px;
+  padding-left: 5px;
+  width: 100%;
+  max-width: 100%;
+}
+
+.sub-menu li {
+  width: auto;
+}
+
+.sub-menu button {
+  color: var(--color-primary-light);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  position: relative;
+  background: linear-gradient(var(--bg-hover), var(--bg-hover)) no-repeat;
+  background-size: 0% 100%;
+  background-position: left center;
+  border: none;
+  cursor: pointer;
+  width: auto;
+  text-align: left;
+  margin-bottom: 0.25rem;
+}
+
+.sub-menu button:hover {
+  background-size: 100% 100%;
+  color: var(--color-primary);
+  border-radius: 8px;
+}
+
+/* Animated border corners for sub-menu */
+.sub-menu button::before,
+.sub-menu button::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  transition: all 0.4s ease;
+  pointer-events: none;
+}
+
+.sub-menu button::before {
+  top: 0;
+  left: 0;
+  border-top: 2px solid var(--color-primary);
+  border-left: 2px solid var(--color-primary);
+}
+
+.sub-menu button::after {
+  bottom: 0;
+  right: 0;
+  border-bottom: 2px solid var(--color-primary);
+  border-right: 2px solid var(--color-primary);
+}
+
+.sub-menu button:hover::before,
+.sub-menu button:hover::after {
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+}
+
+/* Sub-menu icons */
+.sub-menu button img {
+  width: 1.5rem;
+  height: 1.5rem;
+  min-width: 1.5rem;
+  min-height: 1.5rem;
+  flex-shrink: 0;
+  fill: var(--color-primary);
+  display: block;
+}
+
+.sub-menu button span {
+  flex-grow: 0;
+  display: block;
 }
