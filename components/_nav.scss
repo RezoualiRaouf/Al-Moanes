@@ -1,116 +1,11 @@
 /* Navigation section */
 
-.switch {
-  --width-of-switch: 3.5em;
-  --height-of-switch: 2em;
-  --size-of-icon: 1.4em;
-  --slider-offset: 0.3em;
-  position: relative;
-  width: var(--width-of-switch);
-  height: var(--height-of-switch);
-
-  input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, #cbeab2 0%, #acd481 100%);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  border-radius: 30px;
-  box-shadow: inset 0 2px 4px rgba(6, 107, 80, 0.1),
-    0 2px 8px rgba(6, 107, 80, 0.15);
-  border: 1.5px solid rgba(6, 107, 80, 0.2);
-
-  &:before {
-    position: absolute;
-    content: "";
-    height: var(--size-of-icon, 1.4em);
-    width: var(--size-of-icon, 1.4em);
-    border-radius: 50%;
-    left: var(--slider-offset, 0.3em);
-    top: 50%;
-    transform: translateY(-50%);
-    background: linear-gradient(135deg, #fffdf8 0%, #cbeab2 100%);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 0 10px rgba(255, 253, 248, 0.8),
-      0 0 20px rgba(203, 234, 178, 0.4), 0 2px 4px rgba(6, 107, 80, 0.2);
-    border: 2px solid rgba(255, 253, 248, 0.9);
-  }
-
-  &:after {
-    content: "";
-    position: absolute;
-    width: var(--size-of-icon, 1.4em);
-    height: var(--size-of-icon, 1.4em);
-    border-radius: 50%;
-    left: var(--slider-offset, 0.3em);
-    top: 50%;
-    transform: translateY(-50%);
-    background: transparent;
-    box-shadow: 0 0 15px 3px rgba(255, 253, 248, 0.3);
-    opacity: 1;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    pointer-events: none;
-  }
-
-  &:hover {
-    box-shadow: inset 0 2px 4px rgba(6, 107, 80, 0.15),
-      0 4px 12px rgba(6, 107, 80, 0.25);
-    transform: scale(1.02);
-  }
-
-  &:active {
-    transform: scale(0.98);
-  }
-}
-
-input:checked + .slider {
-  background: linear-gradient(135deg, #066b50 0%, #044d39 100%);
-  border-color: rgba(172, 212, 129, 0.3);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2),
-    0 2px 8px rgba(6, 107, 80, 0.3);
-
-  &:before {
-    left: calc(
-      100% - (var(--size-of-icon, 1.4em) + var(--slider-offset, 0.3em))
-    );
-    background: linear-gradient(135deg, #e8f3e0 0%, #cbeab2 100%);
-    border-color: rgba(203, 234, 178, 0.5);
-    box-shadow: inset -6px -3px 0 0 #066b50, 0 0 12px rgba(203, 234, 178, 0.5),
-      0 2px 4px rgba(0, 0, 0, 0.3);
-    animation: twinkle 2s infinite ease-in-out;
-  }
-
-  &:after {
-    left: calc(
-      100% - (var(--size-of-icon, 1.4em) + var(--slider-offset, 0.3em))
-    );
-    opacity: 0;
-    box-shadow: none;
-  }
-
-  &:hover {
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3),
-      0 4px 12px rgba(6, 107, 80, 0.4);
-  }
-}
-
 /* toggle arrow */
 
 .sideBar-toggle-btn img {
   display: block;
   transform-origin: center;
   transition: transform 0.18s ease;
-  transform: rotate(45deg);
 }
 
 /* side bar navigation */
@@ -118,6 +13,12 @@ input:checked + .slider {
 #sideBar {
   background-color: var(--color-white);
   border-right: 2px solid var(--bg-hover);
+  transition: 300ms ease-in-out;
+}
+#sideBar.show {
+  padding: 5px;
+  width: 50px;
+  overflow: hidden;
 }
 
 #sideBar a {
@@ -128,22 +29,37 @@ input:checked + .slider {
 }
 
 #sideBar img {
-  flex-shrink: 0;
   fill: var(--color-primary);
 }
 
+.sideBar-toggle-btn {
+  cursor: pointer;
+  transition: rotate 300ms ease;
+  > img {
+    transition: rotate 150ms ease;
+  }
+}
+
+.sideBar-toggle-btn.rotate {
+  transform: rotate(180deg);
+}
 #sideBar a span,
 #sideBar .dropDown-btn span {
   flex-grow: 0;
 }
 
 #sideBar .sub-menu {
-  display: none;
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: 300ms ease-in-out;
+
+  > div {
+    overflow: hidden;
+  }
 }
 
 #sideBar .sub-menu.show {
-  display: block;
-  border-left: #044d39 solid 2px;
+  grid-template-rows: 1fr;
 }
 
 .dropDown-btn {
@@ -210,11 +126,14 @@ input:checked + .slider {
   flex-grow: 0;
 }
 
-#dropDone-arrow {
+.dropDone-arrow {
   display: block;
   transform-origin: center;
-  transform: rotate(-45deg);
-  padding-bottom: 8px;
+  transition: 250ms ease;
+}
+
+.dropDone-arrow.rotate {
+  transform: rotate(180deg);
 }
 
 /* hover effect */
@@ -224,7 +143,7 @@ input:checked + .slider {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0rem;
   border-radius: 6px;
   position: relative;
   background: linear-gradient(var(--bg-hover), var(--bg-hover)) no-repeat;

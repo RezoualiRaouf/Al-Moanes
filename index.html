@@ -11,20 +11,13 @@
     <!-- Container -->
     <div class="max-w-7xl mx-auto px-6">
       <nav
-        class="nav__section flex items-center flex-row-reverse justify-between top-0 z-50 py-12"
+        class="nav__section flex items-center justify-center top-0 z-50 py-12"
       >
-        <!-- Links -->
-
         <img
-          class="nav__logo w-64 absolute left-1/2 -translate-x-1/2"
+          class="nav__logo w-64"
           src="assets/Al-Moanes-mini-logo.png"
           alt="Al Moanes mini logo"
         />
-
-        <label class="switch">
-          <input type="checkbox" id="theme-toggle" />
-          <span class="slider"></span>
-        </label>
       </nav>
 
       <!-- side bar navigation -->
@@ -32,8 +25,8 @@
         class="top-0 left-0 absolute p-10 h-screen box-border w-64"
         id="sideBar"
       >
-        <div class="sideBar-toggle-btn w-8 mt-2">
-          <img src="assets/arrow-bottom-left-5-circle-fill.svg" alt="" />
+        <div class="sideBar-toggle-btn w-8 mt-2 ml-3">
+          <img src="assets/left-arrow.svg" alt="" />
         </div>
 
         <ul class="nav-links flex flex-col justify-end mb-4 mt-4 gap-3">
@@ -58,21 +51,20 @@
             <button class="dropDown-btn flex w-fit">
               <img src="assets/toggle_them.svg" />
               <span>Theme</span>
-              <img
-                id="dropDone-arrow"
-                src="assets/arrow-bottom-left-2-bold.svg"
-              />
+              <img class="dropDone-arrow" src="assets/dropdown-arrow.svg" />
             </button>
             <ul class="sub-menu flex flex-col">
-              <button class="flex">
-                <img src="assets/light.svg" /> <span>Light</span>
-              </button>
-              <button class="flex">
-                <img src="assets/dark.svg" /><span>Dark</span>
-              </button>
-              <button class="flex">
-                <img src="assets/monitor.svg" /> <span>System</span>
-              </button>
+              <div>
+                <button class="flex">
+                  <img src="assets/light.svg" /> <span>Light</span>
+                </button>
+                <button class="flex">
+                  <img src="assets/dark.svg" /><span>Dark</span>
+                </button>
+                <button class="flex">
+                  <img src="assets/monitor.svg" /> <span>System</span>
+                </button>
+              </div>
             </ul>
           </li>
         </ul>
