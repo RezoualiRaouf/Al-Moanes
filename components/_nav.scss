@@ -1,24 +1,11 @@
 /* Navigation section */
 
-/* toggle arrow */
-
-.sideBar-toggle-btn img {
-  display: block;
-  transform-origin: center;
-  transition: transform 0.18s ease;
-}
-
 /* side bar navigation */
 
 #sideBar {
   background-color: var(--color-white);
   border-right: 2px solid var(--bg-hover);
   transition: 300ms ease-in-out;
-}
-#sideBar.show {
-  padding: 5px;
-  width: 50px;
-  overflow: hidden;
 }
 
 #sideBar a {
@@ -32,20 +19,6 @@
   fill: var(--color-primary);
 }
 
-.sideBar-toggle-btn {
-  margin-left: auto;
-  padding: auto;
-  cursor: pointer;
-  transition: rotate 300ms ease;
-
-  > img {
-    transition: rotate 150ms ease;
-  }
-}
-
-.sideBar-toggle-btn.rotate {
-  transform: rotate(180deg);
-}
 #sideBar a span,
 #sideBar .dropDown-btn span {
   flex-grow: 0;
@@ -55,10 +28,10 @@
   display: grid;
   grid-template-rows: 0fr;
   transition: 300ms ease-in-out;
+}
 
-  > div {
-    overflow: hidden;
-  }
+#sideBar .sub-menu > div {
+  overflow: hidden;
 }
 
 #sideBar .sub-menu.show {

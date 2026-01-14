@@ -10,7 +10,61 @@
   <body>
     <!-- Container -->
     <div class="max-w-7xl mx-auto px-6">
-      <li><a href="index.html">Home</a></li>
+      <nav
+        class="nav__section flex items-center justify-center top-0 z-50 py-12"
+      >
+        <img
+          class="nav__logo w-64"
+          src="assets/Al-Moanes-mini-logo.png"
+          alt="Al Moanes mini logo"
+        />
+      </nav>
+
+      <!-- side bar navigation -->
+      <div
+        class="top-0 left-0 absolute p-10 h-screen box-border w-64"
+        id="sideBar"
+      >
+        <ul class="nav-links flex flex-col justify-end mb-4 mt-4 gap-3">
+          <li class="flex">
+            <img src="assets/home.svg" />
+            <a href="index.html"><span>Home</span></a>
+          </li>
+          <li class="flex">
+            <img src="assets/headphones-16-solid.svg" />
+            <a href="recitation.html"><span>Recitation</span></a>
+          </li>
+          <li class="flex">
+            <img src="assets/quran.svg" />
+            <a href="#quran"><span>Quran</span></a>
+          </li>
+          <li class="flex">
+            <img src="assets/hadith.svg" />
+            <a href="#hadith"><span>Hadith</span></a>
+          </li>
+
+          <li>
+            <button class="dropDown-btn flex w-fit">
+              <img src="assets/toggle_them.svg" />
+              <span>Theme</span>
+              <img class="dropDone-arrow" src="assets/dropdown-arrow.svg" />
+            </button>
+            <ul class="sub-menu flex flex-col">
+              <div>
+                <button class="flex">
+                  <img src="assets/light.svg" /> <span>Light</span>
+                </button>
+                <button class="flex">
+                  <img src="assets/dark.svg" /><span>Dark</span>
+                </button>
+                <button class="flex">
+                  <img src="assets/monitor.svg" /> <span>System</span>
+                </button>
+              </div>
+            </ul>
+          </li>
+        </ul>
+      </div>
 
       <!-- Listen Section -->
       <section
@@ -61,7 +115,13 @@
           <!-- Player controls: flex layout -->
           <div class="flex flex-wrap items-center gap-4 justify-center">
             <button id="playBtn" class="player__btn">
-              <span>▶️ Play</span>
+              <span
+                ><img
+                  class="w-5"
+                  id="playIcon"
+                  src="assets/play-audio.svg"
+                  alt=""
+              /></span>
             </button>
 
             <button id="prevSecBtn" class="player__btn-small">↶</button>
@@ -90,6 +150,7 @@
       </footer>
     </div>
 
-    <script src="scripts/script.js" type="module"></script>
+    <script src="scripts/listenFetch.js" type="module"></script>
+    <script src="scripts/sideBar.js" type="module"></script>
   </body>
 </html>
