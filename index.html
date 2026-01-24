@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AL-Moanes</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="../style.scss" />
+    <link rel="stylesheet" href="style.scss" />
   </head>
   <body>
     <!-- Container -->
@@ -15,7 +15,7 @@
       >
         <img
           class="nav__logo w-64"
-          src="/public/assets/Al-Moanes-mini-logo.png"
+          src="/assets/Al-Moanes-mini-logo.png"
           alt="Al Moanes mini logo"
         />
       </nav>
@@ -27,42 +27,38 @@
       >
         <ul class="nav-links flex flex-col justify-end mb-4 mt-4 gap-3">
           <li class="flex">
-            <img src="/public/assets/home.svg" />
-
-            <a href="index.html"><span>Home</span></a>
+            <img src="/assets/home.svg" />
+            <a href="#home"><span>Home</span></a>
           </li>
           <li class="flex">
-            <img src="/public/assets/headphones-16-solid.svg" />
-            <a href="recitation.html"><span>Recitation</span></a>
+            <img src="/assets/headphones-16-solid.svg" />
+            <a href="#recitation"><span>Recitation</span></a>
           </li>
           <li class="flex">
-            <img src="/public/assets/quran.svg" />
+            <img src="/assets/quran.svg" />
             <a href="#quran"><span>Quran</span></a>
           </li>
           <li class="flex">
-            <img src="/public/assets/hadith.svg" />
+            <img src="/assets/hadith.svg" />
             <a href="#hadith"><span>Hadith</span></a>
           </li>
 
           <li>
             <button class="dropDown-btn flex w-fit">
-              <img src="/public/assets/toggle_them.svg" />
+              <img src="/assets/toggle_them.svg" />
               <span>Theme</span>
-              <img
-                class="dropDone-arrow"
-                src="/public/assets/dropdown-arrow.svg"
-              />
+              <img class="dropDone-arrow" src="/assets/dropdown-arrow.svg" />
             </button>
             <ul class="sub-menu flex flex-col">
               <div>
                 <button class="flex">
-                  <img src="/public/assets/light.svg" /> <span>Light</span>
+                  <img src="/assets/light.svg" /> <span>Light</span>
                 </button>
                 <button class="flex">
-                  <img src="/public/assets/dark.svg" /><span>Dark</span>
+                  <img src="/assets/dark.svg" /><span>Dark</span>
                 </button>
                 <button class="flex">
-                  <img src="/public/assets/monitor.svg" /> <span>System</span>
+                  <img src="/assets/monitor.svg" /> <span>System</span>
                 </button>
               </div>
             </ul>
@@ -70,8 +66,35 @@
         </ul>
       </div>
 
-      <!-- Listen Section -->
+      <!-- HOME SECTION -->
       <section
+        id="home"
+        class="hero__section grid grid-cols-1 lg:grid-cols-2 gap-16 py-16 items-center"
+      >
+        <!-- Left -->
+        <div class="hero__content">
+          <h1 class="hero__title mb-6">AL-Moanes</h1>
+          <p class="hero__text mb-8">
+            Listen to beautiful Quran recitations from your favorite readers
+            with access to over 250 trusted reciters and multiple recitations
+            from across the Islamic world.
+          </p>
+          <button class="hero__btn">Start Listening</button>
+        </div>
+
+        <!-- Logo -->
+        <div class="p-12">
+          <img
+            class="hero__logo_img"
+            src="/assets/Al-Moanes.png"
+            alt="AL-Moanes logo"
+          />
+        </div>
+      </section>
+
+      <!-- RECITATION SECTION -->
+      <section
+        id="recitation"
         class="listen__section grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 py-12"
       >
         <!-- Reciter Dropdown -->
@@ -123,7 +146,7 @@
                 ><img
                   class="w-5"
                   id="playIcon"
-                  src="/public/assets/play-audio.svg"
+                  src="/assets/play-audio.svg"
                   alt=""
               /></span>
             </button>
@@ -148,13 +171,25 @@
         </div>
       </section>
 
+      <!-- QURAN SECTION -->
+      <section id="quran" class="py-12">
+        <h2 class="text-3xl font-bold mb-6">Quran</h2>
+        <p>Quran section content goes here...</p>
+      </section>
+
+      <!-- HADITH SECTION -->
+      <section id="hadith" class="py-12">
+        <h2 class="text-3xl font-bold mb-6">Hadith</h2>
+        <p>Hadith section content goes here...</p>
+      </section>
+
       <!-- Footer -->
       <footer class="py-8 flex justify-between items-center">
         <div class="copyright">Raouf Rezouali©</div>
       </footer>
     </div>
 
-    <script src="scripts/listenFetch.js" type="module"></script>
-    <script src="scripts/sideBar.js" type="module"></script>
+    <script src="./scripts/sideBar.js" type="module"></script>
+    <script src="./scripts/listenFetch.js" type="module"></script>
   </body>
 </html>

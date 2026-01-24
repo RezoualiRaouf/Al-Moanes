@@ -31,15 +31,12 @@ const surahDuration = document.getElementById("surahDuration");
 
 // Play/Pause Button
 playBtn.addEventListener("click", () => {
-  console.log("Play button clicked", audioPlayer.paused);
-  console.log("playIcon element:", playIcon);
-
   if (audioPlayer.paused) {
     audioPlayer.play();
-    playIcon.setAttribute("src", "/public/assets/pause-audio.svg");
+    playIcon.src = "./assets/pause-audio.svg";
   } else {
     audioPlayer.pause();
-    playIcon.setAttribute("src", "/public/assets/play-audio.svg");
+    playIcon.src = "./assets/play-audio.svg";
   }
 });
 
@@ -88,5 +85,5 @@ progressBar.addEventListener("click", (e) => {
 
 // Reset play button when audio ends
 audioPlayer.addEventListener("ended", () => {
-  playIcon.src = "assets/play-audio.svg";
+  playIcon.src = "./assets/play-audio.svg";
 });
