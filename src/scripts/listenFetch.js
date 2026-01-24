@@ -36,10 +36,10 @@ playBtn.addEventListener("click", () => {
 
   if (audioPlayer.paused) {
     audioPlayer.play();
-    playIcon.setAttribute("src", "assets/pause-audio.svg");
+    playIcon.setAttribute("src", "/public/assets/pause-audio.svg");
   } else {
     audioPlayer.pause();
-    playIcon.setAttribute("src", "assets/play-audio.svg");
+    playIcon.setAttribute("src", "/public/assets/play-audio.svg");
   }
 });
 
@@ -61,7 +61,7 @@ audioPlayer.addEventListener("timeupdate", () => {
 skipSecBtn.addEventListener("click", () => {
   audioPlayer.currentTime = Math.min(
     (audioPlayer.currentTime || 0) + 10,
-    audioPlayer.duration || Infinity
+    audioPlayer.duration || Infinity,
   );
 });
 
@@ -82,7 +82,7 @@ progressBar.addEventListener("click", (e) => {
   const clickedTime = clickPosition * audioPlayer.duration;
   audioPlayer.currentTime = Math.max(
     0,
-    Math.min(clickedTime, audioPlayer.duration)
+    Math.min(clickedTime, audioPlayer.duration),
   );
 });
 

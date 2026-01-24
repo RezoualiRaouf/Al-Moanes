@@ -5,7 +5,7 @@
     "parcel": "^2.16.3"
   },
   "scripts": {
-    "dev": "parcel index.html",
-    "build": "parcel build index.html"
+    "dev": "parcel src/index.html src/recitation.html src/hadith.html",
+    "build": "parcel build src/index.html src/recitation.html src/hadith.html"
   }
 }
