@@ -1,3 +1,9 @@
+const playIconUtl = new URL("../assets/play-audio.svg", import.meta.url);
+const pauseIconUrl = new URL("../assets/pause-audio.svg", import.meta.url);
+
+const muteIconUrl = new URL("../assets/mute.svg", import.meta.url);
+const unmuteIconUrl = new URL("../assets/unmute.svg", import.meta.url);
+
 async function fetchReciter() {}
 async function fetchSurah() {}
 async function fetchNarration() {}
@@ -23,6 +29,7 @@ const audioPlayer = document.getElementById("audioPlayer");
 const playBtn = document.getElementById("playBtn");
 const playIcon = document.getElementById("playIcon");
 const muteBtn = document.getElementById("muteBtn");
+const muteBtnIcon = document.getElementById("muteBtnIcon");
 const skipSecBtn = document.getElementById("skipSecBtn");
 const prevSecBtn = document.getElementById("prevSecBtn");
 const progressBar = document.getElementById("progressBar");
@@ -33,17 +40,17 @@ const surahDuration = document.getElementById("surahDuration");
 playBtn.addEventListener("click", () => {
   if (audioPlayer.paused) {
     audioPlayer.play();
-    playIcon.src = "./assets/pause-audio.svg";
+    playIcon.src = pauseIconUrl.href;
   } else {
     audioPlayer.pause();
-    playIcon.src = "./assets/play-audio.svg";
+    playIcon.src = playIconUtl.href;
   }
 });
 
 // Mute/Unmute Button
 muteBtn.addEventListener("click", () => {
   audioPlayer.muted = !audioPlayer.muted;
-  muteBtn.innerText = audioPlayer.muted ? "🔇 Unmute" : "🔊 Mute";
+  muteBtnIcon.src = audioPlayer.muted ? unmuteIconUrl.href : muteIconUrl.href;
 });
 
 // Update Progress Bar and Time Display
@@ -85,5 +92,5 @@ progressBar.addEventListener("click", (e) => {
 
 // Reset play button when audio ends
 audioPlayer.addEventListener("ended", () => {
-  playIcon.src = "./assets/play-audio.svg";
+  playIcon.src = playIconUtl.href;
 });
