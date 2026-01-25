@@ -1,18 +1,41 @@
 /* Navigation section */
+.nav__section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: 0;
+  z-index: 50;
+  padding-top: 48px; /* py-12 */
+  padding-bottom: 48px; /* py-12 */
+}
+
+.nav__logo {
+  width: 256px; /* w-64 */
+}
 
 /* side bar navigation */
 
 #sideBar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 256px;
+  height: 100%;
+  padding: 40px;
+  box-sizing: border-box;
   background-color: var(--color-white);
   border-right: 2px solid var(--bg-hover);
   transition: 300ms ease-in-out;
 }
 
 #sideBar a {
+  display: flex;
   border-radius: 0.5rem;
   color: var(--color-primary);
   align-items: center;
   gap: 1rem;
+  text-decoration: none;
 }
 
 #sideBar img {
@@ -28,6 +51,11 @@
   display: grid;
   grid-template-rows: 0fr;
   transition: 300ms ease-in-out;
+  margin-top: 0.5rem;
+  margin-left: 20px;
+  padding-left: 5px;
+  width: 100%;
+  max-width: 100%;
 }
 
 #sideBar .sub-menu > div {
@@ -38,6 +66,19 @@
   grid-template-rows: 1fr;
 }
 
+/* Navigation list */
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  gap: 0.75rem;
+  list-style: none;
+  padding: 0;
+}
+
+/* Dropdown button */
 .dropDown-btn {
   gap: 0.5rem;
   align-items: center;
@@ -112,8 +153,7 @@
   transform: rotate(180deg);
 }
 
-/* hover effect */
-
+/* hover effect - navigation links */
 .nav-links li {
   width: fit-content;
   display: inline-flex;
@@ -126,6 +166,7 @@
   background-size: 0% 100%;
   background-position: left center;
   transition: all 0.3s ease;
+  list-style: none;
 }
 
 /* Exclude the theme dropdown li from hover effects */
@@ -197,19 +238,7 @@
   opacity: 1;
 }
 
-/* Sub-menu styling to match nav links */
-.sub-menu {
-  margin-top: 0.5rem;
-  margin-left: 20px;
-  padding-left: 5px;
-  width: 100%;
-  max-width: 100%;
-}
-
-.sub-menu li {
-  width: auto;
-}
-
+/* Sub-menu button styling */
 .sub-menu button {
   color: var(--color-primary-light);
   text-decoration: none;
@@ -238,7 +267,7 @@
   border-radius: 8px;
 }
 
-/* Animated border corners for sub-menu */
+/* Animated border corners for sub-menu buttons */
 .sub-menu button::before,
 .sub-menu button::after {
   content: "";

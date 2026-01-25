@@ -17,8 +17,11 @@ body {
 
 .container {
   margin: 0 auto;
-  max-width: var(--container-width);
-  padding: 0 var(--gutter);
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 24px;
 }
 
 .back_to_top {

@@ -4,60 +4,51 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AL-Moanes</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.scss" />
   </head>
   <body>
     <!-- Container -->
     <div class="max-w-7xl mx-auto px-6">
-      <nav
-        class="nav__section flex items-center justify-center top-0 z-50 py-12"
-      >
+      <nav class="nav__section">
         <img
-          class="nav__logo w-64"
+          class="nav__logo"
           src="/assets/Al-Moanes-mini-logo.png"
           alt="Al Moanes mini logo"
         />
       </nav>
 
       <!-- side bar navigation -->
-      <div
-        class="top-0 left-0 absolute p-10 h-screen box-border w-64"
-        id="sideBar"
-      >
-        <ul class="nav-links flex flex-col justify-end mb-4 mt-4 gap-3">
-          <li class="flex">
+      <div id="sideBar">
+        <ul class="nav-links">
+          <li>
             <img src="/assets/home.svg" />
             <a href="#home"><span>Home</span></a>
           </li>
-          <li class="flex">
+          <li>
             <img src="/assets/headphones-16-solid.svg" />
             <a href="#recitation"><span>Recitation</span></a>
           </li>
-          <li class="flex">
+          <li>
             <img src="/assets/quran.svg" />
             <a href="#quran"><span>Quran</span></a>
           </li>
-          <li class="flex">
+          <li>
             <img src="/assets/hadith.svg" />
             <a href="#hadith"><span>Hadith</span></a>
           </li>
-
           <li>
-            <button class="dropDown-btn flex w-fit">
+            <button class="dropDown-btn">
               <img src="/assets/toggle_them.svg" />
               <span>Theme</span>
               <img class="dropDone-arrow" src="/assets/dropdown-arrow.svg" />
             </button>
-            <ul class="sub-menu flex flex-col">
+            <ul class="sub-menu">
               <div>
-                <button class="flex">
+                <button>
                   <img src="/assets/light.svg" /> <span>Light</span>
                 </button>
-                <button class="flex">
-                  <img src="/assets/dark.svg" /><span>Dark</span>
-                </button>
-                <button class="flex">
+                <button><img src="/assets/dark.svg" /><span>Dark</span></button>
+                <button>
                   <img src="/assets/monitor.svg" /> <span>System</span>
                 </button>
               </div>
@@ -65,7 +56,6 @@
           </li>
         </ul>
       </div>
-
       <!-- HOME SECTION -->
       <section
         id="home"
@@ -129,8 +119,8 @@
           </select>
         </div>
 
-        <!-- Audio Player: spans all columns -->
-        <div class="col-span-full listen__player">
+        <!-- Audio Player -->
+        <div class="listen__player">
           <audio id="audioPlayer">
             <source
               src="https://server6.mp3quran.net/kurdi/002.mp3"
@@ -139,33 +129,47 @@
             Your browser does not support the audio element.
           </audio>
 
-          <!-- Player controls: flex layout -->
-          <div class="flex flex-wrap items-center gap-4 justify-center">
-            <button id="playBtn" class="player__btn">
-              <span
-                ><img
-                  class="w-5"
-                  id="playIcon"
-                  src="/assets/play-audio.svg"
-                  alt=""
-              /></span>
+          <div class="player__controls">
+            <!-- Play Button -->
+            <button id="playBtn" class="player__btn" title="Play/Pause">
+              <img id="playIcon" src="/assets/play-audio.svg" alt="Play" />
             </button>
 
-            <button id="prevSecBtn" class="player__btn-small">↶</button>
+            <!-- Previous 10s Button -->
+            <button
+              id="prevSecBtn"
+              class="player__btn-small"
+              title="Previous 10s"
+            >
+              <img src="/assets/arrow-up-left.svg" alt="Previous" />
+            </button>
 
-            <div class="flex-1 min-w-[200px]">
-              <input type="range" min="0" max="100" id="progressBar" />
+            <!-- Progress Bar -->
+            <div class="player__progress-container">
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value="0"
+                id="progressBar"
+              />
             </div>
 
-            <button id="skipSecBtn" class="player__btn-small">↷</button>
+            <!-- Next 10s Button -->
+            <button id="skipSecBtn" class="player__btn-small" title="Skip 10s">
+              <img src="/assets/arrow-up-right.svg" alt="Skip" />
+            </button>
 
-            <button id="muteBtn" class="player__btn">Mute</button>
+            <!-- Mute Button -->
+            <button id="muteBtn" class="player__btn" title="Mute/Unmute">
+              <img id="muteBtnIcon" src="/assets/mute.svg" alt="Mute" />
+            </button>
 
-            <!-- Time display -->
-            <div class="flex gap-2 player__time">
-              <div id="surahCurrentTime">0:00</div>
+            <!-- Time Display -->
+            <div class="player__time">
+              <span id="surahCurrentTime">0:00</span>
               <span>/</span>
-              <div id="surahDuration">0:00</div>
+              <span id="surahDuration">0:00</span>
             </div>
           </div>
         </div>
