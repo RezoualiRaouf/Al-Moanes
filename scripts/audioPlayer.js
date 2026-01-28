@@ -1,14 +1,14 @@
 const playIconUtl = new URL("../assets/play-audio.svg", import.meta.url);
 const pauseIconUrl = new URL("../assets/pause-audio.svg", import.meta.url);
-
 const muteIconUrl = new URL("../assets/mute.svg", import.meta.url);
 const unmuteIconUrl = new URL("../assets/unmute.svg", import.meta.url);
 
-async function fetchReciter() {}
-async function fetchSurah() {}
-async function fetchNarration() {}
-
 function formatTime(seconds) {
+  // check NaN and invalid values
+  if (!isFinite(seconds) || seconds < 0) {
+    return "00:00";
+  }
+
   if (seconds >= 3600) {
     const h = Math.floor(seconds / 3600);
     const m = Math.floor((seconds % 3600) / 60);
@@ -23,6 +23,13 @@ function formatTime(seconds) {
     const s = Math.floor(seconds % 60);
     return `${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
   }
+}
+
+function resetPlayer() {
+  progressBar.value = 0;
+  surahCurrentTime.innerText = "00:00";
+  surahDuration.innerText = "00:00";
+  playIcon.src = playIconUtl.href;
 }
 
 const audioPlayer = document.getElementById("audioPlayer");
@@ -55,10 +62,23 @@ muteBtn.addEventListener("click", () => {
 
 // Update Progress Bar and Time Display
 audioPlayer.addEventListener("timeupdate", () => {
-  let percentage = (audioPlayer.currentTime / audioPlayer.duration) * 100;
-  progressBar.value = percentage;
-  surahCurrentTime.innerText = formatTime(audioPlayer.currentTime);
+  if (isFinite(audioPlayer.duration)) {
+    let percentage = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+    progressBar.value = percentage;
+    surahCurrentTime.innerText = formatTime(audioPlayer.currentTime);
+    surahDuration.innerText = formatTime(audioPlayer.duration);
+  }
+});
+
+//  Reset when new audio starts loading
+audioPlayer.addEventListener("loadstart", () => {
+  resetPlayer();
+});
+
+//  Update duration when metadata is loaded
+audioPlayer.addEventListener("loadedmetadata", () => {
   surahDuration.innerText = formatTime(audioPlayer.duration);
+  progressBar.value = 0;
 });
 
 // Skip Forward 10 Seconds
@@ -76,18 +96,22 @@ prevSecBtn.addEventListener("click", () => {
 
 // Progress Bar - Seek by Dragging
 progressBar.addEventListener("input", () => {
-  audioPlayer.currentTime = (progressBar.value / 100) * audioPlayer.duration;
+  if (isFinite(audioPlayer.duration)) {
+    audioPlayer.currentTime = (progressBar.value / 100) * audioPlayer.duration;
+  }
 });
 
 // Progress Bar - Seek by Clicking
 progressBar.addEventListener("click", (e) => {
-  const rect = progressBar.getBoundingClientRect();
-  const clickPosition = (e.clientX - rect.left) / rect.width;
-  const clickedTime = clickPosition * audioPlayer.duration;
-  audioPlayer.currentTime = Math.max(
-    0,
-    Math.min(clickedTime, audioPlayer.duration),
-  );
+  if (isFinite(audioPlayer.duration)) {
+    const rect = progressBar.getBoundingClientRect();
+    const clickPosition = (e.clientX - rect.left) / rect.width;
+    const clickedTime = clickPosition * audioPlayer.duration;
+    audioPlayer.currentTime = Math.max(
+      0,
+      Math.min(clickedTime, audioPlayer.duration),
+    );
+  }
 });
 
 // Reset play button when audio ends

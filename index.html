@@ -8,7 +8,7 @@
   </head>
   <body>
     <!-- Container -->
-    <div class="max-w-7xl mx-auto px-6">
+    <div class="container">
       <nav class="nav__section">
         <img
           class="nav__logo"
@@ -56,144 +56,115 @@
           </li>
         </ul>
       </div>
+
       <!-- HOME SECTION -->
-      <section
-        id="home"
-        class="hero__section grid grid-cols-1 lg:grid-cols-2 gap-16 py-16 items-center"
-      >
-        <!-- Left -->
-        <div class="hero__content">
-          <h1 class="hero__title mb-6">AL-Moanes</h1>
-          <p class="hero__text mb-8">
-            Listen to beautiful Quran recitations from your favorite readers
-            with access to over 250 trusted reciters and multiple recitations
-            from across the Islamic world.
-          </p>
-          <button class="hero__btn">Start Listening</button>
-        </div>
-
-        <!-- Logo -->
-        <div class="p-12">
-          <img
-            class="hero__logo_img"
-            src="/assets/Al-Moanes.png"
-            alt="AL-Moanes logo"
-          />
-        </div>
-      </section>
-
-      <!-- RECITATION SECTION -->
-      <section
-        id="recitation"
-        class="listen__section grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 py-12"
-      >
-        <!-- Reciter Dropdown -->
-        <div class="listen__card">
-          <label for="reciter" class="listen__label">Select a reciter:</label>
-          <select id="reciter" class="listen__select">
-            <option value="1">Value 1</option>
-            <option value="2">Value 2</option>
-            <option value="3">Value 3</option>
-          </select>
-        </div>
-
-        <!-- Narration Dropdown -->
-        <div class="listen__card">
-          <label for="narration" class="listen__label"
-            >Select a Narration/Rewaya:</label
-          >
-          <select id="narration" class="listen__select">
-            <option value="1">Value 1</option>
-            <option value="2">Value 2</option>
-            <option value="3">Value 3</option>
-          </select>
-        </div>
-
-        <!-- Surah Dropdown -->
-        <div class="listen__card">
-          <label for="surah" class="listen__label">Select a Surah:</label>
-          <select id="surah" class="listen__select">
-            <option value="1">Value 1</option>
-            <option value="2">Value 2</option>
-            <option value="3">Value 3</option>
-          </select>
-        </div>
-
-        <!-- Audio Player -->
-        <div class="listen__player">
-          <audio id="audioPlayer">
-            <source
-              src="https://server6.mp3quran.net/kurdi/002.mp3"
-              type="audio/mpeg"
+      <main>
+        <section id="home" class="hero__section">
+          <div class="hero__content">
+            <h1 class="hero__title">AL-Moanes</h1>
+            <p class="hero__text">
+              Listen to beautiful Quran recitations from your favorite readers
+              with access to over 250 trusted reciters and multiple recitations
+              from across the Islamic world.
+            </p>
+            <button class="hero__btn">Start Listening</button>
+          </div>
+          <!-- Logo -->
+          <div class="hero__logo_container">
+            <img
+              class="hero__logo_img"
+              src="/assets/Al-Moanes.png"
+              alt="AL-Moanes logo"
             />
-            Your browser does not support the audio element.
-          </audio>
+          </div>
+        </section>
 
-          <div class="player__controls">
-            <!-- Play Button -->
-            <button id="playBtn" class="player__btn" title="Play/Pause">
-              <img id="playIcon" src="/assets/play-audio.svg" alt="Play" />
-            </button>
+        <!-- RECITATION SECTION -->
+        <section id="recitation" class="listen__section">
+          <!-- Reciter Dropdown -->
+          <div class="listen__card">
+            <label for="reciter" class="listen__label">Select a reciter:</label>
+            <select id="reciter" class="listen__select"></select>
+          </div>
 
-            <!-- Previous 10s Button -->
-            <button
-              id="prevSecBtn"
-              class="player__btn-small"
-              title="Previous 10s"
+          <!-- Narration Dropdown -->
+          <div class="listen__card">
+            <label for="narration" class="listen__label"
+              >Select a Narration/Rewaya:</label
             >
-              <img src="/assets/arrow-up-left.svg" alt="Previous" />
-            </button>
+            <select id="narration" class="listen__select"></select>
+          </div>
 
-            <!-- Progress Bar -->
-            <div class="player__progress-container">
-              <input
-                type="range"
-                min="0"
-                max="100"
-                value="0"
-                id="progressBar"
-              />
-            </div>
+          <!-- Surah Dropdown -->
+          <div class="listen__card">
+            <label for="surah" class="listen__label">Select a Surah:</label>
+            <select id="surah" class="listen__select"></select>
+          </div>
 
-            <!-- Next 10s Button -->
-            <button id="skipSecBtn" class="player__btn-small" title="Skip 10s">
-              <img src="/assets/arrow-up-right.svg" alt="Skip" />
-            </button>
+          <!-- Audio Player -->
+          <div class="listen__player">
+            <audio id="audioPlayer">
+              <source src="#" type="audio/mpeg" />
+              Your browser does not support the audio element.
+            </audio>
 
-            <!-- Mute Button -->
-            <button id="muteBtn" class="player__btn" title="Mute/Unmute">
-              <img id="muteBtnIcon" src="/assets/mute.svg" alt="Mute" />
-            </button>
+            <div class="player__controls">
+              <!-- Play Button -->
+              <button id="playBtn" class="player__btn" title="Play/Pause">
+                <img id="playIcon" src="/assets/play-audio.svg" alt="Play" />
+              </button>
 
-            <!-- Time Display -->
-            <div class="player__time">
-              <span id="surahCurrentTime">0:00</span>
-              <span>/</span>
-              <span id="surahDuration">0:00</span>
+              <button
+                id="prevSecBtn"
+                class="player__btn-small"
+                title="Previous 10s"
+              >
+                <img src="/assets/arrow-up-left.svg" alt="Previous" />
+              </button>
+
+              <!-- Progress Bar -->
+              <div class="player__progress-container">
+                <input
+                  type="range"
+                  min="0"
+                  max="100"
+                  value="0"
+                  id="progressBar"
+                />
+              </div>
+
+              <!-- Next 10s Button -->
+              <button
+                id="skipSecBtn"
+                class="player__btn-small"
+                title="Skip 10s"
+              >
+                <img src="/assets/arrow-up-right.svg" alt="Skip" />
+              </button>
+
+              <!-- Mute Button -->
+              <button id="muteBtn" class="player__btn" title="Mute/Unmute">
+                <img id="muteBtnIcon" src="/assets/mute.svg" alt="Mute" />
+              </button>
+
+              <!-- Time Display -->
+              <div class="player__time">
+                <span id="surahCurrentTime">0:00</span>
+                <span>/</span>
+                <span id="surahDuration">0:00</span>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      <!-- QURAN SECTION -->
-      <section id="quran" class="py-12">
-        <h2 class="text-3xl font-bold mb-6">Quran</h2>
-        <p>Quran section content goes here...</p>
-      </section>
-
-      <!-- HADITH SECTION -->
-      <section id="hadith" class="py-12">
-        <h2 class="text-3xl font-bold mb-6">Hadith</h2>
-        <p>Hadith section content goes here...</p>
-      </section>
-
+        </section>
+      </main>
       <!-- Footer -->
       <footer class="py-8 flex justify-between items-center">
         <div class="copyright">Raouf Rezouali©</div>
       </footer>
     </div>
 
-    <script src="./scripts/sideBar.js" type="module"></script>
-    <script src="./scripts/listenFetch.js" type="module"></script>
+    <script src="./scripts/sideBar.js"></script>
+    <script src="./scripts/fetchReciation.js" type="module"></script>
+    <script src="./scripts/audioPlayer.js" type="module"></script>
   </body>
 </html>
