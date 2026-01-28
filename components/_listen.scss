@@ -1,10 +1,63 @@
 /* Audio Player Styles */
+
+.listen__section {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto 1fr;
+  gap: 24px;
+  margin-bottom: 32px;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  margin: 0 auto;
+  padding: 40px 30px;
+  margin-top: 150px;
+}
+
+.listen__card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.listen__label {
+  font-family: "The Seasons";
+  font-weight: 800;
+  font-size: 1.25rem;
+  padding-left: 5px;
+  color: var(--color-primary-dark);
+}
+
+.listen__select {
+  padding: 12px 16px;
+  border-radius: 8px;
+  color: var(--color-primary-dark);
+  font-size: 1rem;
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 20px;
+  padding-right: 40px;
+  background-color: var(--color-accent-light);
+  border-color: var(--color-accent-dark);
+}
+
+.listen__select option {
+  padding: 10px;
+  color: var(--color-primary);
+  background-color: var(--color-accent-light);
+}
+
 .listen__player {
-  backdrop-filter: blur(16px);
-  background: rgba(255, 255, 255, 0.8);
+  background: var(--color-accent-light);
   border-radius: var(--radius-xl);
   padding: var(--spacing-xl);
   grid-column: 1 / -1;
+  grid-row: 2;
+  align-self: center;
+  justify-self: center;
+  padding: 20px 60px;
 }
 
 .player__controls {
@@ -21,22 +74,16 @@
   justify-content: center;
   width: 48px;
   height: 48px;
-  border-radius: var(--radius-full);
-  color: var(--color-white);
-  border: none;
   cursor: pointer;
-  transition: all var(--transition-base);
   flex-shrink: 0;
-}
-
-.player__btn:active {
-  transform: scale(0.95);
+  background: none;
+  border: none;
+  padding: 0;
 }
 
 .player__btn img {
   width: 24px;
   height: 24px;
-  object-fit: contain;
 }
 
 .player__btn-small {
@@ -47,15 +94,9 @@
   height: 40px;
   border-radius: var(--radius-full);
   background-color: var(--color-secondary);
-  color: var(--text-primary);
-  border: none;
   cursor: pointer;
   transition: all var(--transition-base);
   flex-shrink: 0;
-}
-
-.player__btn-small:active {
-  transform: scale(0.95);
 }
 
 .player__btn-small img {
