@@ -67,12 +67,6 @@
   --gradient-button: linear-gradient(135deg, #066b50 0%, #088567 100%);
   --gradient-button-hover: linear-gradient(135deg, #088567 0%, #0aa07a 100%);
 
-  /* Status Colors */
-  --success: #4caf50;
-  --warning: #ff9800;
-  --error: #f44336;
-  --info: #2196f3;
-
   /* Spacing Scale */
   --spacing-xs: 0.25rem;
   --spacing-sm: 0.5rem;
@@ -93,8 +87,12 @@
   --font-body: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   --font-arabic:
     "Markazi Text", "Traditional Arabic", "Noto Naskh Arabic", serif;
-  --font-heading: "Amiri", "Georgia", serif;
-  --font-display: "The Seasons", Georgia, serif;
+  --font-heroSubTitle:
+    "The Seasons" --font-heading: "The Seasons", "Georgia", serif;
+  --font-display-eng: Georgia, serif;
+  --font-display-ar:
+    "Markazi text", , "Traditional Arabic", "Noto Naskh Arabic", serif;
+  --font-display: var(--font-display-eng);
   --font-sans:
     "Zalando Sans Semi Expanded", -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;

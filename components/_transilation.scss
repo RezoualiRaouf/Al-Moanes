@@ -1,0 +1,117 @@
+// Language  Styles
+
+// Active state for selected language button
+.sub-menu button.active {
+  background: var(--color-primary);
+  color: var(--color-white);
+  font-weight: var(--font-weight-semibold);
+}
+
+.sub-menu button.active::before,
+.sub-menu button.active::after {
+  border-color: var(--color-white);
+}
+
+// Active state icon styling
+.sub-menu button.active img {
+  filter: brightness(0) invert(1); /* Makes icon white */
+}
+
+// Flip sidebar position for RTL
+html[dir="rtl"] #sideBar {
+  left: auto;
+  right: 0;
+  border-right: none;
+  border-left: 2px solid var(--bg-hover);
+}
+
+html[dir="rtl"] main {
+  margin-left: 0;
+  margin-right: 256px;
+}
+
+// Flip dropdown arrow for RTL
+html[dir="rtl"] .dropDone-arrow {
+  transform: scaleX(-1);
+}
+
+html[dir="rtl"] .dropDone-arrow.rotate {
+  transform: scaleX(-1) rotate(180deg);
+}
+
+// keep the audio player's elements order
+html[dir="rtl"] .player__controls {
+  flex-direction: row-reverse;
+}
+// Adjust sub-menu padding for RTL
+html[dir="rtl"] #sideBar .sub-menu {
+  margin-left: 0;
+  margin-right: 20px;
+  padding-left: 0;
+  padding-right: 5px;
+}
+
+// Adjust animated corners for RTL
+html[dir="rtl"] .nav-links li::before,
+html[dir="rtl"] .dropDown-btn::before,
+html[dir="rtl"] .dropDown-lang-btn::before,
+html[dir="rtl"] .sub-menu button::before {
+  left: auto;
+  right: 0;
+  border-left: none;
+  border-right: 2px solid var(--color-primary);
+}
+
+html[dir="rtl"] .nav-links li::after,
+html[dir="rtl"] .dropDown-btn::after,
+html[dir="rtl"] .dropDown-lang-btn::after,
+html[dir="rtl"] .sub-menu button::after {
+  right: auto;
+  left: 0;
+  border-right: none;
+  border-left: 2px solid var(--color-primary);
+}
+
+// Adjust text alignment for RTL
+html[dir="rtl"] {
+  text-align: right;
+}
+
+html[dir="rtl"] .sub-menu button {
+  text-align: right;
+}
+
+// Optional: Smooth transition when switching directions
+#sideBar,
+main,
+.nav-links li,
+.dropDown-btn,
+.dropDown-lang-btn,
+.sub-menu button {
+  transition:
+    margin 0.3s ease,
+    padding 0.3s ease;
+}
+
+// Arabic Font Optimizations
+html[lang="ar"] {
+  font-family: var(--font-arabic);
+}
+
+html[lang="ar"] .nav-links,
+html[lang="ar"] #sideBar {
+  font-family: var(--font-arabic);
+}
+
+// Adjust line height for Arabic text (typically needs more space)
+html[lang="ar"] body {
+  line-height: var(--line-height-relaxed);
+}
+
+// Adjust font size for better Arabic readability
+html[lang="ar"] .nav-links a,
+html[lang="ar"] .dropDown-btn,
+html[lang="ar"] .dropDown-lang-btn,
+html[lang="ar"] .sub-menu button {
+  font-size: calc(var(--font-size-base) * 1.1);
+}

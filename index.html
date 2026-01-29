@@ -9,47 +9,47 @@
   <body>
     <!-- Container -->
     <div class="container">
-      <nav class="nav__section">
-        <img
-          class="nav__logo"
-          src="/assets/Al-Moanes-mini-logo.png"
-          alt="Al Moanes mini logo"
-        />
-      </nav>
-
       <!-- side bar navigation -->
       <div id="sideBar">
         <ul class="nav-links">
           <li>
             <img src="/assets/home.svg" />
-            <a href="#home"><span>Home</span></a>
+            <a href="#home" data-><span data-i18n="home">Home</span></a>
           </li>
           <li>
             <img src="/assets/headphones.svg" />
-            <a href="#recitation"><span>Recitation</span></a>
+            <a href="#recitation"
+              ><span data-i18n="recitation">Recitation</span></a
+            >
           </li>
           <li>
             <img src="/assets/quran.svg" />
-            <a href="#quran"><span>Quran</span></a>
+            <a href="#quran"><span data-i18n="quran">Quran</span></a>
           </li>
           <li>
             <img src="/assets/hadith.svg" />
-            <a href="#hadith"><span>Hadith</span></a>
+            <a href="#hadith"><span data-i18n="hadith">Hadith</span></a>
           </li>
           <li>
             <button class="dropDown-btn">
               <img src="/assets/toggle_them.svg" />
-              <span>Theme</span>
+              <span data-i18n="theme">Theme</span>
               <img class="dropDone-arrow" src="/assets/dropdown-arrow.svg" />
             </button>
             <ul class="sub-menu">
               <div>
                 <button>
-                  <img src="/assets/light.svg" /> <span>Light</span>
+                  <img src="/assets/light.svg" />
+                  <span data-i18n="light">Light</span>
                 </button>
-                <button><img src="/assets/dark.svg" /><span>Dark</span></button>
                 <button>
-                  <img src="/assets/monitor.svg" /> <span>System</span>
+                  <img src="/assets/dark.svg" /><span data-i18n="dark"
+                    >Dark</span
+                  >
+                </button>
+                <button>
+                  <img src="/assets/monitor.svg" />
+                  <span data-i18n="system">System</span>
                 </button>
               </div>
             </ul>
@@ -57,41 +57,49 @@
           <li>
             <button class="dropDown-lang-btn">
               <img src="/assets/language.svg" />
-              <span>Language</span>
+              <span data-i18n="language">Language</span>
               <img class="dropDone-arrow" src="/assets/dropdown-arrow.svg" />
             </button>
             <ul class="sub-menu">
               <div>
-                <button>
+                <button id="ar-btn">
                   <img src="/assets/circle.svg" alt="Arabic" />
-                  <span>Arabic</span>
+                  <span data-i18n="arabic">Arabic</span>
                 </button>
-                <button>
+                <button id="eng-btn">
                   <img src="/assets/circle.svg" alt="English" />
-                  <span>English</span>
+                  <span data-i18n="english">English</span>
                 </button>
               </div>
             </ul>
           </li>
           <li>
             <img src="/assets/gmail.svg" />
-            <a href="#contact"><span>Conatct Us</span></a>
+            <a href="#contact"><span data-i18n="contact">Conatct Us</span></a>
           </li>
         </ul>
       </div>
 
-      <!-- HOME SECTION -->
       <main>
+        <nav class="logo__section">
+          <img
+            class="logo"
+            src="/assets/Al-Moanes-mini-logo.png"
+            alt="Al Moanes mini logo"
+          />
+        </nav>
+
+        <!-- HOME SECTION -->
         <section id="home" class="hero__section">
           <div class="hero__content">
-            <p class="hero__text">
+            <p class="hero__text" data-i18n="heroSubTitle">
               Listen to beautiful Quran recitations from your favorite readers
               with access to over 250 trusted reciters and multiple recitations
               from across the Islamic world.
             </p>
             <button class="hero__btn">
-              Install extation
-              <span><img src="/assets/download.svg" alt="install" /></span>
+              <span data-i18n="ctaButton"> Install extation</span>
+              <img src="/assets/download.svg" alt="install" />
             </button>
           </div>
           <!-- Logo -->
@@ -108,13 +116,18 @@
         <section id="recitation" class="listen__section">
           <!-- Reciter Dropdown -->
           <div class="listen__card">
-            <label for="reciter" class="listen__label">Select a reciter:</label>
+            <label for="reciter" class="listen__label" data-i18n="selectReciter"
+              >Select a reciter:</label
+            >
             <select id="reciter" class="listen__select"></select>
           </div>
 
           <!-- Narration Dropdown -->
           <div class="listen__card">
-            <label for="narration" class="listen__label"
+            <label
+              for="narration"
+              class="listen__label"
+              data-i18n="selectNarration"
               >Select a Narration/Rewaya:</label
             >
             <select id="narration" class="listen__select"></select>
@@ -122,7 +135,9 @@
 
           <!-- Surah Dropdown -->
           <div class="listen__card">
-            <label for="surah" class="listen__label">Select a Surah:</label>
+            <label for="surah" class="listen__label" data-i18n="selectSurah"
+              >Select a Surah:</label
+            >
             <select id="surah" class="listen__select"></select>
           </div>
 
@@ -188,6 +203,8 @@
       </footer>
     </div>
 
+    <script src="./scripts/translation.js"></script>
+    <script src="./scripts/languageSwitcher.js"></script>
     <script src="./scripts/sideBar.js"></script>
     <script src="./scripts/fetchReciation.js" type="module"></script>
     <script src="./scripts/audioPlayer.js" type="module"></script>
