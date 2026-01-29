@@ -3,7 +3,7 @@ main {
   margin-left: 256px;
 }
 
-.nav__section {
+.logo__section {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -14,7 +14,7 @@ main {
   padding-bottom: 48px;
 }
 
-.nav__logo {
+.logo {
   width: 256px;
 }
 
@@ -85,6 +85,11 @@ main {
   list-style: none;
   padding: 0;
 }
+
+/** todo : 
+* - remove the hover effect when an button id active
+* - add a better select effect to the button when actived
+*/
 
 /* Dropdown button - Shared styles for all dropdown buttons */
 .dropDown-btn,
@@ -256,8 +261,9 @@ main {
   border-right: 2px solid var(--color-primary);
 }
 
-.nav-links li:hover::before,
-.nav-links li:hover::after {
+// only apply hover when li does not have .no-hover
+.nav-links li:not(.no-hover):hover::before,
+.nav-links li:not(.no-hover):hover::after {
   width: 100%;
   height: 100%;
   opacity: 1;

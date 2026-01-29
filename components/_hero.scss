@@ -4,19 +4,17 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 64px;
-  padding-top: 64px;
-  padding-bottom: 64px;
-  padding-left: 200px;
+  padding-block: 64px 64px;
+  padding-inline-start: 200px;
   align-items: center;
-  margin-top: 60px;
-  margin-bottom: 100px;
+  margin-block: 60px 100px;
 }
 
 .hero__text {
   font-size: 1.5rem;
   line-height: 1.7;
-  font-weight: 600;
-  font-family: var(--font-display);
+  font-weight: 500;
+  font-family: var(--font-heroSubTitle);
   color: var(--color-primary-dark);
 }
 
@@ -24,8 +22,9 @@
   background: var(--color-primary-dark);
   color: white;
   border: none;
-  padding: 1rem 2rem;
-  margin-top: 70px;
+  padding-block: 1rem;
+  padding-inline: 2rem;
+  margin-block-start: 70px;
   font-size: 1.125rem;
   font-family: var(--font-sans);
   font-weight: 400;
@@ -44,7 +43,7 @@
   }
 }
 
-.hero__btn span img {
+.hero__btn img {
   height: 1.5rem;
 }
 
