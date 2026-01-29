@@ -20,7 +20,7 @@
 }
 
 .listen__label {
-  font-family: "The Seasons";
+  font-family: var(--font-heading);
   font-weight: 800;
   font-size: 1.25rem;
   padding-left: 5px;
@@ -31,8 +31,9 @@
   padding: 12px 16px;
   border-radius: 8px;
   color: var(--color-primary-dark);
-  font-size: 1rem;
-  font-weight: var(--font-weight-bold);
+  font-size: 1.2rem;
+  font-family: var(--font-arabic);
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
   background-repeat: no-repeat;

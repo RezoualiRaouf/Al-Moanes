@@ -12,18 +12,12 @@
   margin-bottom: 100px;
 }
 
-.hero__title {
-  font-size: 4rem;
-  color: var(--color-primary-dark);
-  font-weight: 700;
-  font-family: "The Seasons";
-}
-
 .hero__text {
   font-size: 1.5rem;
-  color: var(--color-primary-dark);
   line-height: 1.7;
-  font-family: "The Seasons";
+  font-weight: 600;
+  font-family: var(--font-display);
+  color: var(--color-primary-dark);
 }
 
 .hero__btn {
@@ -31,8 +25,10 @@
   color: white;
   border: none;
   padding: 1rem 2rem;
-  margin-top: 20px;
+  margin-top: 70px;
   font-size: 1.125rem;
+  font-family: var(--font-sans);
+  font-weight: 400;
   border-radius: 50px;
   cursor: pointer;
   display: inline-flex;
@@ -46,11 +42,10 @@
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(45, 107, 90, 0.4);
   }
+}
 
-  &::after {
-    content: "›";
-    font-size: 1.5rem;
-  }
+.hero__btn span img {
+  height: 1.5rem;
 }
 
 .hero__logo_img {

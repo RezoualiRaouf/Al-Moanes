@@ -25,7 +25,7 @@
             <a href="#home"><span>Home</span></a>
           </li>
           <li>
-            <img src="/assets/headphones-16-solid.svg" />
+            <img src="/assets/headphones.svg" />
             <a href="#recitation"><span>Recitation</span></a>
           </li>
           <li>
@@ -54,6 +54,29 @@
               </div>
             </ul>
           </li>
+          <li>
+            <button class="dropDown-lang-btn">
+              <img src="/assets/language.svg" />
+              <span>Language</span>
+              <img class="dropDone-arrow" src="/assets/dropdown-arrow.svg" />
+            </button>
+            <ul class="sub-menu">
+              <div>
+                <button>
+                  <img src="/assets/circle.svg" alt="Arabic" />
+                  <span>Arabic</span>
+                </button>
+                <button>
+                  <img src="/assets/circle.svg" alt="English" />
+                  <span>English</span>
+                </button>
+              </div>
+            </ul>
+          </li>
+          <li>
+            <img src="/assets/gmail.svg" />
+            <a href="#contact"><span>Conatct Us</span></a>
+          </li>
         </ul>
       </div>
 
@@ -61,13 +84,15 @@
       <main>
         <section id="home" class="hero__section">
           <div class="hero__content">
-            <h1 class="hero__title">AL-Moanes</h1>
             <p class="hero__text">
               Listen to beautiful Quran recitations from your favorite readers
               with access to over 250 trusted reciters and multiple recitations
               from across the Islamic world.
             </p>
-            <button class="hero__btn">Start Listening</button>
+            <button class="hero__btn">
+              Install extation
+              <span><img src="/assets/download.svg" alt="install" /></span>
+            </button>
           </div>
           <!-- Logo -->
           <div class="hero__logo_container">
@@ -144,7 +169,7 @@
 
               <!-- Mute Button -->
               <button id="muteBtn" class="player__btn" title="Mute/Unmute">
-                <img id="muteBtnIcon" src="/assets/mute.svg" alt="Mute" />
+                <img id="muteBtnIcon" src="/assets/unmute.svg" alt="Mute" />
               </button>
 
               <!-- Time Display -->

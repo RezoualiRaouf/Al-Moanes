@@ -1,4 +1,4 @@
-const playIconUtl = new URL("../assets/play-audio.svg", import.meta.url);
+const playIconUrl = new URL("../assets/play-audio.svg", import.meta.url);
 const pauseIconUrl = new URL("../assets/pause-audio.svg", import.meta.url);
 const muteIconUrl = new URL("../assets/mute.svg", import.meta.url);
 const unmuteIconUrl = new URL("../assets/unmute.svg", import.meta.url);
@@ -29,7 +29,7 @@ function resetPlayer() {
   progressBar.value = 0;
   surahCurrentTime.innerText = "00:00";
   surahDuration.innerText = "00:00";
-  playIcon.src = playIconUtl.href;
+  playIcon.src = playIconUrl.href;
 }
 
 const audioPlayer = document.getElementById("audioPlayer");
@@ -50,14 +50,14 @@ playBtn.addEventListener("click", () => {
     playIcon.src = pauseIconUrl.href;
   } else {
     audioPlayer.pause();
-    playIcon.src = playIconUtl.href;
+    playIcon.src = playIconUrl.href;
   }
 });
 
 // Mute/Unmute Button
 muteBtn.addEventListener("click", () => {
   audioPlayer.muted = !audioPlayer.muted;
-  muteBtnIcon.src = audioPlayer.muted ? unmuteIconUrl.href : muteIconUrl.href;
+  muteBtnIcon.src = audioPlayer.muted ? muteIconUrl.href : unmuteIconUrl.href;
 });
 
 // Update Progress Bar and Time Display
