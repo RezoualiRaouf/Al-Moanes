@@ -33,6 +33,7 @@ main {
   transition: 300ms ease-in-out;
   z-index: 100;
   overflow-y: auto;
+  font-family: var(--font-sans);
 }
 
 #sideBar a {
@@ -49,7 +50,8 @@ main {
 }
 
 #sideBar a span,
-#sideBar .dropDown-btn span {
+#sideBar .dropDown-btn span,
+#sideBar .dropDown-lang-btn span {
   flex-grow: 0;
 }
 
@@ -84,8 +86,9 @@ main {
   padding: 0;
 }
 
-/* Dropdown button */
-.dropDown-btn {
+/* Dropdown button - Shared styles for all dropdown buttons */
+.dropDown-btn,
+.dropDown-lang-btn {
   gap: 0.5rem;
   align-items: center;
   width: fit-content;
@@ -100,16 +103,22 @@ main {
   color: var(--color-primary-light);
   border: none;
   cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
 }
 
-.dropDown-btn:hover {
+.dropDown-btn:hover,
+.dropDown-lang-btn:hover {
   background-size: 100% 100%;
   border-radius: 8px;
   color: var(--color-primary);
 }
 
 .dropDown-btn::before,
-.dropDown-btn::after {
+.dropDown-btn::after,
+.dropDown-lang-btn::before,
+.dropDown-lang-btn::after {
   content: "";
   position: absolute;
   width: 0;
@@ -118,14 +127,16 @@ main {
   transition: all 0.4s ease;
 }
 
-.dropDown-btn::before {
+.dropDown-btn::before,
+.dropDown-lang-btn::before {
   top: 0;
   left: 0;
   border-top: 2px solid var(--color-primary);
   border-left: 2px solid var(--color-primary);
 }
 
-.dropDown-btn::after {
+.dropDown-btn::after,
+.dropDown-lang-btn::after {
   bottom: 0;
   right: 0;
   border-bottom: 2px solid var(--color-primary);
@@ -133,19 +144,23 @@ main {
 }
 
 .dropDown-btn:hover::before,
-.dropDown-btn:hover::after {
+.dropDown-btn:hover::after,
+.dropDown-lang-btn:hover::before,
+.dropDown-lang-btn:hover::after {
   width: 100%;
   height: 100%;
   opacity: 1;
 }
 
-.dropDown-btn img {
+.dropDown-btn img,
+.dropDown-lang-btn img {
   width: 1.5rem;
   height: 1.5rem;
   flex-shrink: 0;
 }
 
-.dropDown-btn span {
+.dropDown-btn span,
+.dropDown-lang-btn span {
   flex-grow: 0;
 }
 
@@ -175,8 +190,9 @@ main {
   list-style: none;
 }
 
-/* Exclude the theme dropdown li from hover effects */
-.nav-links li:has(.dropDown-btn) {
+/* Exclude the dropdown li elements from hover effects */
+.nav-links li:has(.dropDown-btn),
+.nav-links li:has(.dropDown-lang-btn) {
   width: 100%;
   display: block;
   padding: 0;
@@ -184,7 +200,9 @@ main {
 }
 
 .nav-links li:has(.dropDown-btn)::before,
-.nav-links li:has(.dropDown-btn)::after {
+.nav-links li:has(.dropDown-btn)::after,
+.nav-links li:has(.dropDown-lang-btn)::before,
+.nav-links li:has(.dropDown-lang-btn)::after {
   display: none;
 }
 
@@ -203,8 +221,9 @@ main {
   color: var(--color-primary-light);
   text-decoration: none;
   align-items: center;
-  font-size: 0.95rem;
-  font-size: var(--font-size-lg);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
   transition: color 0.3s ease;
 }
 
@@ -252,7 +271,9 @@ main {
   align-items: center;
   justify-content: flex-start;
   gap: 1rem;
-  font-size: 0.95rem;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
   transition: all 0.3s ease;
   padding: 0.5rem 1rem;
   border-radius: 6px;

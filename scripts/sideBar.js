@@ -1,10 +1,48 @@
-const dropdownBtn = document.querySelector(".dropDown-btn");
+// Handle all dropdown buttons in the sidebar
+const dropdownButtons = document.querySelectorAll(
+  ".dropDown-btn, .dropDown-lang-btn",
+);
 
-const submenu = document.querySelector(".sub-menu");
+// Open current dropDown and close the other if open
+dropdownButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    // Find the submenu and arrow within the same parent li
+    const parentLi = button.closest("li");
+    const submenu = parentLi.querySelector(".sub-menu");
+    const arrow = button.querySelector(".dropDone-arrow");
 
-const submenuArrow = document.querySelector(".dropDone-arrow");
+    // Toggle the current dropdown
+    submenu.classList.toggle("show");
+    arrow.classList.toggle("rotate");
 
-dropdownBtn.addEventListener("click", () => {
-  submenu.classList.toggle("show");
-  submenuArrow.classList.toggle("rotate");
+    dropdownButtons.forEach((otherButton) => {
+      if (otherButton !== button) {
+        const otherParentLi = otherButton.closest("li");
+        const otherSubmenu = otherParentLi.querySelector(".sub-menu");
+        const otherArrow = otherButton.querySelector(".dropDone-arrow");
+
+        otherSubmenu.classList.remove("show");
+        otherArrow.classList.remove("rotate");
+      }
+    });
+  });
+});
+
+// Close dropdowns when clicking outside
+document.addEventListener("click", (event) => {
+  const isDropdownButton = event.target.closest(
+    ".dropDown-btn, .dropDown-lang-btn",
+  );
+  const isSubmenu = event.target.closest(".sub-menu");
+
+  if (!isDropdownButton && !isSubmenu) {
+    dropdownButtons.forEach((button) => {
+      const parentLi = button.closest("li");
+      const submenu = parentLi.querySelector(".sub-menu");
+      const arrow = button.querySelector(".dropDone-arrow");
+
+      submenu.classList.remove("show");
+      arrow.classList.remove("rotate");
+    });
+  }
 });

@@ -17,7 +17,7 @@
   --color-accent-dark: #b3d999;
 
   --color-white: #ffffff;
-  --color-black: #000000
+  --color-black: #000000;
 
   --color-cream: #fffdf8;
 
@@ -91,8 +91,13 @@
 
   /* Typography */
   --font-body: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  --font-arabic: "Traditional Arabic", "Noto Naskh Arabic", serif;
+  --font-arabic:
+    "Markazi Text", "Traditional Arabic", "Noto Naskh Arabic", serif;
   --font-heading: "Amiri", "Georgia", serif;
+  --font-display: "The Seasons", Georgia, serif;
+  --font-sans:
+    "Zalando Sans Semi Expanded", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
 
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
