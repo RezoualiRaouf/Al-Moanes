@@ -81,7 +81,7 @@ html[dir="rtl"] .sub-menu button {
   text-align: right;
 }
 
-// Optional: Smooth transition when switching directions
+// switch transition
 #sideBar,
 main,
 .nav-links li,
@@ -93,7 +93,6 @@ main,
     padding 0.3s ease;
 }
 
-// Arabic Font Optimizations
 html[lang="ar"] {
   font-family: var(--font-arabic);
 }

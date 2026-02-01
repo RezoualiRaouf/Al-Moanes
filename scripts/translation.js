@@ -1,3 +1,5 @@
+/** todo : save the current reciter narration surah playing so when the user changes the lang when listening the surah stops and the slection are saved and traselated and the icon switched to stop */
+
 const translations = {
   en: {
     // Navigation

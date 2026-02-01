@@ -51,7 +51,7 @@ const setLanguage = (lang) => {
   localStorage.setItem("language", lang);
   currentLang = lang;
 
-  // Optional: Trigger custom event for other scripts to listen to
+  // Trigger changing language event
   window.dispatchEvent(
     new CustomEvent("languageChanged", { detail: { lang } }),
   );

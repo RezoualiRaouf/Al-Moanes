@@ -116,5 +116,5 @@ progressBar.addEventListener("click", (e) => {
 
 // Reset play button when audio ends
 audioPlayer.addEventListener("ended", () => {
-  playIcon.src = playIconUtl.href;
+  playIcon.src = playIconUrl.href;
 });

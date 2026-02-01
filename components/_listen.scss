@@ -154,7 +154,6 @@
   border: none;
 }
 
-/** todo :change the font body and make a time font for it*/
 .player__time {
   color: var(--color-primary);
   font-family: var(--font-body);
@@ -163,4 +162,5 @@
   white-space: nowrap;
   display: flex;
   gap: var(--spacing-sm);
+  direction: ltr; // so the time won't be reversed when switching to arabic
 }
