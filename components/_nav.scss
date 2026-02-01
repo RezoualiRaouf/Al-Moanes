@@ -262,8 +262,8 @@ main {
 }
 
 // only apply hover when li does not have .no-hover
-.nav-links li:not(.no-hover):hover::before,
-.nav-links li:not(.no-hover):hover::after {
+.nav-links li:hover::before,
+.nav-links li:hover::after {
   width: 100%;
   height: 100%;
   opacity: 1;
@@ -294,7 +294,7 @@ main {
   margin-bottom: 0.25rem;
 }
 
-.sub-menu button:hover {
+.sub-menu button:not(.active):hover {
   background-size: 100% 100%;
   color: var(--color-primary);
   border-radius: 8px;
@@ -326,8 +326,8 @@ main {
   border-right: 2px solid var(--color-primary);
 }
 
-.sub-menu button:hover::before,
-.sub-menu button:hover::after {
+.sub-menu button:not(.active):hover::before,
+.sub-menu button:not(.active):hover::after {
   width: 100%;
   height: 100%;
   opacity: 1;
