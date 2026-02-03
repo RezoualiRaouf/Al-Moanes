@@ -43,6 +43,10 @@ const progressBar = document.getElementById("progressBar");
 const surahCurrentTime = document.getElementById("surahCurrentTime");
 const surahDuration = document.getElementById("surahDuration");
 
+const isRTL = () => {
+  return localStorage.getItem("language") === "ar";
+};
+
 // Play/Pause Button
 playBtn.addEventListener("click", () => {
   if (audioPlayer.paused) {
@@ -83,16 +87,32 @@ audioPlayer.addEventListener("loadedmetadata", () => {
 
 // Skip Forward 10 Seconds
 skipSecBtn.addEventListener("click", () => {
-  audioPlayer.currentTime = Math.min(
-    (audioPlayer.currentTime || 0) + 10,
-    audioPlayer.duration || Infinity,
-  );
+  if (isRTL()) {
+    // RTL skip button rewinds
+    audioPlayer.currentTime = Math.max(0, (audioPlayer.currentTime || 0) - 10);
+  } else {
+    // LTR skip button skips
+    audioPlayer.currentTime = Math.min(
+      (audioPlayer.currentTime || 0) + 10,
+      audioPlayer.duration || Infinity,
+    );
+  }
 });
 
 // Rewind 10 Seconds
 prevSecBtn.addEventListener("click", () => {
-  audioPlayer.currentTime = Math.max(0, (audioPlayer.currentTime || 0) - 10);
+  if (isRTL()) {
+    // RTL prev button skips
+    audioPlayer.currentTime = Math.min(
+      (audioPlayer.currentTime || 0) + 10,
+      audioPlayer.duration || Infinity,
+    );
+  } else {
+    // LTR prev button rewinds
+    audioPlayer.currentTime = Math.max(0, (audioPlayer.currentTime || 0) - 10);
+  }
 });
+window.addEventListener("languagechange", () => {});
 
 // Progress Bar - Seek by Dragging
 progressBar.addEventListener("input", () => {
