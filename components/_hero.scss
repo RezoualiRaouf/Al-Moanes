@@ -3,19 +3,30 @@
 .hero__section {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 64px;
-  padding-block: 64px 64px;
-  padding-inline-start: 200px;
+  gap: 32px;
+  padding-block: 32px;
+  padding-inline: 24px;
   align-items: center;
-  margin-block: 60px 100px;
+  margin-block: 40px 60px;
+}
+
+.hero__content {
+  order: 2;
+}
+
+.hero__logo_container {
+  order: 1;
+  display: flex;
+  justify-content: center;
 }
 
 .hero__text {
-  font-size: 1.5rem;
+  font-size: 1.125rem;
   line-height: 1.7;
   font-weight: 500;
   font-family: var(--font-heroSubTitle);
   color: var(--color-primary-dark);
+  text-align: center;
 }
 
 .hero__btn {
@@ -24,17 +35,21 @@
   border: none;
   padding-block: 1rem;
   padding-inline: 2rem;
-  margin-block-start: 70px;
-  font-size: 1.125rem;
+  margin-block-start: 40px;
+  font-size: 1rem;
   font-family: var(--font-sans);
   font-weight: 400;
   border-radius: 50px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(45, 107, 90, 0.3);
+  width: 100%;
+  max-width: 300px;
+  margin-inline: auto;
 
   &:hover {
     background: #1f4d3f;
@@ -45,15 +60,95 @@
 
 .hero__btn img {
   height: 1.5rem;
+  flex-shrink: 0;
 }
 
 .hero__logo_img {
   border-radius: 15px;
+  max-width: 100%;
+  height: auto;
 }
 
-/* Hero Section - Large screens */
+@media (min-width: 768px) {
+  .hero__section {
+    gap: 48px;
+    padding-block: 48px;
+    padding-inline: 40px;
+    margin-block: 50px 80px;
+  }
+
+  .hero__text {
+    font-size: 1.25rem;
+  }
+
+  .hero__btn {
+    font-size: 1.0625rem;
+    width: auto;
+    margin-inline: 0;
+    margin-block-start: 20px;
+  }
+
+  .hero__content {
+    text-align: start;
+  }
+
+  .hero__text {
+    text-align: start;
+  }
+}
+
+@media (max-width: 1024px) {
+  .hero__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .hero__btn {
+    width: auto;
+    max-width: 300px;
+    margin-block-start: 40px;
+    margin-inline: 0;
+    display: inline-flex;
+  }
+}
+
 @media (min-width: 1024px) {
   .hero__section {
-    grid-template-columns: repeat(2, 1fr); /* lg:grid-cols-2 */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 64px;
+    padding-inline-start: 200px;
+    margin-block: 60px 100px;
+  }
+
+  .hero__content {
+    order: 1;
+  }
+
+  .hero__logo_container {
+    order: 2;
+  }
+
+  .hero__text {
+    font-size: 1.4rem;
+  }
+
+  .hero__btn {
+    font-size: 1.125rem;
+    padding-block: 0.75rem;
+    padding-inline: 1.75rem;
+  }
+}
+
+html[dir="rtl"] .hero__section {
+  padding-inline-start: 24px;
+  padding-inline-end: 24px;
+}
+
+@media (min-width: 1024px) {
+  html[dir="rtl"] .hero__section {
+    padding-inline-start: 24px;
+    padding-inline-end: 200px;
   }
 }

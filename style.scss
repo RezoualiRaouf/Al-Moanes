@@ -8,17 +8,28 @@
 @use "components/hero";
 @use "components/listen";
 @use "components/footer";
+@use "components/contact";
 
 body {
-  background: linear-gradient(
-    to bottom,
-    #fffdf8 0%,
-    #fffdf8 10%,
-    #cbeab2 30%,
-    #acd481 60%,
-    #066b50 90%
-  );
+  /* min-height covers the screen but allows scrolling */
   min-height: 100vh;
+  margin: 0;
+
+  background: repeating-linear-gradient(
+    to bottom,
+
+    #fffdf8 0vh,
+    #fffdf8 10vh,
+    #cbeab2 30vh,
+    #acd481 60vh,
+    #066b50 110vh,
+
+    /* Reversed Direction*/ #066b50 110vh,
+    /* Mirror of 90vh */ #acd481 190vh,
+    /* Mirror of 60vh */ #cbeab2 210vh,
+    /* Mirror of 30vh */ #fffdf8 230vh,
+    /* Mirror of 10vh */ #fffdf8 240vh
+  );
 }
 
 .back_to_top {

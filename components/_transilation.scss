@@ -39,16 +39,17 @@ html[dir="rtl"] .dropDone-arrow.rotate {
   transform: scaleX(-1) rotate(180deg);
 }
 
-// keep the audio player's elements order
+// Keep the audio player's elements order
 html[dir="rtl"] .player__controls {
   flex-direction: row-reverse;
 }
+
 // Adjust sub-menu padding for RTL
 html[dir="rtl"] #sideBar .sub-menu {
-  margin-left: 0;
-  margin-right: 20px;
-  padding-left: 0;
-  padding-right: 5px;
+  margin-inline-start: 0;
+  margin-inline-end: 20px;
+  padding-inline-start: 0;
+  padding-inline-end: 5px;
 }
 
 // Adjust animated corners for RTL
@@ -102,15 +103,27 @@ html[lang="ar"] #sideBar {
   font-family: var(--font-arabic);
 }
 
-// Adjust line height for Arabic text (typically needs more space)
 html[lang="ar"] body {
   line-height: var(--line-height-relaxed);
 }
 
-// Adjust font size for better Arabic readability
 html[lang="ar"] .nav-links a,
 html[lang="ar"] .dropDown-btn,
 html[lang="ar"] .dropDown-lang-btn,
 html[lang="ar"] .sub-menu button {
   font-size: calc(var(--font-size-base) * 1.1);
+}
+
+@media (max-width: 1023px) {
+  html[dir="rtl"] main {
+    margin-left: 0;
+    margin-right: 200px;
+  }
+}
+
+@media (max-width: 767px) {
+  html[dir="rtl"] main {
+    margin-left: 0;
+    margin-right: 180px;
+  }
 }
