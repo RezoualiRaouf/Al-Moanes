@@ -247,12 +247,11 @@ async function loadPrevSelect() {
         }
       });
     });
-    /**
-     * todo : load the new surah when switching
-     */
 
     // Set surah dropdown value
+
     surahSelect.value = currentUserSelect.surahServer;
+    audioPlayer.src = currentUserSelect.surahServer;
   } catch (error) {
     console.error("Error loading previous selections:", error);
   }
