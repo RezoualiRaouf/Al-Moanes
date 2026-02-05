@@ -17,6 +17,37 @@
   filter: brightness(0) invert(1); /* Makes icon white */
 }
 
+html[dir="rtl"] .sidebar-toggle {
+  left: auto;
+  right: 256px;
+  transform: scaleX(-1);
+}
+
+html[dir="rtl"] .sidebar-toggle.collapsed {
+  left: auto;
+  right: 0;
+}
+
+html[dir="rtl"] #sideBar {
+  left: auto;
+  right: 0;
+  border-right: none;
+  border-left: 2px solid var(--bg-hover);
+}
+
+html[dir="rtl"] #sideBar.hidden {
+  transform: translateX(100%);
+}
+
+html[dir="rtl"] main {
+  margin-left: 0;
+  margin-right: 256px;
+}
+
+html[dir="rtl"] main.sidebar-hidden {
+  margin-right: 0;
+}
+
 // Flip sidebar position for RTL
 html[dir="rtl"] #sideBar {
   left: auto;
@@ -112,18 +143,4 @@ html[lang="ar"] .dropDown-btn,
 html[lang="ar"] .dropDown-lang-btn,
 html[lang="ar"] .sub-menu button {
   font-size: calc(var(--font-size-base) * 1.1);
-}
-
-@media (max-width: 1023px) {
-  html[dir="rtl"] main {
-    margin-left: 0;
-    margin-right: 200px;
-  }
-}
-
-@media (max-width: 767px) {
-  html[dir="rtl"] main {
-    margin-left: 0;
-    margin-right: 180px;
-  }
 }

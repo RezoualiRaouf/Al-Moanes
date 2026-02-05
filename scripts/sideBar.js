@@ -1,3 +1,34 @@
+const sidebar = document.getElementById("sideBar");
+const main = document.querySelector("main");
+const toggleBtn = document.querySelector(".sidebar-toggle");
+
+// Sidebar Toggle
+document.addEventListener("DOMContentLoaded", function () {
+  // Check if there's a saved state in localStorage
+  const sidebarState = localStorage.getItem("sidebarState");
+  if (sidebarState === "hidden") {
+    sidebar.classList.add("hidden");
+    main.classList.add("sidebar-hidden");
+    toggleBtn.classList.add("collapsed");
+  }
+
+  // Toggle sidebar on button click
+  toggleBtn.addEventListener("click", function () {
+    sidebar.classList.toggle("hidden");
+    main.classList.toggle("sidebar-hidden");
+    toggleBtn.classList.toggle("collapsed");
+
+    // Save state
+    if (sidebar.classList.contains("hidden")) {
+      localStorage.setItem("sidebarState", "hidden");
+    } else {
+      localStorage.setItem("sidebarState", "visible");
+    }
+  });
+});
+
+window.addEventListener("languagechange", () => {});
+
 // Handle all dropdown buttons in the sidebar
 const dropdownButtons = document.querySelectorAll(
   ".dropDown-btn, .dropDown-lang-btn",

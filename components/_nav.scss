@@ -88,11 +88,6 @@ main {
   padding: 0;
 }
 
-/** todo : 
-* - remove the hover effect when an button id active
-* - add a better select effect to the button when actived
-*/
-
 /* Dropdown button - Shared styles for all dropdown buttons */
 .dropDown-btn,
 .dropDown-lang-btn {
@@ -166,11 +161,6 @@ main {
   flex-shrink: 0;
 }
 
-.dropDown-btn span,
-.dropDown-lang-btn span {
-  flex-grow: 0;
-}
-
 .dropDone-arrow {
   display: block;
   transform-origin: center;
@@ -178,6 +168,51 @@ main {
 }
 
 .dropDone-arrow.rotate {
+  transform: rotate(180deg);
+}
+
+/* Sidebar Toggle Button */
+.sidebar-toggle {
+  position: fixed;
+  top: 20px;
+  left: 256px;
+  width: 40px;
+  height: 40px;
+  background: var(--color-primary);
+  border: none;
+  border-radius: 0 8px 8px 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 101;
+  transition: all 0.3s ease;
+}
+
+.sidebar-toggle:hover {
+  background: var(--color-primary-dark);
+}
+
+.sidebar-toggle img {
+  width: 20px;
+  height: 20px;
+  filter: brightness(0) invert(1); /* Make arrow white */
+}
+
+/* When sidebar is hidden */
+#sideBar.hidden {
+  transform: translateX(-100%);
+}
+
+main.sidebar-hidden {
+  margin-left: 0;
+}
+
+.sidebar-toggle.collapsed {
+  left: 0;
+}
+
+.sidebar-toggle.collapsed img {
   transform: rotate(180deg);
 }
 
@@ -349,6 +384,60 @@ main {
 .sub-menu button span {
   flex-grow: 0;
   display: block;
+}
+
+@media (max-width: 1023px) {
+  html[dir="rtl"] main {
+    margin-left: 0;
+    margin-right: 200px;
+  }
+}
+
+@media (max-width: 767px) {
+  html[dir="rtl"] main {
+    margin-left: 0;
+    margin-right: 180px;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1023px) {
+  .sidebar-toggle {
+    left: 200px;
+  }
+}
+
+@media (max-width: 767px) {
+  .sidebar-toggle {
+    left: 180px;
+    width: 36px;
+    height: 36px;
+  }
+
+  .sidebar-toggle img {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media (max-width: 1023px) {
+  html[dir="rtl"] .sidebar-toggle {
+    right: 200px;
+  }
+
+  html[dir="rtl"] main {
+    margin-right: 200px;
+  }
+}
+
+@media (max-width: 767px) {
+  html[dir="rtl"] .sidebar-toggle {
+    right: 180px;
+  }
+
+  html[dir="rtl"] main {
+    margin-right: 180px;
+  }
 }
 
 /* Mobile Responsive */
