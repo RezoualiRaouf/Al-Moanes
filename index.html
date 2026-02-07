@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AL-Moanes</title>
     <link rel="stylesheet" href="style.scss" />
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   </head>
   <body>
     <!-- Container -->
@@ -81,6 +82,18 @@
             <a href="#contact"><span data-i18n="contact">Conatct Us</span></a>
           </li>
         </ul>
+        <div class="palestine-badge">
+          <a
+            href="https://techforpalestine.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="https://img.shields.io/badge/🇵🇸%20Tech%20For%20Palestine-black?style=for-the-badge"
+              alt="Tech For Palestine"
+            />
+          </a>
+        </div>
       </div>
 
       <main>
@@ -199,7 +212,257 @@
             </div>
           </div>
         </section>
+
+        <!-- TODO : finsh editing the contact section for both english and arabic-->
+
+        <!-- Contact Section -->
+        <section class="contact__section" id="contact">
+          <div class="contact__container">
+            <div class="contact__info">
+              <h2 class="contact__heading" data-i18n="contact-heading">
+                Contribute
+              </h2>
+              <p
+                class="contact__description"
+                data-i18n="contribute-description"
+              >
+                Help improve this project by contributing code or reporting
+                issues
+              </p>
+
+              <!-- Contribution Links -->
+              <div class="contribute__links">
+                <a
+                  href="#"
+                  class="contribute__link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img src="assets/fund.svg" alt="Pull Requests" />
+                  <div>
+                    <span class="contribute__link_title">Fund project</span>
+                    <span class="contribute__link_desc"
+                      >Not available for now!</span
+                    >
+                  </div>
+                </a>
+
+                <a
+                  href="https://github.com/RezoualiRaouf/Al-Moanes"
+                  class="contribute__link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img src="assets/github.svg" alt="GitHub" />
+                  <div>
+                    <span class="contribute__link_title">View Repository</span>
+                    <span class="contribute__link_desc">Star this repo</span>
+                  </div>
+                </a>
+
+                <a
+                  href="https://github.com/RezoualiRaouf/Al-Moanes/issues"
+                  class="contribute__link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img src="assets/issue.svg" alt="Issues" />
+                  <div>
+                    <span class="contribute__link_title">Report Issues</span>
+                    <span class="contribute__link_desc">Help us fix bugs</span>
+                  </div>
+                </a>
+
+                <a
+                  href="https://github.com/RezoualiRaouf/Al-Moanes/pulls"
+                  class="contribute__link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img src="assets/pull-request.svg" alt="Pull Requests" />
+                  <div>
+                    <span class="contribute__link_title"
+                      >Submit Pull Request</span
+                    >
+                    <span class="contribute__link_desc">Contribute code</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="contact__form_wrapper">
+              <div class="contact__form_header">
+                <h3 class="contact__form_title" data-i18n="form-title">
+                  Contact Us
+                </h3>
+
+                <!-- Submission Limit Tooltip -->
+                <div class="tooltip-container">
+                  <button
+                    class="tooltip-trigger"
+                    type="button"
+                    aria-label="Form submission info"
+                  >
+                    <svg
+                      class="tooltip-icon"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  </button>
+                  <div class="tooltip-content">
+                    <div class="tooltip-header">
+                      <svg
+                        class="tooltip-header-icon"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                      <h4 class="tooltip-title" data-i18n="tooltip-title">
+                        Form Submission
+                      </h4>
+                    </div>
+                    <p class="tooltip-text" data-i18n="tooltip-text">
+                      You have 2/2 submissions left
+                    </p>
+                    <div class="tooltip-footer">
+                      <svg
+                        class="tooltip-check-icon"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                      <span data-i18n="tooltip-footer">Restarts in 24h</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <form id="contactForm" class="contact__form">
+                <div class="form__group">
+                  <input
+                    class="form__input"
+                    type="text"
+                    placeholder="Full Name *"
+                    id="form__name_input"
+                    name="name"
+                    required
+                    data-i18n-placeholder="form-name-placeholder"
+                  />
+                </div>
+
+                <div class="form__group">
+                  <input
+                    class="form__input"
+                    type="email"
+                    placeholder="Email Address *"
+                    id="form__email_input"
+                    name="email"
+                    required
+                    data-i18n-placeholder="form-email-placeholder"
+                  />
+                </div>
+
+                <div class="form__group">
+                  <textarea
+                    class="form__input form__textarea"
+                    placeholder="Your Message *"
+                    name="message"
+                    id="form__message_input"
+                    rows="5"
+                    required
+                    data-i18n-placeholder="form-message-placeholder"
+                  ></textarea>
+                </div>
+
+                <button
+                  type="submit"
+                  class="form__submit"
+                  id="form__submit_btn"
+                >
+                  <span data-i18n="form-submit">Send Message</span>
+                  <svg
+                    class="form__submit_icon"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"
+                    />
+                  </svg>
+                </button>
+              </form>
+            </div>
+
+            <!-- Success Popup -->
+            <div class="popup-overlay" id="successPopup">
+              <div class="popup-content">
+                <div class="popup-icon popup-icon--success">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                </div>
+                <h3 class="popup-title" data-i18n="success-title">
+                  Message Sent!
+                </h3>
+                <p class="popup-message" data-i18n="success-message">
+                  Thank you for your message. We'll get back to you soon.
+                </p>
+                <button class="popup-btn" onclick="closePopup('successPopup')">
+                  <span data-i18n="popup-close">Close</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Error Popup -->
+            <div class="popup-overlay" id="errorPopup">
+              <div class="popup-content">
+                <div class="popup-icon popup-icon--error">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </div>
+                <h3 class="popup-title" data-i18n="error-title">Error</h3>
+                <p class="popup-message" data-i18n="error-message">
+                  Something went wrong. Please try again later.
+                </p>
+                <button class="popup-btn" onclick="closePopup('errorPopup')">
+                  <span data-i18n="popup-close">Close</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
+
       <!-- Footer -->
       <footer class="py-8 flex justify-between items-center">
         <div class="copyright">Raouf Rezouali©</div>
@@ -211,5 +474,7 @@
     <script src="./scripts/sideBar.js"></script>
     <script src="./scripts/fetchReciation.js" type="module"></script>
     <script src="./scripts/audioPlayer.js" type="module"></script>
+    <script src="./scripts/config.js"></script>
+    <script src="./scripts/contactForm.js"></script>
   </body>
 </html>

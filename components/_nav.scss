@@ -36,6 +36,8 @@ main {
   z-index: 100;
   overflow-y: auto;
   font-family: var(--font-sans);
+  display: flex;
+  flex-direction: column;
 }
 
 #sideBar a {
@@ -383,6 +385,29 @@ main.sidebar-hidden {
 
 .sub-menu button span {
   flex-grow: 0;
+  display: block;
+}
+
+// palestine tech link
+.palestine-badge {
+  width: 1.5rem;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--bg-hover);
+  text-align: center;
+}
+
+.palestine-badge a {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.palestine-badge a:hover {
+  transform: scale(1.05);
+}
+
+.palestine-badge img {
+  width: auto;
   display: block;
 }
 
