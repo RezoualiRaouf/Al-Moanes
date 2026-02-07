@@ -1,0 +1,110 @@
+/* Tooltip Container */
+.tooltip-container {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: 2px solid var(--bg-hover);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.tooltip-trigger:hover {
+  border-color: var(--color-primary);
+  background: var(--color-accent-light);
+}
+
+.tooltip-icon {
+  width: 18px;
+  height: 18px;
+  stroke: var(--color-primary);
+}
+
+/* Improved Tooltip Content */
+.tooltip-content {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  right: 0;
+  background: var(--color-cream);
+  padding: 16px;
+  border-radius: 8px;
+  border: 2px solid var(--color-primary);
+  min-width: 280px;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+/* Show tooltip on hover of trigger OR content itself */
+.tooltip-trigger:hover + .tooltip-content,
+.tooltip-content:hover {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.tooltip-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.tooltip-header-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.tooltip-title {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-primary-dark);
+  margin: 0;
+}
+
+.tooltip-text {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--color-primary);
+  margin: 0 0 12px 0;
+  line-height: 1.5;
+}
+
+.tooltip-footer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-top: 12px;
+  border-top: 1px solid var(--bg-hover);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--color-primary);
+}
+
+.tooltip-check-icon {
+  width: 14px;
+  height: 14px;
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+html[dir="rtl"] .tooltip-content {
+  right: auto;
+  left: 0;
+}

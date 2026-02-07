@@ -9,6 +9,8 @@
 @use "components/listen";
 @use "components/footer";
 @use "components/contact";
+@use "components/tooltip";
+@use "components/popup";
 
 body {
   /* min-height covers the screen but allows scrolling */
