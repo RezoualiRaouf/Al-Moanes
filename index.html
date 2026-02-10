@@ -133,7 +133,7 @@
           <!-- Reciter Dropdown -->
           <div class="listen__card">
             <label for="reciter" class="listen__label" data-i18n="selectReciter"
-              >Select a reciter:</label
+              >Select Reciter:</label
             >
             <select id="reciter" class="listen__select"></select>
           </div>
@@ -144,7 +144,7 @@
               for="narration"
               class="listen__label"
               data-i18n="selectNarration"
-              >Select a Narration/Rewaya:</label
+              >Select Rewaya:</label
             >
             <select id="narration" class="listen__select"></select>
           </div>
@@ -152,7 +152,7 @@
           <!-- Surah Dropdown -->
           <div class="listen__card">
             <label for="surah" class="listen__label" data-i18n="selectSurah"
-              >Select a Surah:</label
+              >Select Surah:</label
             >
             <select id="surah" class="listen__select"></select>
           </div>
@@ -213,7 +213,7 @@
           </div>
         </section>
 
-        <!-- TODO : finsh editing the contact section for both english and arabic-->
+        <!-- TODO : add arabic and fix sizing the conact form 1600px > -->
 
         <!-- Contact Section -->
         <section class="contact__section" id="contact">
@@ -222,10 +222,7 @@
               <h2 class="contact__heading" data-i18n="contact-heading">
                 Contribute
               </h2>
-              <p
-                class="contact__description"
-                data-i18n="contribute-description"
-              >
+              <p class="contact__description" data-i18n="contributeDesc">
                 Help improve this project by contributing code or reporting
                 issues
               </p>
@@ -240,8 +237,10 @@
                 >
                   <img src="assets/fund.svg" alt="Pull Requests" />
                   <div>
-                    <span class="contribute__link_title">Fund project</span>
-                    <span class="contribute__link_desc"
+                    <span class="contribute__link_title" data-i18n="fundTitle"
+                      >Fund project</span
+                    >
+                    <span class="contribute__link_desc" data-i18n="fundDesc"
                       >Not available for now!</span
                     >
                   </div>
@@ -255,8 +254,16 @@
                 >
                   <img src="assets/github.svg" alt="GitHub" />
                   <div>
-                    <span class="contribute__link_title">View Repository</span>
-                    <span class="contribute__link_desc">Star this repo</span>
+                    <span
+                      class="contribute__link_title"
+                      data-i18n="contributeTitle"
+                      >View Repository</span
+                    >
+                    <span
+                      class="contribute__link_desc"
+                      data-i18n="contributeDesc"
+                      >Star our repo</span
+                    >
                   </div>
                 </a>
 
@@ -268,8 +275,12 @@
                 >
                   <img src="assets/issue.svg" alt="Issues" />
                   <div>
-                    <span class="contribute__link_title">Report Issues</span>
-                    <span class="contribute__link_desc">Help us fix bugs</span>
+                    <span class="contribute__link_title" data-i18n="issueTitle"
+                      >Report Issues</span
+                    >
+                    <span class="contribute__link_desc" data-i18n="issueDesc"
+                      >Help us find and fix bugs</span
+                    >
                   </div>
                 </a>
 
@@ -281,10 +292,14 @@
                 >
                   <img src="assets/pull-request.svg" alt="Pull Requests" />
                   <div>
-                    <span class="contribute__link_title"
+                    <span
+                      class="contribute__link_title"
+                      data-i18n="pullReqTitle"
                       >Submit Pull Request</span
                     >
-                    <span class="contribute__link_desc">Contribute code</span>
+                    <span class="contribute__link_desc" data-i18n="pullReqDesc"
+                      >Contribute by code</span
+                    >
                   </div>
                 </a>
               </div>
@@ -293,7 +308,7 @@
             <!-- Contact Form -->
             <div class="contact__form_wrapper">
               <div class="contact__form_header">
-                <h3 class="contact__form_title" data-i18n="form-title">
+                <h3 class="contact__form_title" data-i18n="formTitle">
                   Contact Us
                 </h3>
 
@@ -331,13 +346,11 @@
                           clip-rule="evenodd"
                         />
                       </svg>
-                      <h4 class="tooltip-title" data-i18n="tooltip-title">
+                      <h4 class="tooltip-title" data-i18n="toolTipTitle">
                         Form Submission
                       </h4>
                     </div>
-                    <p class="tooltip-text" data-i18n="tooltip-text">
-                      You have 2/2 submissions left
-                    </p>
+                    <p class="tooltip-text">You have 2/2 submissions left</p>
                     <div class="tooltip-footer">
                       <svg
                         class="tooltip-check-icon"
@@ -350,7 +363,7 @@
                           clip-rule="evenodd"
                         />
                       </svg>
-                      <span data-i18n="tooltip-footer">Restarts in 24h</span>
+                      <span>Restarts in 24h</span>
                     </div>
                   </div>
                 </div>
@@ -365,7 +378,7 @@
                     id="form__name_input"
                     name="name"
                     required
-                    data-i18n-placeholder="form-name-placeholder"
+                    data-i18n-placeholder="formNameHolder"
                   />
                 </div>
 
@@ -377,7 +390,7 @@
                     id="form__email_input"
                     name="email"
                     required
-                    data-i18n-placeholder="form-email-placeholder"
+                    data-i18n-placeholder="formEmailHolder"
                   />
                 </div>
 
@@ -389,7 +402,7 @@
                     id="form__message_input"
                     rows="5"
                     required
-                    data-i18n-placeholder="form-message-placeholder"
+                    data-i18n-placeholder="formMsgHolder"
                   ></textarea>
                 </div>
 
@@ -398,7 +411,7 @@
                   class="form__submit"
                   id="form__submit_btn"
                 >
-                  <span data-i18n="form-submit">Send Message</span>
+                  <span data-i18n="formSubmit">Send Message</span>
                   <svg
                     class="form__submit_icon"
                     viewBox="0 0 20 20"
@@ -425,14 +438,14 @@
                     />
                   </svg>
                 </div>
-                <h3 class="popup-title" data-i18n="success-title">
+                <h3 class="popup-title" data-i18n="successTitle">
                   Message Sent!
                 </h3>
-                <p class="popup-message" data-i18n="success-message">
+                <p class="popup-message" data-i18n="successMsg">
                   Thank you for your message. We'll get back to you soon.
                 </p>
                 <button class="popup-btn" onclick="closePopup('successPopup')">
-                  <span data-i18n="popup-close">Close</span>
+                  <span data-i18n="popClose">Close</span>
                 </button>
               </div>
             </div>
@@ -450,12 +463,12 @@
                     />
                   </svg>
                 </div>
-                <h3 class="popup-title" data-i18n="error-title">Error</h3>
-                <p class="popup-message" data-i18n="error-message">
+                <h3 class="popup-title" data-i18n="errorTitle">Error</h3>
+                <p class="popup-message" data-i18n="errorMsg">
                   Something went wrong. Please try again later.
                 </p>
                 <button class="popup-btn" onclick="closePopup('errorPopup')">
-                  <span data-i18n="popup-close">Close</span>
+                  <span data-i18n="popClose">Close</span>
                 </button>
               </div>
             </div>
@@ -469,12 +482,12 @@
       </footer>
     </div>
 
-    <script src="./scripts/translation.js"></script>
-    <script src="./scripts/languageSwitcher.js"></script>
+    <script src="./scripts/translation.js" type="module"></script>
+    <script src="./scripts/languageSwitcher.js" type="module"></script>
     <script src="./scripts/sideBar.js"></script>
     <script src="./scripts/fetchReciation.js" type="module"></script>
     <script src="./scripts/audioPlayer.js" type="module"></script>
     <script src="./scripts/config.js"></script>
-    <script src="./scripts/contactForm.js"></script>
+    <script src="./scripts/contactForm.js" type="module"></script>
   </body>
 </html>

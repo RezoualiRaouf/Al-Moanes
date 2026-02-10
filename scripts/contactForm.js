@@ -1,3 +1,6 @@
+import { update } from "lodash";
+import { isRTL } from "./audioPlayer";
+
 const CONFIG = {
   // Email credentials
   get EMAILJS_PUBLIC_KEY() {
@@ -9,15 +12,12 @@ const CONFIG = {
   get EMAILJS_TEMPLATE_ID() {
     return window.EMAIL_CONFIG?.EMAILJS_TEMPLATE_ID || "";
   },
-
   // Submission limits
   MAX_SUBMISSIONS_PER_DAY: 2,
   LOCK_DURATION_MS: 24 * 60 * 60 * 1000, // 24 hours
-
   // Update intervals
   HOUR_UPDATE_INTERVAL: 60 * 60 * 1000, // 1 hour
   MINUTE_UPDATE_INTERVAL: 5 * 60 * 1000, // 5 minutes
-
   // LocalStorage keys
   STORAGE_KEYS: {
     LOCK_RESET_TIME: "contactForm_lockResetTime",
@@ -32,9 +32,6 @@ function validateConfig() {
     !CONFIG.EMAILJS_SERVICE_ID ||
     !CONFIG.EMAILJS_TEMPLATE_ID
   ) {
-    console.error(
-      "EmailJS configuration is missing. Please create config.js file.",
-    );
     return false;
   }
   return true;
@@ -44,7 +41,6 @@ const Storage = {
   getLockResetTime() {
     const value = localStorage.getItem(CONFIG.STORAGE_KEYS.LOCK_RESET_TIME);
     if (!value) return null;
-
     const timestamp = parseInt(value, 10);
     return isNaN(timestamp) ? null : timestamp;
   },
@@ -76,11 +72,9 @@ const Storage = {
     const today = new Date().toDateString();
     const submissions = this.getSubmissions();
     const cleaned = {};
-
     if (submissions[today]) {
       cleaned[today] = submissions[today];
     }
-
     this.setSubmissions(cleaned);
   },
 };
@@ -110,7 +104,6 @@ const SubmissionManager = {
   recordSubmission() {
     const today = new Date().toDateString();
     const submissions = Storage.getSubmissions();
-
     submissions[today] = (submissions[today] || 0) + 1;
     Storage.setSubmissions(submissions);
 
@@ -135,7 +128,6 @@ const SubmissionManager = {
   getTimeUntilReset() {
     const lockResetTime = Storage.getLockResetTime();
     if (!lockResetTime) return 0;
-
     const remaining = lockResetTime - Date.now();
     return Math.max(0, remaining);
   },
@@ -147,20 +139,24 @@ const UI = {
   updateTooltip() {
     const tooltipText = document.querySelector(".tooltip-text");
     const tooltipFooter = document.querySelector(".tooltip-footer span");
-
     if (!tooltipText || !tooltipFooter) return;
 
     const remaining = SubmissionManager.getRemainingSubmissions();
     const isLocked = SubmissionManager.isLocked();
     const timeUntilReset = SubmissionManager.getTimeUntilReset();
 
-    tooltipText.textContent = `You have ${remaining}/${CONFIG.MAX_SUBMISSIONS_PER_DAY} submissions left`;
+    if (isRTL())
+      tooltipText.textContent = `لديك ${remaining} من ${CONFIG.MAX_SUBMISSIONS_PER_DAY} محاولات إرسال متبقية`;
+    else
+      tooltipText.textContent = `You have ${remaining}/${CONFIG.MAX_SUBMISSIONS_PER_DAY} submissions left`;
 
     if (isLocked && timeUntilReset > 0) {
       const timeText = this.formatTimeRemaining(timeUntilReset);
-      tooltipFooter.textContent = `Restarts in ${timeText}`;
+      if (isRTL()) tooltipFooter.textContent = `يُعاد ضبطه خلال ${timeText}`;
+      else tooltipFooter.textContent = `Restarts in ${timeText}`;
     } else {
-      tooltipFooter.textContent = "Restarts in 24h";
+      if (isRTL()) tooltipFooter.textContent = `يُعاد ضبطه خلال 24h `;
+      else tooltipFooter.textContent = `Restarts in 24h`;
     }
 
     this.scheduleNextUpdate();
@@ -175,7 +171,8 @@ const UI = {
     } else if (minutes > 0) {
       return `${minutes}m`;
     } else {
-      return "less than 1m";
+      if (isRTL()) return "أقل من 1m";
+      else return "less than 1m";
     }
   },
 
@@ -186,7 +183,6 @@ const UI = {
     }
 
     const timeUntilReset = SubmissionManager.getTimeUntilReset();
-
     if (timeUntilReset === 0) {
       this.updateTimer = setTimeout(
         () => this.updateTooltip(),
@@ -234,11 +230,9 @@ const UI = {
   setSubmitButtonState(disabled, text) {
     const submitBtn = document.getElementById("form__submit_btn");
     const submitText = submitBtn?.querySelector("span");
-
     if (submitBtn) {
       submitBtn.disabled = disabled;
     }
-
     if (submitText) {
       submitText.textContent = text;
     }
@@ -247,9 +241,15 @@ const UI = {
 
 const FormHandler = {
   init() {
-    // Validate configuration
+    // Validate configuration first
     if (!validateConfig()) {
-      console.error("Form initialization failed: Invalid configuration");
+      UI.showConfigError();
+      return;
+    }
+
+    // Check if emailjs is available
+    if (typeof emailjs === "undefined") {
+      UI.showConfigError();
       return;
     }
 
@@ -257,19 +257,24 @@ const FormHandler = {
     try {
       emailjs.init(CONFIG.EMAILJS_PUBLIC_KEY);
     } catch (error) {
-      console.error("EmailJS initialization failed:", error);
+      UI.showConfigError();
       return;
     }
 
+    // Set up form event listener
     const form = document.getElementById("contactForm");
     if (form) {
       form.addEventListener("submit", (e) => this.handleSubmit(e));
+    } else {
+      return;
     }
 
+    // Set up popup close buttons
     document.querySelectorAll(".popup-btn").forEach((btn) => {
       btn.addEventListener("click", () => UI.closeAllPopups());
     });
 
+    // Close popup on overlay click
     document.querySelectorAll(".popup-overlay").forEach((overlay) => {
       overlay.addEventListener("click", (e) => {
         if (e.target === overlay) {
@@ -278,6 +283,7 @@ const FormHandler = {
       });
     });
 
+    // Tooltip functionality
     document.querySelectorAll(".tooltip-trigger").forEach((trigger) => {
       trigger.addEventListener("click", (e) => {
         e.stopPropagation();
@@ -289,35 +295,46 @@ const FormHandler = {
       });
     });
 
+    // Close tooltips on outside click
     document.addEventListener("click", () => {
       document.querySelectorAll(".tooltip-content").forEach((tooltip) => {
         tooltip.style.pointerEvents = "none";
       });
     });
 
+    // Update tooltip when page becomes visible
     document.addEventListener("visibilitychange", () => {
       if (document.visibilityState === "visible") {
         UI.updateTooltip();
       }
     });
 
+    // Initial tooltip update
     UI.updateTooltip();
   },
 
   async handleSubmit(e) {
     e.preventDefault();
 
+    // Check submission limit
     if (!SubmissionManager.canSubmit()) {
       UI.showPopup("errorPopup");
       const errorMessage = document.querySelector("#errorPopup .popup-message");
       if (errorMessage) {
-        errorMessage.textContent =
-          "You have reached your daily submission limit. Please try again later.";
+        if (isRTL()) {
+          errorMessage.textContent =
+            "لقد وصلت إلى الحد الأقصى اليوم لإرسال الرسائل. يرجى المحاولة مرة أخرى لاحقاً.";
+        } else {
+          errorMessage.textContent =
+            "You have reached your daily submission limit. Please try again later.";
+        }
       }
       return;
     }
 
-    UI.setSubmitButtonState(true, "Sending...");
+    // Update button state
+    if (isRTL()) UI.setSubmitButtonState(true, "جاري الإرسال...");
+    else UI.setSubmitButtonState(true, "Sending...");
 
     try {
       const response = await emailjs.sendForm(
@@ -332,22 +349,28 @@ const FormHandler = {
         UI.showPopup("successPopup");
         e.target.reset();
       } else {
-        throw new Error("EmailJS returned non-200 status");
+        throw new Error(`EmailJS returned status: ${response.status}`);
       }
     } catch (error) {
-      console.error("Form submission failed:", error);
       UI.showPopup("errorPopup");
       const errorMessage = document.querySelector("#errorPopup .popup-message");
       if (errorMessage) {
-        errorMessage.textContent =
-          "Something went wrong. Please try again later.";
+        if (isRTL())
+          errorMessage.textContent =
+            "حدث خطأ ما. يرجى المحاولة مرة أخرى لاحقًا.";
+        else
+          errorMessage.textContent =
+            "Something went wrong. Please try again later.";
       }
     } finally {
-      UI.setSubmitButtonState(false, "Send Message");
+      // Reset button state
+      if (isRTL()) UI.setSubmitButtonState(false, "إرسال الرسالة");
+      else UI.setSubmitButtonState(false, "Send Message");
     }
   },
 };
 
+// Global function for popup close button
 window.closePopup = (popupId) => {
   if (popupId) {
     UI.closePopup(popupId);
@@ -356,8 +379,13 @@ window.closePopup = (popupId) => {
   }
 };
 
+// Initialize when DOM is ready
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", () => FormHandler.init());
 } else {
   FormHandler.init();
 }
+
+window.addEventListener("languageChanged", () => {
+  UI.updateTooltip();
+});

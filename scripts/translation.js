@@ -1,5 +1,3 @@
-/** todo : save the current reciter narration surah playing so when the user changes the lang when listening the surah stops and the slection are saved and traselated and the icon switched to stop */
-
 const translations = {
   en: {
     // Navigation
@@ -28,9 +26,38 @@ const translations = {
     ctaButton: "Install extation",
 
     // Recitaion
-    selectReciter: "Select a reciter:",
-    selectNarration: "Select a Narration/Rewaya:",
-    selectSurah: "Select a Surah:",
+    selectReciter: "Select Reciter:",
+    selectNarration: "Select Rewaya:",
+    selectSurah: "Select Surah:",
+
+    // Conatct
+
+    // contribute links
+    fundTitle: "Fund project",
+    fundDesc: "Not available for now!",
+    contributeTitle: "View Repository",
+    contributeDesc: "Start our project",
+    issueTitle: "Report Issues",
+    issueDesc: "Help us find and fix bugs",
+    pullReqTitle: "Submit Pull Request",
+    pullReqDesc: "Contribute by code",
+
+    // tool tip
+    toolTipTitle: "Form Submition",
+
+    // conatct form
+    formTitle: "Conatct Us",
+    formNameHolder: "Full name *",
+    formEmailHolder: "Email Address *",
+    formMsgHolder: "Your message *",
+    formSubmit: "Send Message",
+
+    // Pop Up
+    successTitle: "Message Sent!",
+    successMsg: "Thank you for your message. We'll get back to you soon.",
+    popClose: "Close",
+    errorTitle: "Error",
+    errorMsg: "Thank you for your message. We'll get back to you soon.",
   },
 
   ar: {
@@ -63,6 +90,35 @@ const translations = {
     selectReciter: "إختر قارئ",
     selectNarration: "إختر المصحف",
     selectSurah: "إختر السورة",
+
+    // Conatct
+
+    // contribute links
+    fundTitle: "تمويل المشروع",
+    fundDesc: "غير متاح حالياً!",
+    contributeTitle: "عرض المستودع",
+    contributeDesc: "ابدأ مشروعنا",
+    issueTitle: "الإبلاغ عن المشاكل",
+    issueDesc: "ساعدنا في العثور على الأخطاء وإصلاحها",
+    pullReqTitle: "إرسال طلب سحب",
+    pullReqDesc: "ساهم عبر الكود",
+
+    // tool tip
+    toolTipTitle: "إرسال النموذج",
+
+    // conatct form
+    formTitle: "تواصل معنا",
+    formNameHolder: "الاسم الكامل *",
+    formEmailHolder: "البريد الإلكتروني *",
+    formMsgHolder: "رسالتك *",
+    formSubmit: "إرسال الرسالة",
+
+    // Pop Up
+    successTitle: "تم إرسال الرسالة!",
+    successMsg: "شكرًا على رسالتك. سنعاود التواصل معك قريبًا.",
+    popClose: "إغلاق",
+    errorTitle: "خطأ",
+    errorMsg: "حدث خطأ ما. يرجى المحاولة مرة أخرى لاحقاً.",
   },
 };
 

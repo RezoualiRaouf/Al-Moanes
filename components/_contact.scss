@@ -16,6 +16,7 @@
   padding: 32px;
   border-radius: 12px;
   border: 2px solid var(--bg-hover);
+  box-sizing: border-box; /* Added */
 }
 
 /* Contact Info */
@@ -96,12 +97,15 @@
   color: var(--color-primary);
 }
 
-// Contact Form Wrapper
+/* Contact Form Wrapper - FIXED */
 .contact__form_wrapper {
   background: transparent;
-  padding: 32px;
+  padding: 24px; /* Reduced from 32px for small screens */
   border-radius: 12px;
   border: 2px solid var(--color-primary-light);
+  box-sizing: border-box; /* Added */
+  width: 100%; /* Added */
+  max-width: 100%; /* Added */
 }
 
 .contact__form_header {
@@ -126,13 +130,19 @@
   gap: 16px;
 }
 
+/* Form Group - FIXED */
 .form__group {
   display: flex;
   flex-direction: column;
+  width: 100%; /* Added */
+  max-width: 100%; /* Added */
+  box-sizing: border-box; /* Added */
 }
 
+/* Form Input - FIXED */
 .form__input {
   width: 100%;
+  max-width: 100%; /* Added to prevent overflow */
   padding: 12px 16px;
   font-family: var(--font-body);
   font-size: 1rem;
@@ -142,6 +152,7 @@
   border-radius: 8px;
   transition: all 0.3s ease;
   outline: none;
+  box-sizing: border-box; /* Added - THIS IS CRITICAL */
 }
 
 .form__input::placeholder {
@@ -180,6 +191,7 @@
   cursor: pointer;
   transition: all 0.3s ease;
   width: fit-content;
+  box-sizing: border-box; /* Added */
 }
 
 .form__submit:hover:not(:disabled) {
@@ -205,6 +217,21 @@
 }
 
 /* Responsive Design */
+@media (min-width: 1024px) {
+  .contact__section {
+    padding: 100px 60px;
+    margin-top: 100px;
+  }
+
+  .contact__heading {
+    font-size: 3rem;
+  }
+
+  .contact__form_wrapper {
+    padding: 40px; /* Restored larger padding for desktop */
+  }
+}
+
 @media (min-width: 768px) {
   .contact__section {
     padding: 80px 40px;
@@ -221,18 +248,7 @@
   }
 
   .contact__form_wrapper {
-    padding: 40px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .contact__section {
-    padding: 100px 60px;
-    margin-top: 100px;
-  }
-
-  .contact__heading {
-    font-size: 3rem;
+    padding: 32px; /* Moderate padding for tablet */
   }
 }
 
@@ -250,11 +266,21 @@
   }
 
   .contact__form_wrapper {
-    padding: 24px;
+    padding: 20px; /* Even smaller padding for mobile */
   }
 
   .popup-content {
     padding: 32px 24px;
+  }
+
+  /* Extra small screens - make inputs even more compact */
+  .form__input {
+    padding: 10px 12px;
+    font-size: 0.9375rem; /* 15px */
+  }
+
+  .contact__form_title {
+    font-size: 1.25rem;
   }
 }
 
@@ -265,4 +291,9 @@ html[dir="rtl"] .contribute__link:hover {
 
 html[dir="rtl"] .form__submit {
   flex-direction: row-reverse;
+}
+
+html[dir="rtl"] .contact__description {
+  padding-left: 0;
+  padding-right: 10px;
 }
