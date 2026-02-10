@@ -43,7 +43,7 @@ const progressBar = document.getElementById("progressBar");
 const surahCurrentTime = document.getElementById("surahCurrentTime");
 const surahDuration = document.getElementById("surahDuration");
 
-const isRTL = () => {
+export const isRTL = () => {
   return localStorage.getItem("language") === "ar";
 };
 
@@ -112,7 +112,6 @@ prevSecBtn.addEventListener("click", () => {
     audioPlayer.currentTime = Math.max(0, (audioPlayer.currentTime || 0) - 10);
   }
 });
-window.addEventListener("languagechange", () => {});
 
 // Progress Bar - Seek by Dragging
 progressBar.addEventListener("input", () => {

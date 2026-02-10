@@ -14,21 +14,25 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  width: 100%; /* Added */
+  max-width: 100%; /* Added */
+  box-sizing: border-box; /* Added */
 }
 
 .listen__label {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 1.125rem;
+  font-size: 1rem; /* Reduced from 1.125rem for mobile */
   padding-inline-start: 5px;
   color: var(--color-primary-dark);
 }
 
+/* Select/Dropdown - FIXED */
 .listen__select {
-  padding: 12px 16px;
+  padding: 10px 12px; /* Reduced from 12px 16px for mobile */
   border-radius: 8px;
   color: var(--color-primary-dark);
-  font-size: 1.125rem;
+  font-size: 0.9375rem; /* Reduced from 1.125rem (18px to 15px) for mobile */
   font-family: var(--font-display);
   font-weight: 600;
   cursor: pointer;
@@ -37,20 +41,29 @@
   background-position: right 12px center;
   background-size: 20px;
   padding-inline-end: 40px;
-  padding-inline-start: 16px;
+  padding-inline-start: 12px; /* Reduced from 16px */
   background-color: var(--color-accent-light);
-  border-color: var(--color-accent-dark);
+  border: 2px solid var(--color-accent-dark); /* Added border width */
+  width: 100%; /* Added */
+  max-width: 100%; /* Added */
+  box-sizing: border-box; /* CRITICAL - prevents overflow */
+
+  /* Prevent text overflow */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .listen__select option {
   padding: 10px;
   color: var(--color-primary);
   background-color: var(--color-accent-light);
+  font-size: 0.9375rem; /* Match select font size */
 }
 
 .listen__player {
   background: var(--color-accent-light);
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-md);
   padding: var(--spacing-xl);
   grid-column: 1 / -1;
   align-self: center;
@@ -58,6 +71,7 @@
   padding: 20px 24px;
   width: 100%;
   max-width: 100%;
+  box-sizing: border-box; /* Added */
 }
 
 .player__controls {
@@ -85,8 +99,6 @@
   width: 24px;
   height: 24px;
 }
-
-/** todo reverse the skip ans prev icons in arabic version */
 
 .player__btn-small {
   display: flex;
@@ -161,28 +173,47 @@
   white-space: nowrap;
   display: flex;
   gap: var(--spacing-sm);
-  direction: ltr; // so the time won't be reversed when switching to arabic
+  direction: ltr; /* so the time won't be reversed when switching to arabic */
 }
 
+/* Tablet (768px) - 2 column layout with centered 3rd item - FIXED */
 @media (min-width: 768px) {
   .listen__section {
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: auto auto;
+    grid-template-rows: auto auto auto; /* Changed from 'auto auto' */
     gap: 32px;
     padding: 40px 40px;
     margin-top: 100px;
   }
 
+  /* First two dropdowns stay in their columns */
+  .listen__card:nth-child(1),
+  .listen__card:nth-child(2) {
+    grid-column: auto;
+  }
+
+  /* Third dropdown (Surah) - centered and spanning both columns - FIXED */
   .listen__card:nth-child(3) {
+    grid-column: 1 / -1; /* Span both columns */
+    max-width: 50%; /* Take up only half width */
+    margin: 0 auto; /* Center it */
+    justify-self: center; /* Additional centering */
+  }
+
+  /* Audio player spans both columns */
+  .listen__player {
     grid-column: 1 / -1;
   }
 
   .listen__label {
-    font-size: 1.25rem;
+    font-size: 1.125rem; /* Slightly bigger on tablet */
   }
 
   .listen__select {
-    font-size: 1.25rem;
+    font-size: 1rem; /* Increased but not too big (16px) */
+    padding: 12px 14px;
+    padding-inline-end: 40px;
+    padding-inline-start: 14px;
   }
 
   .player__controls {
@@ -194,31 +225,99 @@
   }
 }
 
+/* Desktop (1024px) - 3 column layout - FIXED */
 @media (min-width: 1024px) {
   .listen__section {
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: auto 1fr;
+    grid-template-rows: auto auto; /* Changed from 'auto 1fr' */
     gap: 24px;
     padding: 40px 30px;
     margin-top: 150px;
   }
 
+  /* All three dropdowns get their own columns - FIXED */
+  .listen__card:nth-child(1),
+  .listen__card:nth-child(2),
   .listen__card:nth-child(3) {
-    grid-column: auto;
+    grid-column: auto; /* Reset to auto - each takes one column */
+    max-width: 100%; /* Reset max-width */
+    margin: 0; /* Reset margin */
+    justify-self: stretch; /* Stretch to fill column */
   }
 
+  /* Audio player spans all three columns */
   .listen__player {
+    grid-column: 1 / -1;
     padding: 20px 60px;
+  }
+
+  .listen__label {
+    font-size: 1.125rem;
+  }
+
+  .listen__select {
+    font-size: 1rem; /* Keep reasonable font size */
+    padding: 12px 16px;
+    padding-inline-end: 40px;
+    padding-inline-start: 16px;
   }
 }
 
+/* RTL Support */
 html[dir="rtl"] .listen__select {
   background-position: left 12px center;
   padding-inline-start: 40px;
-  padding-inline-end: 16px;
+  padding-inline-end: 12px;
 }
 
 /* Keep the audio player's elements order in RTL */
 html[dir="rtl"] .player__controls {
   flex-direction: row-reverse;
+}
+
+/* Extra small screens - additional adjustments */
+@media (max-width: 480px) {
+  .listen__section {
+    padding: 30px 16px;
+    gap: 20px;
+  }
+
+  .listen__label {
+    font-size: 0.9375rem; /* 15px */
+  }
+
+  .listen__select {
+    font-size: 0.875rem; /* 14px - even smaller for mobile */
+    padding: 8px 10px;
+    padding-inline-end: 36px;
+    padding-inline-start: 10px;
+  }
+
+  .listen__player {
+    padding: 16px 20px;
+  }
+
+  .player__controls {
+    gap: 8px;
+  }
+
+  .player__btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .player__btn img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .player__btn-small {
+    width: 36px;
+    height: 36px;
+  }
+
+  .player__btn-small img {
+    width: 18px;
+    height: 18px;
+  }
 }

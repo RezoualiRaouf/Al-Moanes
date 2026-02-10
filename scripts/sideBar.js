@@ -27,8 +27,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-window.addEventListener("languagechange", () => {});
-
 // Handle all dropdown buttons in the sidebar
 const dropdownButtons = document.querySelectorAll(
   ".dropDown-btn, .dropDown-lang-btn",
