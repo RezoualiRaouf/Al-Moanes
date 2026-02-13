@@ -6,15 +6,10 @@ const translations = {
     quran: "Quarn",
     hadith: "Hadith",
     contact: "Contact Us",
+    menu: "Mune",
 
     // Dropdowns
-    theme: "Theme",
     language: "Language",
-
-    // Theme options
-    light: "Light",
-    dark: "Dark",
-    system: "System",
 
     // Language options
     arabic: "Arabic",
@@ -31,8 +26,14 @@ const translations = {
     selectSurah: "Select Surah:",
 
     // Conatct
+    contactHeading: "Contribute",
+    contactDesc:
+      "Help improve this project by contributing code or reporting issues",
 
     // contribute links
+    contactDesc:
+      "Help improve this project by contributing code or reporting issues",
+
     fundTitle: "Fund project",
     fundDesc: "Not available for now!",
     contributeTitle: "View Repository",
@@ -67,15 +68,10 @@ const translations = {
     quran: "القرآن",
     hadith: "حديث",
     contact: "تواصل معنا",
+    menu: "القائمة",
 
     // Dropdowns
-    theme: "المظهر",
     language: "اللغة",
-
-    // Theme options
-    light: "فاتح",
-    dark: "داكن",
-    system: "النظام",
 
     // Language options
     arabic: "العربية",
@@ -84,14 +80,17 @@ const translations = {
     //  Hero
     heroSubTitle:
       "استمع إلى تلاوات قرآنية جميلة من قرائك المفضلين مع إمكانية الوصول إلى أكثر من 250 قارئًا موثوقًا به وتلاوات متعددة من جميع أنحاء العالم الإسلامي.",
-    ctaButton: "تحميل الإضافة",
+    ctaButton: "تحميل التطبيق",
 
     // Recitaion
     selectReciter: "إختر قارئ",
     selectNarration: "إختر المصحف",
     selectSurah: "إختر السورة",
 
-    // Conatct
+    // Contact
+    contactHeading: "ساهم معنا",
+    contactDesc:
+      "ساهم في تحسين هذا المشروع من خلال المساعدة في برمجة الموقع أو الإبلاغ عن المشاكل",
 
     // contribute links
     fundTitle: "تمويل المشروع",

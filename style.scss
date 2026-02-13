@@ -5,6 +5,7 @@
 @use "components/transilation";
 
 @use "components/nav";
+@use "components/mobile-nav"; // Add this line
 @use "components/hero";
 @use "components/listen";
 @use "components/footer";
@@ -13,24 +14,23 @@
 @use "components/popup";
 
 body {
-  /* min-height covers the screen but allows scrolling */
   min-height: 100vh;
   margin: 0;
 
+  /* Dynamic Gradient based on CSS variables */
   background: repeating-linear-gradient(
     to bottom,
+    var(--gradient-color-1) 0vh,
+    var(--gradient-color-1) 10vh,
+    var(--gradient-color-2) 30vh,
+    var(--gradient-color-3) 60vh,
+    var(--gradient-color-4) 110vh,
 
-    #fffdf8 0vh,
-    #fffdf8 10vh,
-    #cbeab2 30vh,
-    #acd481 60vh,
-    #066b50 110vh,
-
-    /* Reversed Direction*/ #066b50 110vh,
-    /* Mirror of 90vh */ #acd481 190vh,
-    /* Mirror of 60vh */ #cbeab2 210vh,
-    /* Mirror of 30vh */ #fffdf8 230vh,
-    /* Mirror of 10vh */ #fffdf8 240vh
+    /* Reversed Direction */ var(--gradient-color-4) 110vh,
+    var(--gradient-color-3) 190vh,
+    var(--gradient-color-2) 210vh,
+    var(--gradient-color-1) 230vh,
+    var(--gradient-color-1) 240vh
   );
 }
 

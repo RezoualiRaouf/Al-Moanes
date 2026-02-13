@@ -13,18 +13,20 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Toggle sidebar on button click
-  toggleBtn.addEventListener("click", function () {
-    sidebar.classList.toggle("hidden");
-    main.classList.toggle("sidebar-hidden");
-    toggleBtn.classList.toggle("collapsed");
+  if (toggleBtn) {
+    toggleBtn.addEventListener("click", function () {
+      sidebar.classList.toggle("hidden");
+      main.classList.toggle("sidebar-hidden");
+      toggleBtn.classList.toggle("collapsed");
 
-    // Save state
-    if (sidebar.classList.contains("hidden")) {
-      localStorage.setItem("sidebarState", "hidden");
-    } else {
-      localStorage.setItem("sidebarState", "visible");
-    }
-  });
+      // Save state
+      if (sidebar.classList.contains("hidden")) {
+        localStorage.setItem("sidebarState", "hidden");
+      } else {
+        localStorage.setItem("sidebarState", "visible");
+      }
+    });
+  }
 });
 
 // Handle all dropdown buttons in the sidebar
@@ -35,12 +37,10 @@ const dropdownButtons = document.querySelectorAll(
 // Open current dropDown and close the other if open
 dropdownButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    // Find the submenu and arrow within the same parent li
     const parentLi = button.closest("li");
     const submenu = parentLi.querySelector(".sub-menu");
     const arrow = button.querySelector(".dropDone-arrow");
 
-    // Toggle the current dropdown
     submenu.classList.toggle("show");
     arrow.classList.toggle("rotate");
 

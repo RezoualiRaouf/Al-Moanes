@@ -289,6 +289,11 @@ html[dir="rtl"] .contribute__link:hover {
   transform: translateX(-4px);
 }
 
+// revers fund icon in RTL
+html[dir="rtl"] .contribute__link:first-child img {
+  transform: scaleX(-1);
+}
+
 html[dir="rtl"] .form__submit {
   flex-direction: row-reverse;
 }
@@ -296,4 +301,221 @@ html[dir="rtl"] .form__submit {
 html[dir="rtl"] .contact__description {
   padding-left: 0;
   padding-right: 10px;
+}
+
+/* Mobile Bottom Navigation Bar */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--color-white);
+  border-top: 2px solid var(--bg-hover);
+  padding: 8px 0;
+  z-index: 1000;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-nav__list {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mobile-nav__item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  text-decoration: none;
+  color: var(--color-primary-light);
+}
+
+.mobile-nav__item img {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.3s ease;
+}
+
+.mobile-nav__item span {
+  font-size: 11px;
+  font-weight: var(--font-weight-normal);
+  font-family: var(--font-sans);
+  transition: color 0.3s ease;
+}
+
+.mobile-nav__item.active {
+  color: var(--color-primary);
+}
+
+.mobile-nav__item.active img {
+  transform: translateY(-2px);
+}
+
+/* Ripple effect on tap */
+.mobile-nav__item::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 80%;
+  height: 80%;
+  background-color: var(--bg-hover);
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+
+.mobile-nav__item:active::before {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
+
+// Mobile Menu Overlay
+.mobile-menu-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  animation: fadeIn 0.3s ease;
+}
+
+.mobile-menu-overlay.active {
+  display: block;
+}
+
+.mobile-menu-panel {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--color-white);
+  border-radius: 20px 20px 0 0;
+  padding: 20px;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+  z-index: 1000;
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+.mobile-menu-panel.active {
+  transform: translateY(0);
+}
+
+.mobile-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--bg-hover);
+}
+
+.mobile-menu-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-primary);
+  font-family: var(--font-sans);
+}
+
+.mobile-menu-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.mobile-menu-close img {
+  width: 24px;
+  height: 24px;
+}
+
+.mobile-menu-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mobile-menu-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  background-color: var(--bg-hover);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.mobile-menu-option:active {
+  transform: scale(0.98);
+}
+
+.mobile-menu-option.active {
+  background-color: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+}
+
+.mobile-menu-option img {
+  width: 24px;
+  height: 24px;
+}
+
+.mobile-menu-option span {
+  font-size: 16px;
+  font-family: var(--font-sans);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Hide sidebar on mobile, show bottom nav */
+@media (max-width: 767px) {
+  #sideBar {
+    transform: translateX(-100%);
+  }
+
+  main {
+    margin-left: 0;
+    padding-bottom: 80px; /* Space for bottom nav */
+  }
+
+  .sidebar-toggle {
+    display: none;
+  }
+
+  .mobile-nav {
+    display: block;
+  }
+
+  html[dir="rtl"] #sideBar {
+    transform: translateX(100%);
+  }
+
+  html[dir="rtl"] main {
+    margin-right: 0;
+  }
 }

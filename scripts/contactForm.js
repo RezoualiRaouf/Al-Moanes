@@ -389,3 +389,48 @@ if (document.readyState === "loading") {
 window.addEventListener("languageChanged", () => {
   UI.updateTooltip();
 });
+
+// Tooltip mobile
+
+document.addEventListener("DOMContentLoaded", function () {
+  const tooltipTriggers = document.querySelectorAll(".tooltip-trigger");
+
+  // Only apply this for touch devices
+  if ("ontouchstart" in window) {
+    tooltipTriggers.forEach((trigger) => {
+      const tooltip = trigger.nextElementSibling;
+
+      if (tooltip && tooltip.classList.contains("tooltip-content")) {
+        // Prevent default hover behavior
+        trigger.addEventListener("click", function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+
+          // Close all other tooltips first
+          document.querySelectorAll(".tooltip-content").forEach((t) => {
+            if (t !== tooltip) {
+              t.classList.remove("tooltip-active");
+            }
+          });
+
+          // Toggle this tooltip
+          tooltip.classList.toggle("tooltip-active");
+        });
+
+        // Close tooltip when clicking outside
+        document.addEventListener("click", function (e) {
+          if (!trigger.contains(e.target) && !tooltip.contains(e.target)) {
+            tooltip.classList.remove("tooltip-active");
+          }
+        });
+
+        // Close tooltip when tapping the backdrop (if you add one)
+        tooltip.addEventListener("click", function (e) {
+          if (e.target === tooltip) {
+            tooltip.classList.remove("tooltip-active");
+          }
+        });
+      }
+    });
+  }
+});
