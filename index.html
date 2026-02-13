@@ -35,30 +35,6 @@
             <a href="#hadith"><span data-i18n="hadith">Hadith</span></a>
           </li>
           <li>
-            <button class="dropDown-btn">
-              <img src="/assets/toggle_them.svg" />
-              <span data-i18n="theme">Theme</span>
-              <img class="dropDone-arrow" src="/assets/dropdown-arrow.svg" />
-            </button>
-            <ul class="sub-menu">
-              <div>
-                <button>
-                  <img src="/assets/light.svg" />
-                  <span data-i18n="light">Light</span>
-                </button>
-                <button>
-                  <img src="/assets/dark.svg" /><span data-i18n="dark"
-                    >Dark</span
-                  >
-                </button>
-                <button>
-                  <img src="/assets/monitor.svg" />
-                  <span data-i18n="system">System</span>
-                </button>
-              </div>
-            </ul>
-          </li>
-          <li>
             <button class="dropDown-lang-btn">
               <img src="/assets/language.svg" />
               <span data-i18n="language">Language</span>
@@ -114,7 +90,7 @@
               from across the Islamic world.
             </p>
             <button class="hero__btn">
-              <span data-i18n="ctaButton"> Install extation</span>
+              <span data-i18n="ctaButton"> Install App</span>
               <img src="/assets/download.svg" alt="install" />
             </button>
           </div>
@@ -217,10 +193,10 @@
         <section class="contact__section" id="contact">
           <div class="contact__container">
             <div class="contact__info">
-              <h2 class="contact__heading" data-i18n="contact-heading">
+              <h2 class="contact__heading" data-i18n="contactHeading">
                 Contribute
               </h2>
-              <p class="contact__description" data-i18n="contributeDesc">
+              <p class="contact__description" data-i18n="contactDesc">
                 Help improve this project by contributing code or reporting
                 issues
               </p>
@@ -474,8 +450,80 @@
         </section>
       </main>
 
+      <!-- make the menu scorlable horizontaly and the nav stiky -->
+
+      <!-- Mobile Bottom Navigation -->
+      <nav class="mobile-nav">
+        <ul class="mobile-nav__list">
+          <li>
+            <a href="#home" class="mobile-nav__item active" data-nav="home">
+              <img src="/assets/home.svg" alt="Home" />
+              <span data-i18n="home">Home</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="#recitation"
+              class="mobile-nav__item"
+              data-nav="recitation"
+            >
+              <img src="/assets/headphones.svg" alt="Recitation" />
+              <span data-i18n="recitation">Recitation</span>
+            </a>
+          </li>
+          <li>
+            <a href="#quran" class="mobile-nav__item" data-nav="quran">
+              <img src="/assets/quran.svg" alt="Quran" />
+              <span data-i18n="quran">Quran</span>
+            </a>
+          </li>
+          <li>
+            <button class="mobile-nav__item" data-nav="menu" id="mobileMenuBtn">
+              <img src="/assets/menu.svg" alt="Menu" />
+              <span data-i18n="menu">Menu</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+        <div class="mobile-menu-panel" id="mobileMenuPanel">
+          <div class="mobile-menu-header">
+            <h3 class="mobile-menu-title" data-i18n="menu">Menu</h3>
+            <button class="mobile-menu-close" id="mobileMenuClose">
+              <img src="/assets/dropdown-arrow.svg" alt="Close" />
+            </button>
+          </div>
+
+          <!-- Language Options -->
+          <div class="mobile-menu-options">
+            <h4 data-i18n="language">Language</h4>
+            <button class="mobile-menu-option" data-lang="ar">
+              <img src="/assets/circle.svg" alt="Arabic" />
+              <span data-i18n="arabic">Arabic</span>
+            </button>
+            <button class="mobile-menu-option" data-lang="en">
+              <img src="/assets/circle.svg" alt="English" />
+              <span data-i18n="english">English</span>
+            </button>
+          </div>
+
+          <!-- Contact Us -->
+          <a href="#contact" class="mobile-menu-option">
+            <img src="/assets/gmail.svg" alt="Contact" />
+            <span data-i18n="contact">Contact Us</span>
+          </a>
+
+          <!-- Hadith  -->
+          <a href="#hadith" class="mobile-menu-option">
+            <img src="/assets/hadith.svg" alt="Hadith" />
+            <span data-i18n="hadith">Hadith</span>
+          </a>
+        </div>
+      </div>
+
       <!-- Footer -->
-      <footer class="py-8 flex justify-between items-center">
+      <footer class="">
         <div class="copyright">Raouf Rezouali©</div>
       </footer>
     </div>
@@ -483,6 +531,7 @@
     <script src="./scripts/translation.js" type="module"></script>
     <script src="./scripts/languageSwitcher.js" type="module"></script>
     <script src="./scripts/sideBar.js"></script>
+    <script src="./scripts/mobileNav.js"></script>
     <script src="./scripts/fetchReciation.js" type="module"></script>
     <script src="./scripts/audioPlayer.js" type="module"></script>
     <script src="./scripts/config.js"></script>

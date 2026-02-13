@@ -201,7 +201,7 @@ main {
   filter: brightness(0) invert(1); /* Make arrow white */
 }
 
-/* When sidebar is hidden */
+// When sidebar is hidden
 #sideBar.hidden {
   transform: translateX(-100%);
 }

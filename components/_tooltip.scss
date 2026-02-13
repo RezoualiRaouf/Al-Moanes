@@ -29,7 +29,7 @@
   stroke: var(--color-primary);
 }
 
-/* Improved Tooltip Content */
+/* Desktop Tooltip Content */
 .tooltip-content {
   position: absolute;
   bottom: calc(100% + 12px);
@@ -45,9 +45,10 @@
   transform: translateY(10px);
   transition: all 0.3s ease;
   pointer-events: none;
+  box-shadow: var(--shadow-lg);
 }
 
-/* Show tooltip on hover of trigger OR content itself */
+/* Show tooltip on hover (Desktop) */
 .tooltip-trigger:hover + .tooltip-content,
 .tooltip-content:hover {
   opacity: 1;
@@ -104,7 +105,111 @@
   flex-shrink: 0;
 }
 
+/* RTL Support for Desktop */
 html[dir="rtl"] .tooltip-content {
   right: auto;
   left: 0;
+}
+
+/* Mobile: Fixed to viewport (top-center) */
+@media (max-width: 768px) {
+  .tooltip-content {
+    /* Fixed positioning - relative to viewport, not parent */
+    position: fixed;
+    top: 20px; /* 20px from top of screen */
+    left: 50%; /* Center horizontally */
+    right: auto;
+    bottom: auto;
+
+    /* Perfect centering */
+    transform: translate(-50%, -20px);
+
+    /* Responsive width */
+    width: calc(100vw - 32px); /* Screen width minus padding */
+    max-width: 360px; /* Cap maximum width */
+    min-width: 0; /* Remove fixed minimum */
+
+    /* Enhanced styling */
+    box-shadow: var(--shadow-xl);
+    z-index: 9999; /* Above everything */
+
+    /* Animation */
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  /* Show tooltip - slide down from top */
+  .tooltip-trigger:hover + .tooltip-content,
+  .tooltip-content:hover,
+  .tooltip-content.tooltip-active {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
+    pointer-events: auto;
+  }
+
+  /* Backdrop overlay when tooltip is active */
+  .tooltip-content.tooltip-active::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: -1;
+    backdrop-filter: blur(3px);
+    animation: fadeIn 0.3s ease;
+  }
+
+  /* RTL: Same positioning (centering works for both) */
+  html[dir="rtl"] .tooltip-content {
+    left: 50%;
+    right: auto;
+    transform: translate(-50%, -20px);
+  }
+
+  html[dir="rtl"] .tooltip-trigger:hover + .tooltip-content,
+  html[dir="rtl"] .tooltip-content:hover,
+  html[dir="rtl"] .tooltip-content.tooltip-active {
+    transform: translate(-50%, 0);
+  }
+
+  /* Very small screens - adjust sizing */
+  @media (max-width: 360px) {
+    .tooltip-content {
+      width: calc(100vw - 24px);
+      padding: 12px;
+    }
+
+    .tooltip-title {
+      font-size: 0.9rem;
+    }
+
+    .tooltip-text {
+      font-size: 0.8rem;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Better touch target for mobile */
+@media (max-width: 768px) {
+  .tooltip-trigger {
+    width: 40px;
+    height: 40px;
+  }
+
+  .tooltip-icon {
+    width: 20px;
+    height: 20px;
+  }
 }

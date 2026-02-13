@@ -16,3 +16,13 @@
     border-radius: 60% 40% 35% 65% / 55% 45% 55% 45%;
   }
 }
+
+@keyframes bounce-up-down {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px); /* Adjust distance here */
+  }
+}
