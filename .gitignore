@@ -137,3 +137,5 @@ dist
 # EmailJS Configuration
 config.js
 
+# License file
+LICENSE.txt
