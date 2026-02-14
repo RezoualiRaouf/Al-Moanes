@@ -1,4 +1,203 @@
-/* Mobile Bottom Navigation */
+/* Language Panel Overlay */
+.language-panel-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 80px; // Stops above bottom nav
+  background: rgba(0, 0, 0, 0.5);
+  z-index: calc(var(--z-fixed) - 1); // below bottom nav
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-base);
+  backdrop-filter: blur(4px);
+}
+
+.language-panel-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.language-panel {
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  right: 0;
+  background: var(--color-white);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  padding: 1.5rem;
+  transform: translateY(100%);
+  transition: transform var(--transition-slow);
+}
+
+.language-panel-overlay.active .language-panel {
+  transform: translateY(0);
+}
+
+.language-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--bg-hover);
+}
+
+.language-panel-title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  margin: 0;
+}
+
+.language-panel-close {
+  background: var(--bg-hover);
+  border: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.language-panel-close:hover {
+  animation: bounce-up-down 0.6s infinite ease-in-out;
+}
+
+.language-panel-close img {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.language-panel-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Language Panel Option - Matches Sidebar Sub-menu Button Styling */
+.language-panel-option {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.875rem 1rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--color-primary-light);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  width: 100%;
+  text-align: left;
+  position: relative;
+  border: none;
+  background: linear-gradient(var(--bg-hover), var(--bg-hover)) no-repeat;
+  background-size: 0% 100%;
+  background-position: left center;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.language-panel-option:last-child {
+  margin-bottom: 0;
+}
+
+.language-panel-option img {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+}
+
+// Hover effect for non-active buttons only
+.language-panel-option:not(.active):hover {
+  background-size: 100% 100%;
+  color: var(--color-primary);
+  border-radius: 8px;
+}
+
+// Animated border corners
+.language-panel-option::before,
+.language-panel-option::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  transition: all 0.4s ease;
+  pointer-events: none;
+}
+
+.language-panel-option::before {
+  top: 0;
+  left: 0;
+  border-top: 2px solid var(--color-primary);
+  border-left: 2px solid var(--color-primary);
+}
+
+.language-panel-option::after {
+  bottom: 0;
+  right: 0;
+  border-bottom: 2px solid var(--color-primary);
+  border-right: 2px solid var(--color-primary);
+}
+
+// Show animated corners on hover for non-active buttons
+.language-panel-option:not(.active):hover::before,
+.language-panel-option:not(.active):hover::after {
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+}
+
+// Active state - matches sidebar sub-menu button exactly
+.language-panel-option.active {
+  background: var(--color-primary);
+  background-size: 100% 100%;
+  color: var(--color-white);
+  font-weight: var(--font-weight-semibold);
+}
+
+.language-panel-option.active img {
+  filter: brightness(0) invert(1);
+}
+
+// Prevent hover effect on active buttons
+.language-panel-option.active:hover {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+// Hide animated corners on active buttons
+.language-panel-option.active::before,
+.language-panel-option.active::after {
+  display: none;
+}
+
+/* RTL Support for Language Panel */
+html[dir="rtl"] .language-panel-option {
+  text-align: right;
+  background-position: right center;
+}
+
+html[dir="rtl"] .language-panel-option::before {
+  left: auto;
+  right: 0;
+  border-left: none;
+  border-right: 2px solid var(--color-primary);
+}
+
+html[dir="rtl"] .language-panel-option::after {
+  right: auto;
+  left: 0;
+  border-right: none;
+  border-left: 2px solid var(--color-primary);
+}
+
+// Mobile Bottom Navigation
 .mobile-nav {
   position: fixed;
   bottom: 0;
@@ -21,17 +220,16 @@
   overflow-y: hidden;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
-  scrollbar-width: none; /* Firefox */
+  scrollbar-width: none;
 }
 
-// Hide scrollbar for Chrome, Safari and Opera
 .mobile-nav__list::-webkit-scrollbar {
   display: none;
 }
 
 .mobile-nav__list li {
-  flex: 0 0 auto;
-  min-width: 80px;
+  flex: 0 0 20%;
+  min-width: 20%;
 }
 
 .mobile-nav__item {
@@ -40,8 +238,9 @@
   align-items: center;
   justify-content: center;
   gap: 0.25rem;
-  padding: 0.75rem 1rem;
+  padding: 0.75rem 0.5rem;
   text-decoration: none;
+  transition: all var(--transition-base);
   background: none;
   border: none;
   cursor: pointer;
@@ -54,6 +253,7 @@
 .mobile-nav__item img {
   width: 1.5rem;
   height: 1.5rem;
+  transition: all var(--transition-base);
 }
 
 .mobile-nav__item span {
@@ -61,7 +261,7 @@
   white-space: nowrap;
 }
 
-/* Active state */
+// Active state for mobile nav items
 .mobile-nav__item.active {
   color: var(--color-primary);
 }
@@ -126,7 +326,6 @@
   font-weight: var(--font-weight-bold);
   color: var(--color-primary);
   margin: 0;
-  font-family: var(--font-heading);
 }
 
 .mobile-menu-close {
@@ -169,8 +368,6 @@
   font-family: var(--font-sans);
 }
 
-// Mobile Menu Options - Sidebar-Style Hover Effects */
-
 .mobile-menu-option {
   display: flex;
   align-items: center;
@@ -179,17 +376,18 @@
   margin-bottom: 0.5rem;
   cursor: pointer;
   text-decoration: none;
-  color: var(--text-primary);
+  color: var(--color-primary-light);
   font-family: var(--font-sans);
   font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
   width: 100%;
   text-align: left;
   position: relative;
-
-  /* Add gradient background like sidebar */
+  border: none;
   background: linear-gradient(var(--bg-hover), var(--bg-hover)) no-repeat;
   background-size: 0% 100%;
   background-position: left center;
+  border-radius: 6px;
   transition: all 0.3s ease;
 }
 
@@ -199,12 +397,11 @@
   flex-shrink: 0;
 }
 
-// Hover effect for non-active buttons
+// Hover effect for non-active buttons only
 .mobile-menu-option:not(.active):hover {
   background-size: 100% 100%;
   color: var(--color-primary);
   border-radius: 8px;
-  border-color: transparent;
 }
 
 // Animated border corners
@@ -233,6 +430,7 @@
   border-right: 2px solid var(--color-primary);
 }
 
+// Show animated corners on hover for non-active buttons
 .mobile-menu-option:not(.active):hover::before,
 .mobile-menu-option:not(.active):hover::after {
   width: 100%;
@@ -240,29 +438,56 @@
   opacity: 1;
 }
 
+// Active state - matches sidebar sub-menu button exactly
 .mobile-menu-option.active {
   background: var(--color-primary);
-  color: var(--color-white);
-  border-color: var(--color-primary);
-  font-weight: var(--font-weight-semibold);
   background-size: 100% 100%;
+  color: var(--color-white);
+  font-weight: var(--font-weight-semibold);
 }
 
 .mobile-menu-option.active img {
   filter: brightness(0) invert(1);
 }
 
-/* Prevent hover effect on active buttons */
+// Prevent hover effect on active buttons
 .mobile-menu-option.active:hover {
   background: var(--color-primary);
   color: var(--color-white);
-  border-color: var(--color-primary);
 }
 
-/* Hide animated corners on active buttons */
+// Hide animated corners on active buttons
 .mobile-menu-option.active::before,
 .mobile-menu-option.active::after {
   display: none;
+}
+
+// RTL Support for Mobile Menu
+html[dir="rtl"] .mobile-menu-close:hover {
+  animation: bounce-up-down 0.6s infinite ease-in-out;
+}
+
+html[dir="rtl"] .mobile-menu-option {
+  text-align: right;
+  background-position: right center;
+}
+
+html[dir="rtl"] .mobile-menu-option::before {
+  left: auto;
+  right: 0;
+  border-left: none;
+  border-right: 2px solid var(--color-primary);
+}
+
+html[dir="rtl"] .mobile-menu-option::after {
+  right: auto;
+  left: 0;
+  border-right: none;
+  border-left: 2px solid var(--color-primary);
+}
+
+html[dir="rtl"] .mobile-menu-panel {
+  direction: rtl;
 }
 
 @media (max-width: 768px) {
@@ -285,31 +510,14 @@
   }
 }
 
-/* RTL Support */
-html[dir="rtl"] .mobile-menu-close :hover {
-  animation: bounce-up-down 0.6s infinite ease-in-out;
-}
+@media (max-width: 360px) {
+  .mobile-nav__item {
+    font-size: 0.7rem;
+    padding: 0.75rem 0.25rem;
+  }
 
-/* RTL Support */
-html[dir="rtl"] .mobile-menu-option {
-  text-align: right;
-  background-position: right center;
-}
-
-html[dir="rtl"] .mobile-menu-option::before {
-  left: auto;
-  right: 0;
-  border-left: none;
-  border-right: 2px solid var(--color-primary);
-}
-
-html[dir="rtl"] .mobile-menu-option::after {
-  right: auto;
-  left: 0;
-  border-right: none;
-  border-left: 2px solid var(--color-primary);
-}
-
-html[dir="rtl"] .mobile-menu-panel {
-  direction: rtl;
+  .mobile-nav__item img {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
 }

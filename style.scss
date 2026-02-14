@@ -5,7 +5,7 @@
 @use "components/transilation";
 
 @use "components/nav";
-@use "components/mobile-nav"; // Add this line
+@use "components/mobile-nav";
 @use "components/hero";
 @use "components/listen";
 @use "components/footer";
@@ -17,7 +17,6 @@ body {
   min-height: 100vh;
   margin: 0;
 
-  /* Dynamic Gradient based on CSS variables */
   background: repeating-linear-gradient(
     to bottom,
     var(--gradient-color-1) 0vh,
@@ -26,7 +25,7 @@ body {
     var(--gradient-color-3) 60vh,
     var(--gradient-color-4) 110vh,
 
-    /* Reversed Direction */ var(--gradient-color-4) 110vh,
+    /* changing point */ var(--gradient-color-4) 110vh,
     var(--gradient-color-3) 190vh,
     var(--gradient-color-2) 210vh,
     var(--gradient-color-1) 230vh,
@@ -36,27 +35,43 @@ body {
 
 .back_to_top {
   position: fixed;
-  color: white;
   background-color: var(--color-primary);
-  padding: 15px 20px;
+  width: 50px;
+  height: 50px;
   border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   bottom: 60px;
   right: 20px;
+  z-index: 999;
+  cursor: pointer;
+  box-shadow: 0 2px 5px var(--bg-hover);
   transition: all ease 0.3s;
   opacity: 0;
   pointer-events: none;
+  transform: translateY(20px);
 
   &.show {
     opacity: 1;
     pointer-events: auto;
+    transform: translateY(0);
   }
 
   &:hover {
-    transform: scale3d(1.1, 1.1, 1.1);
+    transform: scale(1.08);
   }
 
-  &::before {
-    content: "\2191";
-    font-size: 20px;
+  img {
+    width: 24px;
+    height: auto;
+    display: block;
+    filter: brightness(0) invert(1);
+  }
+}
+
+@media (max-width: 768px) {
+  .back_to_top {
+    bottom: 90px;
   }
 }

@@ -448,9 +448,213 @@
             </div>
           </div>
         </section>
-      </main>
+        <div class="back_to_top">
+          <img src="assets/arrow-up.svg" alt="back to top" />
+        </div>
+<!--  Footer -->
+  <script></script>
+<footer>
+  <div class="footer__container">
+    <div class="footer__content">
+      <!-- About Section -->
+      <div class="footer__about">
+        <img
+          class="footer__logo"
+          src="/assets/Al-Moanes-mini-logo.png"
+          alt="Al-Moanes Logo"
+        />
+      </div>
+      
+      <!-- Quick Links -->
+      <div class="footer__section">
+        <h3 class="footer__section-title" data-i18n="footerQuickLinks">
+          Navigation
+        </h3>
+        <ul class="footer__links">
+          <li>
+            <a href="#home" data-i18n="home">Home</a>
+          </li>
+          <li>
+            <a href="#recitation" data-i18n="recitation">Recitation</a>
+          </li>
+          <li>
+            <a href="#quran" data-i18n="quran">Quran</a>
+          </li>
+          <li>
+            <a href="#hadith" data-i18n="hadith">Hadith</a>
+          </li>
+          <li>
+            <a href="#contact" data-i18n="contact">Contact Us</a>
+          </li>
+        </ul>
+      </div>
 
-      <!-- make the menu scorlable horizontaly and the nav stiky -->
+<!-- to do : add links to relative websites , my socials new settler script-->
+      <!-- Resources -->
+      <div class="footer__section">
+        <h3 class="footer__section-title" data-i18n="footerResources">
+          Links
+        </h3>
+        <ul class="footer__links">
+          <li>
+            <a
+              href="https://github.com/RezoualiRaouf/Al-Moanes"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-i18n="footerGithub"
+              >GitHub Repository</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://github.com/RezoualiRaouf/Al-Moanes/issues"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-i18n="footerReportIssue"
+              >Report an Issue</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://github.com/RezoualiRaouf/Al-Moanes/blob/main/CONTRIBUTING.md"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-i18n="footerContribute"
+              >Contribute</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://github.com/RezoualiRaouf/Al-Moanes/wiki"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-i18n="footerDocs"
+              >Documentation</a
+            >
+          </li>
+          <li>
+            <!-- API Credits -->
+            <div class="footer__api-container">
+              <button class="footer__api-toggle" id="apiCreditsToggle">
+                <span data-i18n="footerAPI">API Credits</span>
+              </button>              
+              <div class="footer__api-credits" id="apiCredits">
+                <ul class="footer__api-list">
+                  <li>
+                    <a 
+                      href="https://mp3quran.net/" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      data-i18n="apiMP3Quran"
+                    >
+                      MP3 Quran
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Contact / Author -->
+      <div class="footer__section">
+        <h3 class="footer__section-title" data-i18n="footerContactTitle">
+          Author
+        </h3>
+        <div class="footer__contact-item">
+          <img src="/assets/gmail.svg" alt="Email" />
+          <a href="mailto:contact@almoanes.com">contact@almoanes.com</a>
+        </div>
+        <div class="footer__contact-item">
+          <img src="/assets/github.svg" alt="GitHub" />
+          <a
+            href="https://github.com/RezoualiRaouf"
+            target="_blank"
+            rel="noopener noreferrer"
+            >@RezoualiRaouf</a
+          >
+        </div>
+        <div class="footer__contact-item">
+          <img src="assets/circle.svg" alt="LinkedIn" />
+          <a
+            href="https://www.linkedin.com/in/raouf-rezouali/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >@RezoualiRaouf</a
+          >
+        </div>
+
+        <!-- Newsletter -->
+        <div class="footer__newsletter" style="margin-top: 1.5rem">
+          <h4
+            class="footer__section-title"
+            style="font-size: var(--font-size-base); margin-bottom: 0.75rem"
+            data-i18n="footerNewsletter"
+          >
+            Stay Updated
+          </h4>
+          <form class="footer__newsletter-form" id="newsletterForm">
+            <input
+              type="email"
+              class="footer__newsletter-input"
+              placeholder="Your email"
+              data-i18n-placeholder="footerEmailPlaceholder"
+              required
+            />
+            <button type="submit" class="footer__newsletter-btn">
+              <span data-i18n="footerSubscribe">Subscribe</span>
+            </button>
+          </form>
+        </div>
+      </div>
+   </div>
+
+    <!-- Bottom Section -->
+    <div class="footer__bottom">
+      <div class="copyright">
+        <p>© <span id="current-year">2025</span> raoufrezouali. All rights reserved.</p>
+      </div>
+      <script></script>
+      
+      <ul class="footer__bottom-links">
+        <li>
+          <a href="#" data-i18n="footerPrivacy">Privacy Policy</a>
+        </li>
+        <li>
+          <a href="#" data-i18n="footerTerms">Terms of Service</a>
+        </li>
+        <li>
+          <a href="LICENSE.txt" data-i18n="footerLicense">License</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</footer>   </main>
+
+      <!-- Language Panel Overlay  -->
+      <div class="language-panel-overlay" id="languagePanelOverlay">
+        <div class="language-panel">
+          <div class="language-panel-header">
+            <h3 class="language-panel-title" data-i18n="language">Language</h3>
+            <button class="language-panel-close" id="languagePanelClose">
+              <img src="/assets/dropdown-arrow.svg" alt="Close" />
+            </button>
+          </div>
+
+          <!-- Language Options -->
+          <div class="language-panel-options">
+            <button class="language-panel-option" data-lang="ar">
+              <img src="/assets/circle.svg" alt="Arabic" />
+              <span data-i18n="arabic">Arabic</span>
+            </button>
+            <button class="language-panel-option" data-lang="en">
+              <img src="/assets/circle.svg" alt="English" />
+              <span data-i18n="english">English</span>
+            </button>
+          </div>
+        </div>
+      </div>
 
       <!-- Mobile Bottom Navigation -->
       <nav class="mobile-nav">
@@ -478,56 +682,82 @@
             </a>
           </li>
           <li>
-            <button class="mobile-nav__item" data-nav="menu" id="mobileMenuBtn">
-              <img src="/assets/menu.svg" alt="Menu" />
-              <span data-i18n="menu">Menu</span>
+            <a href="#contact" class="mobile-nav__item" data-nav="contact">
+              <img src="/assets/gmail.svg" alt="Contact" />
+              <span data-i18n="contact">Contact</span>
+            </a>
+          </li>
+          <li>
+            <a href="#hadith" class="mobile-nav__item" data-nav="hadith">
+              <img src="/assets/hadith.svg" alt="Hadith" />
+              <span data-i18n="hadith">Hadith</span>
+            </a>
+          </li>
+          <!-- Language Button -->
+          <li>
+            <button
+              class="mobile-nav__item"
+              id="mobileLanguageBtn"
+              data-nav="language"
+            >
+              <img src="/assets/language.svg" alt="Language" />
+              <span data-i18n="language">Language</span>
             </button>
           </li>
         </ul>
       </nav>
 
-      <div class="mobile-menu-overlay" id="mobileMenuOverlay">
-        <div class="mobile-menu-panel" id="mobileMenuPanel">
-          <div class="mobile-menu-header">
-            <h3 class="mobile-menu-title" data-i18n="menu">Menu</h3>
-            <button class="mobile-menu-close" id="mobileMenuClose">
-              <img src="/assets/dropdown-arrow.svg" alt="Close" />
-            </button>
-          </div>
+    <script>
+      document.getElementById('current-year').innerText = new Date().getFullYear();
+      // API Credits
+      document.addEventListener("DOMContentLoaded", function () {
+      const apiToggle = document.getElementById("apiCreditsToggle");
+      const apiCredits = document.getElementById("apiCredits");
 
-          <!-- Language Options -->
-          <div class="mobile-menu-options">
-            <h4 data-i18n="language">Language</h4>
-            <button class="mobile-menu-option" data-lang="ar">
-              <img src="/assets/circle.svg" alt="Arabic" />
-              <span data-i18n="arabic">Arabic</span>
-            </button>
-            <button class="mobile-menu-option" data-lang="en">
-              <img src="/assets/circle.svg" alt="English" />
-              <span data-i18n="english">English</span>
-            </button>
-          </div>
+      function isMobile(){return window.innerWidth <= 768;}
 
-          <!-- Contact Us -->
-          <a href="#contact" class="mobile-menu-option">
-            <img src="/assets/gmail.svg" alt="Contact" />
-            <span data-i18n="contact">Contact Us</span>
-          </a>
+      if (apiToggle && apiCredits) {
+        apiToggle.addEventListener("click", function (e) {
+          if (isMobile()) {
+            e.preventDefault();
+            
+            apiToggle.classList.toggle("active");
+            apiCredits.classList.toggle("show");
+            
+            const isExpanded = apiCredits.classList.contains("show");
+            apiToggle.setAttribute("aria-expanded", isExpanded);
+          }
+        });
 
-          <!-- Hadith  -->
-          <a href="#hadith" class="mobile-menu-option">
-            <img src="/assets/hadith.svg" alt="Hadith" />
-            <span data-i18n="hadith">Hadith</span>
-          </a>
-        </div>
-      </div>
+        // Set initial aria-expanded attribute
+        apiToggle.setAttribute("aria-expanded", "false");
+        document.addEventListener("click", function (e) {
+          if (isMobile() && apiToggle && apiCredits) {
+            // If clicking outside the toggle and credits area
+            const apiContainer = apiToggle.closest(".footer__api-container");
+            if (apiContainer && !apiContainer.contains(e.target)) {
+              apiToggle.classList.remove("active");
+              apiCredits.classList.remove("show");
+              apiToggle.setAttribute("aria-expanded", "false");
+            }
+          }
+        });
 
-      <!-- Footer -->
-      <footer class="">
-        <div class="copyright">Raouf Rezouali©</div>
-      </footer>
-    </div>
-
+        let resizeTimer;
+        window.addEventListener("resize", function () {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(function () {
+            if (!isMobile()) {
+              // Switching to desktop
+              apiToggle.classList.remove("active");
+              apiCredits.classList.remove("show");
+              apiToggle.setAttribute("aria-expanded", "false");
+            }
+          }, 250);
+        });
+      }
+    });
+    </script>     
     <script src="./scripts/translation.js" type="module"></script>
     <script src="./scripts/languageSwitcher.js" type="module"></script>
     <script src="./scripts/sideBar.js"></script>

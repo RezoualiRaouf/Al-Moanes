@@ -59,6 +59,21 @@ const setLanguage = (lang) => {
     if (mobileEngBtn) {
       mobileEngBtn.classList.remove("active");
     }
+
+    // Update LANGUAGE PANEL button state
+    const panelArBtn = document.querySelector(
+      '.language-panel-option[data-lang="ar"]',
+    );
+    const panelEngBtn = document.querySelector(
+      '.language-panel-option[data-lang="en"]',
+    );
+
+    if (panelArBtn) {
+      panelArBtn.classList.add("active");
+    }
+    if (panelEngBtn) {
+      panelEngBtn.classList.remove("active");
+    }
   } else {
     // Set English
     html.setAttribute("lang", "en");
@@ -68,7 +83,7 @@ const setLanguage = (lang) => {
     // Switch to English display font
     html.style.setProperty("--font-display", "var(--font-display-eng)");
 
-    // Update sideBar button state
+    // Update SIDEBAR button state
     if (engBtn) {
       engBtn.classList.add("active");
       removeHover(engBtn);
@@ -78,7 +93,7 @@ const setLanguage = (lang) => {
       addHover(arBtn);
     }
 
-    // Update mobile menu button state
+    // Update MOBILE MENU button state
     const mobileArBtn = document.querySelector(
       '.mobile-menu-option[data-lang="ar"]',
     );
@@ -91,6 +106,21 @@ const setLanguage = (lang) => {
     }
     if (mobileArBtn) {
       mobileArBtn.classList.remove("active");
+    }
+
+    // Update LANGUAGE PANEL button state
+    const panelArBtn = document.querySelector(
+      '.language-panel-option[data-lang="ar"]',
+    );
+    const panelEngBtn = document.querySelector(
+      '.language-panel-option[data-lang="en"]',
+    );
+
+    if (panelEngBtn) {
+      panelEngBtn.classList.add("active");
+    }
+    if (panelArBtn) {
+      panelArBtn.classList.remove("active");
     }
   }
 
@@ -126,5 +156,5 @@ const getCurrentLanguage = () => {
   return currentLang;
 };
 
-// Make setLanguage available globally for mobile nav
+// Make setLanguage available globally
 window.setLanguage = setLanguage;
