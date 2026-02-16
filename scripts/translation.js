@@ -59,6 +59,18 @@ const translations = {
     popClose: "Close",
     errorTitle: "Error",
     errorMsg: "Thank you for your message. We'll get back to you soon.",
+
+    // Fotter
+    footerNav: "Navigation",
+    footerLinks: "Links",
+    footerAPI: "API Credits",
+    footerWebSites: "Similar websites",
+    footerNewsletter: "Stay Updated",
+    footerEmailPlaceholder: "Your Email",
+    footerSubscribe: "Subscribe",
+    footerPrivacy: "Privacy Policy",
+    footerTerms: "Terms of Service",
+    footerLicense: "License",
   },
 
   ar: {
@@ -68,7 +80,6 @@ const translations = {
     quran: "القرآن",
     hadith: "حديث",
     contact: "تواصل معنا",
-    menu: "القائمة",
 
     // Dropdowns
     language: "اللغة",
@@ -118,6 +129,18 @@ const translations = {
     popClose: "إغلاق",
     errorTitle: "خطأ",
     errorMsg: "حدث خطأ ما. يرجى المحاولة مرة أخرى لاحقاً.",
+
+    // Fotter
+    footerNav: "التنقل في الموقع",
+    footerLinks: "الروابط",
+    footerAPI: " رصيد الواجهة البرمجية (API)",
+    footerWebSites: "مواقع مشابهة لنا",
+    footerNewsletter: "إبق على إطلاع",
+    footerEmailPlaceholder: "البريد الإلكتروني الخاص بك",
+    footerSubscribe: "إشترك",
+    footerPrivacy: "الخصوصية",
+    footerTerms: "الشروط والأحكام",
+    footerLicense: "الرخصة",
   },
 };
 

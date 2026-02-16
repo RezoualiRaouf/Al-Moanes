@@ -36,7 +36,6 @@ footer {
   font-weight: var(--font-weight-bold);
   margin-bottom: 1rem;
   color: var(--color-accent-light);
-  font-family: var(--font-heading);
   position: relative;
   display: inline-block;
 }
@@ -171,10 +170,6 @@ footer {
   padding-left: 0;
 }
 
-.footer__api-list a:hover {
-  padding-left: 20px;
-}
-
 .footer__api-list a:hover::before {
   opacity: 1;
   transform: translateX(0);
@@ -260,7 +255,6 @@ footer {
 }
 
 .footer__newsletter-btn:hover {
-  background: var(--color-accent-light);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(203, 234, 178, 0.3);
 }
@@ -310,23 +304,6 @@ footer {
   padding-left: 0; /* Remove padding from bottom links */
 }
 
-/* RTL Support */
-html[dir="rtl"] .footer__links a::before,
-html[dir="rtl"] .footer__api-toggle::before,
-html[dir="rtl"] .footer__api-list a::before {
-  content: "←";
-  left: auto;
-  right: -20px;
-  transform: translateX(10px);
-}
-
-html[dir="rtl"] .footer__links a:hover,
-html[dir="rtl"] .footer__api-toggle:hover,
-html[dir="rtl"] .footer__api-list a:hover {
-  padding-left: 0;
-  padding-right: 20px;
-}
-
 html[dir="rtl"] .footer__links a:hover::before,
 html[dir="rtl"] .footer__api-toggle:hover::before,
 html[dir="rtl"] .footer__api-list a:hover::before {
@@ -339,10 +316,6 @@ html[dir="rtl"] .footer__section-title::after {
 }
 
 html[dir="rtl"] .footer__contact-item {
-  flex-direction: row-reverse;
-}
-
-html[dir="rtl"] .footer__newsletter-form {
   flex-direction: row-reverse;
 }
 
@@ -360,7 +333,6 @@ html[dir="rtl"] .footer__api-list li {
   padding-right: 0;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   footer {
     padding: 2.5rem 1.5rem 1rem;
