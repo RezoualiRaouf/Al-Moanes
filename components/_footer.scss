@@ -211,6 +211,11 @@ footer {
   max-width: 350px;
 }
 
+.footer__section-title {
+  font-size: var(--font-size-base);
+  margin-bottom: 0.75rem;
+}
+
 .footer__newsletter-form {
   display: flex;
   flex-direction: column;

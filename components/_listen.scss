@@ -14,25 +14,25 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  width: 100%; /* Added */
-  max-width: 100%; /* Added */
-  box-sizing: border-box; /* Added */
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .listen__label {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 1rem; /* Reduced from 1.125rem for mobile */
+  font-size: 1rem;
   padding-inline-start: 5px;
   color: var(--color-primary-dark);
 }
 
-/* Select/Dropdown - FIXED */
+// Select/Dropdown
 .listen__select {
-  padding: 10px 12px; /* Reduced from 12px 16px for mobile */
+  padding: 10px 12px;
   border-radius: 8px;
   color: var(--color-primary-dark);
-  font-size: 0.9375rem; /* Reduced from 1.125rem (18px to 15px) for mobile */
+  font-size: 0.9375rem;
   font-family: var(--font-display);
   font-weight: 600;
   cursor: pointer;
@@ -41,14 +41,12 @@
   background-position: right 12px center;
   background-size: 20px;
   padding-inline-end: 40px;
-  padding-inline-start: 12px; /* Reduced from 16px */
+  padding-inline-start: 12px;
   background-color: var(--color-accent-light);
-  border: 2px solid var(--color-accent-dark); /* Added border width */
-  width: 100%; /* Added */
-  max-width: 100%; /* Added */
-  box-sizing: border-box; /* CRITICAL - prevents overflow */
-
-  /* Prevent text overflow */
+  border: 2px solid var(--color-accent-dark);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -58,7 +56,7 @@
   padding: 10px;
   color: var(--color-primary);
   background-color: var(--color-accent-light);
-  font-size: 0.9375rem; /* Match select font size */
+  font-size: 0.9375rem;
 }
 
 .listen__player {
@@ -71,7 +69,7 @@
   padding: 20px 24px;
   width: 100%;
   max-width: 100%;
-  box-sizing: border-box; /* Added */
+  box-sizing: border-box;
 }
 
 .player__controls {
@@ -173,31 +171,30 @@
   white-space: nowrap;
   display: flex;
   gap: var(--spacing-sm);
-  direction: ltr; /* so the time won't be reversed when switching to arabic */
+  direction: ltr;
 }
 
-/* Tablet (768px) - 2 column layout with centered 3rd item - FIXED */
 @media (min-width: 768px) {
   .listen__section {
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: auto auto auto; /* Changed from 'auto auto' */
+    grid-template-rows: auto auto auto;
     gap: 32px;
     padding: 40px 40px;
     margin-top: 100px;
   }
 
-  /* First two dropdowns stay in their columns */
+  // First two dropdowns stay in their columns
   .listen__card:nth-child(1),
   .listen__card:nth-child(2) {
     grid-column: auto;
   }
 
-  /* Third dropdown (Surah) - centered and spanning both columns - FIXED */
+  // Third dropdown (Surah) - centered and spanning both columns
   .listen__card:nth-child(3) {
-    grid-column: 1 / -1; /* Span both columns */
-    max-width: 50%; /* Take up only half width */
-    margin: 0 auto; /* Center it */
-    justify-self: center; /* Additional centering */
+    grid-column: 1 / -1;
+    max-width: 50%;
+    margin: 0 auto;
+    justify-self: center;
   }
 
   /* Audio player spans both columns */
@@ -206,11 +203,11 @@
   }
 
   .listen__label {
-    font-size: 1.125rem; /* Slightly bigger on tablet */
+    font-size: 1.125rem;
   }
 
   .listen__select {
-    font-size: 1rem; /* Increased but not too big (16px) */
+    font-size: 1rem;
     padding: 12px 14px;
     padding-inline-end: 40px;
     padding-inline-start: 14px;
@@ -225,27 +222,25 @@
   }
 }
 
-/* Desktop (1024px) - 3 column layout - FIXED */
 @media (min-width: 1024px) {
   .listen__section {
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: auto auto; /* Changed from 'auto 1fr' */
+    grid-template-rows: auto auto;
     gap: 24px;
     padding: 40px 30px;
     margin-top: 150px;
   }
 
-  /* All three dropdowns get their own columns - FIXED */
+  // All three dropdowns get their own columns
   .listen__card:nth-child(1),
   .listen__card:nth-child(2),
   .listen__card:nth-child(3) {
-    grid-column: auto; /* Reset to auto - each takes one column */
-    max-width: 100%; /* Reset max-width */
-    margin: 0; /* Reset margin */
-    justify-self: stretch; /* Stretch to fill column */
+    grid-column: auto;
+    max-width: 100%;
+    margin: 0;
+    justify-self: stretch;
   }
 
-  /* Audio player spans all three columns */
   .listen__player {
     grid-column: 1 / -1;
     padding: 20px 60px;
@@ -256,26 +251,23 @@
   }
 
   .listen__select {
-    font-size: 1rem; /* Keep reasonable font size */
+    font-size: 1rem;
     padding: 12px 16px;
     padding-inline-end: 40px;
     padding-inline-start: 16px;
   }
 }
 
-/* RTL Support */
 html[dir="rtl"] .listen__select {
   background-position: left 12px center;
   padding-inline-start: 40px;
   padding-inline-end: 12px;
 }
 
-/* Keep the audio player's elements order in RTL */
 html[dir="rtl"] .player__controls {
   flex-direction: row-reverse;
 }
 
-/* Extra small screens - additional adjustments */
 @media (max-width: 480px) {
   .listen__section {
     padding: 30px 16px;
@@ -283,11 +275,11 @@ html[dir="rtl"] .player__controls {
   }
 
   .listen__label {
-    font-size: 0.9375rem; /* 15px */
+    font-size: 0.9375rem;
   }
 
   .listen__select {
-    font-size: 0.875rem; /* 14px - even smaller for mobile */
+    font-size: 0.875rem;
     padding: 8px 10px;
     padding-inline-end: 36px;
     padding-inline-start: 10px;
@@ -319,5 +311,113 @@ html[dir="rtl"] .player__controls {
   .player__btn-small img {
     width: 18px;
     height: 18px;
+  }
+}
+
+@media (max-width: 400px) {
+  .listen__player {
+    padding: 16px 12px;
+  }
+
+  .player__controls {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto auto;
+    gap: 12px 10px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #prevSecBtn {
+    grid-column: 1;
+    grid-row: 1;
+    width: 40px;
+    height: 40px;
+    justify-self: center;
+  }
+
+  #prevSecBtn img {
+    width: 18px;
+    height: 18px;
+  }
+
+  #playBtn {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: center;
+    width: 52px;
+    height: 52px;
+  }
+
+  #playBtn img {
+    width: 26px;
+    height: 26px;
+  }
+
+  #skipSecBtn {
+    grid-column: 3;
+    grid-row: 1;
+    width: 40px;
+    height: 40px;
+    justify-self: center;
+  }
+
+  #skipSecBtn img {
+    width: 18px;
+    height: 18px;
+  }
+
+  .player__progress-container {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    min-width: 0;
+    padding: 0 8px;
+    width: 100%;
+  }
+
+  #muteBtn {
+    grid-column: 1;
+    grid-row: 3;
+    width: 36px;
+    height: 36px;
+    justify-self: start;
+  }
+
+  #muteBtn img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .player__time {
+    grid-column: 2 / -1;
+    grid-row: 3;
+    justify-self: end;
+    font-size: 0.8125rem;
+    gap: 4px;
+  }
+
+  #progressBar {
+    height: 6px;
+  }
+
+  #progressBar::-webkit-slider-thumb {
+    width: 14px;
+    height: 14px;
+  }
+
+  #progressBar::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+@media (max-width: 400px) {
+  html[dir="rtl"] .player__time {
+    justify-self: start;
+  }
+
+  html[dir="rtl"] #muteBtn {
+    justify-self: end;
   }
 }
