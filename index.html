@@ -5,9 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AL-Moanes</title>
     <link rel="stylesheet" href="style.scss" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+ 
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   </head>
   <body>
+      <div id="page-loader">
+        <div class="loader__particles" id="particlesContainer"></div>
+        <div class="loader__wrap">
+          <svg
+            class="loader__svg"
+            viewBox="0 0 375 140"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <text
+              class="loader__text"
+              text-anchor="middle"
+              dominant-baseline="middle"
+              x="187.5"
+              y="72"
+              font-family="'Cormorant Garamond', Georgia, 'Times New Roman', serif"
+              font-weight="400"
+              letter-spacing="6"
+            >AL MOANES</text>
+
+            <!-- borders -->
+            <path
+              class="border-path"
+              id="borderPath"
+              d="
+                M 187.50,7.64
+                L 205.62,25.75
+                L 353.75,25.75
+                L 353.75,51.37
+                L 371.87,69.49
+                L 353.75,87.61
+                L 353.75,113.23
+                L 205.62,113.23
+                L 187.50,131.34
+                L 169.38,113.23
+                L  21.24,113.23
+                L  21.24,87.61
+                L   3.13,69.49
+                L  21.24,51.37
+                L  21.24,25.75
+                L 169.38,25.75
+                Z
+              "
+            />
+
+            <!-- glow -->
+            <circle class="border-dot" id="borderDot" r="3" cx="187.50" cy="7.64"/>
+          </svg>
+
+        </div>
+      </div>
+    
     <!-- Container -->
     <div class="container">
       <button class="sidebar-toggle" aria-label="Toggle Sidebar">
@@ -488,7 +544,6 @@
                 </ul>
               </div>
 
-        <!-- to do : add links to relative websites , my socials new settler script-->
               <!-- Resources -->
               <div class="footer__section">
                 <h3 class="footer__section-title" data-i18n="footerLinks">
@@ -539,35 +594,33 @@
                 </ul>
               </div>
 
-              <div class="footer__section">
               <!-- Newsletter -->
-                <div class="footer__newsletter">
-                  <h4
-                    class="footer__section-title"
-                    data-i18n="footerNewsletter"
-                  >
+              <div class="footer__section">
+                <div class="newsletter-section">
+                  <h4 class="footer__section-title" data-i18n="footerNewsletter">
                     Stay Updated
                   </h4>
-                  <form class="footer__newsletter-form" id="newsletterForm">
-                    <input
-                      type="email"
+                  <form class="footer__newsletter-form" id="subscribeForm">
+                    <input 
                       class="footer__newsletter-input"
-                      placeholder="Your email"
-                      data-i18n-placeholder="footerEmailPlaceholder"
+                      type="email"
+                      data-i18n-placeholder="footerEmailPlaceholder" 
+                      id="emailInput" 
+                      placeholder="Your email" 
                       required
                     />
-                    <button type="submit" class="footer__newsletter-btn">
-                      <span data-i18n="footerSubscribe">Subscribe</span>
+                    <button class="footer__newsletter-btn" data-i18n="footerSubscribe" type="submit">
+                      Subscribe
                     </button>
                   </form>
                 </div>
               </div>
-          </div>
+             </div>
 
-            <!-- Bottom Section -->
+           <!-- Bottom Section -->
             <div class="footer__bottom">
               <div class="copyright">
-                <p>© <span id="current-year">2025</span> raoufrezouali All rights reserved.</p>
+                <p>© <span id="current-year">2025</span> Al Moanes All rights reserved.</p>
               </div>
               <script></script>
               
@@ -585,6 +638,7 @@
             </div>
           </div>
         </footer>   
+        
       </main>
 
       <!-- Language Panel Overlay  -->
@@ -661,65 +715,157 @@
           </li>
         </ul>
       </nav>
+    <!-- Loading Screen -->
+      <script>
+      (function () {
+          const loader = document.getElementById("page-loader");
+          const path = document.getElementById("borderPath");
+          const dot = document.getElementById("borderDot");
+          const textSvg = document.querySelector(".loader__wrap");
+          const MIN_MS = 2800;
+          let raf;
 
-    <script>
-      document.getElementById('current-year').innerText = new Date().getFullYear();
-      // API Credits
-      document.addEventListener("DOMContentLoaded", function () {
-      const apiToggle = document.getElementById("apiCreditsToggle");
-      const apiCredits = document.getElementById("apiCredits");
+          function startAnimation() {
+            if (raf) cancelAnimationFrame(raf);
 
-      function isMobile(){return window.innerWidth <= 768;}
+            const length = path.getTotalLength();
+            const duration = 2000;
+            const t0 = performance.now();
 
-      if (apiToggle && apiCredits) {
-        apiToggle.addEventListener("click", function (e) {
-          if (isMobile()) {
-            e.preventDefault();
-            
-            apiToggle.classList.toggle("active");
-            apiCredits.classList.toggle("show");
-            
-            const isExpanded = apiCredits.classList.contains("show");
-            apiToggle.setAttribute("aria-expanded", isExpanded);
-          }
-        });
+            path.style.strokeDasharray = length;
+            path.style.strokeDashoffset = length;
+            dot.style.opacity = "0";
 
-        // Set initial aria-expanded attribute
-        apiToggle.setAttribute("aria-expanded", "false");
-        document.addEventListener("click", function (e) {
-          if (isMobile() && apiToggle && apiCredits) {
-            // If clicking outside the toggle and credits area
-            const apiContainer = apiToggle.closest(".footer__api-container");
-            if (apiContainer && !apiContainer.contains(e.target)) {
-              apiToggle.classList.remove("active");
-              apiCredits.classList.remove("show");
-              apiToggle.setAttribute("aria-expanded", "false");
+            function tick(now) {
+              const p = Math.min((now - t0) / duration, 1);
+              const e = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+
+              path.style.strokeDashoffset = length * (1 - e);
+
+              const pt = path.getPointAtLength(length * e);
+              dot.setAttribute("cx", pt.x);
+              dot.setAttribute("cy", pt.y);
+              dot.style.opacity = p > 0.01 && p < 0.99 ? "1" : "0";
+
+              if (p < 1) raf = requestAnimationFrame(tick);
             }
-          }
-        });
 
-        let resizeTimer;
-        window.addEventListener("resize", function () {
-          clearTimeout(resizeTimer);
-          resizeTimer = setTimeout(function () {
-            if (!isMobile()) {
-              // Switching to desktop
-              apiToggle.classList.remove("active");
-              apiCredits.classList.remove("show");
-              apiToggle.setAttribute("aria-expanded", "false");
+            raf = requestAnimationFrame(tick);
+          }
+          // Draws one 8-pointed star shape
+          function drawStar(cx, cy, r){
+            const pts = [];
+            for(let i = 0; i < 16; i++){
+              const angle  = (i * Math.PI) / 8;
+              const radius = i % 2 === 0 ? r : r * 0.42;
+              pts.push(
+                (cx + radius * Math.sin(angle)).toFixed(2) + ',' +
+                (cy - radius * Math.cos(angle)).toFixed(2)
+              );
             }
-          }, 250);
-        });
-      }
-    });
-    </script>     
+            return pts.join(' ');
+          }
+
+      function createParticles() {
+            const container = document.getElementById('particlesContainer');
+            const ns = 'http://www.w3.org/2000/svg';
+
+
+            const numberOfStars = 50;
+            const speedInSeconds = 10;
+            const logoSafeZone = 50;       
+
+            const stars = [];
+            const minPos = 50 - (logoSafeZone / 2);
+            const maxPos = 50 + (logoSafeZone / 2);
+
+            for (let i = 0; i < numberOfStars; i++) {
+              let x, y;
+              let isInsideLogo = true;
+
+              while (isInsideLogo) {
+                x = Math.floor(Math.random() * 100);
+                y = Math.floor(Math.random() * 100);
+                
+                const isInXRange = x > minPos && x < maxPos;
+                const isInYRange = y > minPos && y < maxPos;
+
+                if (!(isInXRange && isInYRange)) {
+                  isInsideLogo = false;
+                }
+              }
+
+              stars.push({
+                x: x + '%',
+                y: y + '%',
+                r: (Math.random() * 2 + 3).toFixed(1),
+                dur: speedInSeconds, 
+                delay: -(Math.random() * speedInSeconds).toFixed(2), 
+                op: (Math.random() * 0.12 + 0.08).toFixed(2)
+              });
+            }
+
+            stars.forEach(cfg => {
+              const size = cfg.r * 3;
+              const cx = size / 2;
+              const cy = size / 2;
+
+              const svg = document.createElementNS(ns, 'svg');
+              svg.setAttribute('width', size);
+              svg.setAttribute('height', size);
+              svg.setAttribute('viewBox', `0 0 ${size} ${size}`);
+              svg.style.cssText = 'overflow:visible; display:block;';
+
+              const poly = document.createElementNS(ns, 'polygon');
+              poly.setAttribute('points', drawStar(cx, cy, cfg.r)); 
+              poly.setAttribute('fill', '#acd481');
+              svg.appendChild(poly);
+
+              const div = document.createElement('div');
+              div.classList.add('particle');
+              div.style.cssText = `position:absolute; left:${cfg.x}; top:${cfg.y};`;
+              
+              div.style.setProperty('--dur', cfg.dur + 's');
+              div.style.setProperty('--delay', cfg.delay + 's');
+              div.style.setProperty('--op', cfg.op);
+              
+              div.appendChild(svg);
+              container.appendChild(div);
+            });
+          }
+         startAnimation();
+          createParticles();
+          startAnimation();
+ 
+          const pageStart = performance.now();
+          window.addEventListener("load", () => {
+            const wait = Math.max(0, MIN_MS - (performance.now() - pageStart));
+            setTimeout(() => loader.classList.add("hidden"), wait);
+          });
+
+          window._replayLoader = function () {
+            loader.classList.remove("hidden");
+            textSvg.style.animation = "none";
+            textSvg.style.opacity = "0";
+            void textSvg.offsetWidth;
+            textSvg.style.animation = "textReveal 0.7s ease 0.4s forwards";
+            startAnimation();
+            setTimeout(() => loader.classList.add("hidden"), MIN_MS + 300);
+          };
+        })();
+      </script>
+   
+      <script>
+        document.getElementById('current-year').innerText = new Date().getFullYear();
+     </script>     
+    <script src="./scripts/config.js" type="module"></script>
     <script src="./scripts/translation.js" type="module"></script>
     <script src="./scripts/languageSwitcher.js" type="module"></script>
     <script src="./scripts/sideBar.js"></script>
     <script src="./scripts/mobileNav.js"></script>
     <script src="./scripts/fetchReciation.js" type="module"></script>
     <script src="./scripts/audioPlayer.js" type="module"></script>
-    <script src="./scripts/config.js"></script>
     <script src="./scripts/contactForm.js" type="module"></script>
+    <script src="./scripts/newsLetter.js"></script>
   </body>
 </html>

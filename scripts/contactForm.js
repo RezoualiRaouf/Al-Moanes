@@ -434,3 +434,54 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+// API Credits footer
+document.addEventListener("DOMContentLoaded", function () {
+  const apiToggle = document.getElementById("apiCreditsToggle");
+  const apiCredits = document.getElementById("apiCredits");
+
+  function isMobile() {
+    return window.innerWidth <= 768;
+  }
+
+  if (apiToggle && apiCredits) {
+    apiToggle.addEventListener("click", function (e) {
+      if (isMobile()) {
+        e.preventDefault();
+
+        apiToggle.classList.toggle("active");
+        apiCredits.classList.toggle("show");
+
+        const isExpanded = apiCredits.classList.contains("show");
+        apiToggle.setAttribute("aria-expanded", isExpanded);
+      }
+    });
+
+    // Set initial aria-expanded attribute
+    apiToggle.setAttribute("aria-expanded", "false");
+    document.addEventListener("click", function (e) {
+      if (isMobile() && apiToggle && apiCredits) {
+        // If clicking outside the toggle and credits area
+        const apiContainer = apiToggle.closest(".footer__api-container");
+        if (apiContainer && !apiContainer.contains(e.target)) {
+          apiToggle.classList.remove("active");
+          apiCredits.classList.remove("show");
+          apiToggle.setAttribute("aria-expanded", "false");
+        }
+      }
+    });
+
+    let resizeTimer;
+    window.addEventListener("resize", function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        if (!isMobile()) {
+          // Switching to desktop
+          apiToggle.classList.remove("active");
+          apiCredits.classList.remove("show");
+          apiToggle.setAttribute("aria-expanded", "false");
+        }
+      }, 250);
+    });
+  }
+});
