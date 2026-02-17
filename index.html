@@ -11,6 +11,11 @@
     />
  
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="shortcut icon" href="/assets/favicon.ico">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" sizes="180x180">
+    <meta name="theme-color" content="#ffffff">
   </head>
   <body>
       <div id="page-loader">
@@ -621,9 +626,10 @@
             <div class="footer__bottom">
               <div class="copyright">
                 <p>© <span id="current-year">2025</span> Al Moanes All rights reserved.</p>
-              </div>
-              <script></script>
-              
+              </div> 
+              <script>
+                document.getElementById('current-year').innerText = new Date().getFullYear();
+            </script>     
               <ul class="footer__bottom-links">
                 <li>
                   <a href="#" data-i18n="footerPrivacy">Privacy Policy</a>
@@ -854,10 +860,7 @@
           };
         })();
       </script>
-   
-      <script>
-        document.getElementById('current-year').innerText = new Date().getFullYear();
-     </script>     
+  
     <script src="./scripts/config.js" type="module"></script>
     <script src="./scripts/translation.js" type="module"></script>
     <script src="./scripts/languageSwitcher.js" type="module"></script>
