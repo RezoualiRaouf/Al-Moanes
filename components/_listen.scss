@@ -77,7 +77,6 @@
   justify-content: center;
 }
 
-/* ── Default order (large screens, follows this explicitly) ── */
 #playBtn {
   order: 1;
 }
@@ -366,7 +365,6 @@
     height: 18px;
   }
 
-  /* ── Swapped: surah nav now flanks progress, sec-skip moved out ── */
   #playBtn {
     order: 1;
   }
@@ -423,7 +421,6 @@
     height: 26px;
   }
 
-  /* ── Swapped: surah nav in row 1, sec-skip in row 4 ── */
   #prevSurahBtn {
     grid-column: 2;
     grid-row: 1;
