@@ -136,9 +136,3 @@ dist
 
 # EmailJS Configuration
 config.js
-
-# License file
-LICENSE.txt
-
-#new Letter
-newsLetter.js
