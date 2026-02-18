@@ -4,7 +4,6 @@ const muteIconUrl = new URL("../assets/mute.svg", import.meta.url);
 const unmuteIconUrl = new URL("../assets/unmute.svg", import.meta.url);
 
 function formatTime(seconds) {
-  // check NaN and invalid values
   if (!isFinite(seconds) || seconds < 0) {
     return "00:00";
   }
@@ -51,7 +50,7 @@ export const isRTL = () => {
   return localStorage.getItem("language") === "ar";
 };
 
-// Play/Pause Button
+// ── Play/Pause Button ──
 playBtn.addEventListener("click", () => {
   if (audioPlayer.paused) {
     audioPlayer.play();
@@ -62,13 +61,13 @@ playBtn.addEventListener("click", () => {
   }
 });
 
-// Mute/Unmute Button
+// ── Mute/Unmute Button ──
 muteBtn.addEventListener("click", () => {
   audioPlayer.muted = !audioPlayer.muted;
   muteBtnIcon.src = audioPlayer.muted ? muteIconUrl.href : unmuteIconUrl.href;
 });
 
-// Update Progress Bar and Time Display
+// ── Update Progress Bar and Time Display ──
 audioPlayer.addEventListener("timeupdate", () => {
   if (isFinite(audioPlayer.duration)) {
     let percentage = (audioPlayer.currentTime / audioPlayer.duration) * 100;
@@ -78,24 +77,22 @@ audioPlayer.addEventListener("timeupdate", () => {
   }
 });
 
-//  Reset when new audio starts loading
+// ── Reset when new audio starts loading ──
 audioPlayer.addEventListener("loadstart", () => {
   resetPlayer();
 });
 
-//  Update duration when metadata is loaded
+// ── Update duration when metadata is loaded ──
 audioPlayer.addEventListener("loadedmetadata", () => {
   surahDuration.innerText = formatTime(audioPlayer.duration);
   progressBar.value = 0;
 });
 
-// Skip Forward 10 Seconds
+// ── Skip Forward 10 Seconds ──
 skipSecBtn.addEventListener("click", () => {
   if (isRTL()) {
-    // RTL skip button rewinds
     audioPlayer.currentTime = Math.max(0, (audioPlayer.currentTime || 0) - 10);
   } else {
-    // LTR skip button skips
     audioPlayer.currentTime = Math.min(
       (audioPlayer.currentTime || 0) + 10,
       audioPlayer.duration || Infinity,
@@ -103,28 +100,26 @@ skipSecBtn.addEventListener("click", () => {
   }
 });
 
-// Rewind 10 Seconds
+// ── Rewind 10 Seconds ──
 prevSecBtn.addEventListener("click", () => {
   if (isRTL()) {
-    // RTL prev button skips
     audioPlayer.currentTime = Math.min(
       (audioPlayer.currentTime || 0) + 10,
       audioPlayer.duration || Infinity,
     );
   } else {
-    // LTR prev button rewinds
     audioPlayer.currentTime = Math.max(0, (audioPlayer.currentTime || 0) - 10);
   }
 });
 
-// Progress Bar - Seek by Dragging
+// ── Progress Bar - Seek by Dragging ──
 progressBar.addEventListener("input", () => {
   if (isFinite(audioPlayer.duration)) {
     audioPlayer.currentTime = (progressBar.value / 100) * audioPlayer.duration;
   }
 });
 
-// Progress Bar - Seek by Clicking
+// ── Progress Bar - Seek by Clicking ──
 progressBar.addEventListener("click", (e) => {
   if (isFinite(audioPlayer.duration)) {
     const rect = progressBar.getBoundingClientRect();
@@ -137,11 +132,7 @@ progressBar.addEventListener("click", (e) => {
   }
 });
 
-// Reset play button when audio ends
-audioPlayer.addEventListener("ended", () => {
-  playIcon.src = playIconUrl.href;
-});
-
+// ── Download the current surah ──
 audioPlayer.addEventListener("loadedmetadata", () => {
   downloadBtn.disabled = false;
 });
@@ -150,12 +141,10 @@ audioPlayer.addEventListener("loadstart", () => {
   downloadBtn.disabled = true;
 });
 
-// Download the current surah
 downloadBtn.addEventListener("click", async () => {
   const src = audioPlayer.src;
   if (!src || src === window.location.href) return;
 
-  // Get surah name from the select dropdown for the filename
   const surahSelect = document.getElementById("surah");
   const selectedSurah = surahSelect.options[surahSelect.selectedIndex];
   const surahName = selectedSurah.text;
@@ -185,7 +174,7 @@ downloadBtn.addEventListener("click", async () => {
   }
 });
 
-// ── Loop toggle ──
+// ── Loop Toggle ──
 loopBtn.addEventListener("click", () => {
   audioPlayer.loop = !audioPlayer.loop;
   const isLooping = audioPlayer.loop;
@@ -196,30 +185,7 @@ loopBtn.addEventListener("click", () => {
 // ── Next Surah ──
 nextSurahBtn.addEventListener("click", () => {
   const surahSelect = document.getElementById("surah");
-  const currentIndex = surahSelect.selectedIndex;
-  if (currentIndex < surahSelect.options.length - 1) {
-    surahSelect.selectedIndex = currentIndex + 1;
-    surahSelect.dispatchEvent(new Event("change")); // triggers your existing load logic
-  }
-});
-
-// Enable/disable next button based on position in list
-function updateNextBtn() {
-  const surahSelect = document.getElementById("surah");
-  nextSurahBtn.disabled =
-    surahSelect.selectedIndex >= surahSelect.options.length - 1;
-}
-
-// Call whenever surah changes
-document.getElementById("surah").addEventListener("change", updateNextBtn);
-
-audioPlayer.addEventListener("ended", () => {
-  updateNextBtn();
-  const surahSelect = document.getElementById("surah");
-  if (
-    !audioPlayer.loop &&
-    surahSelect.selectedIndex < surahSelect.options.length - 1
-  ) {
+  if (surahSelect.selectedIndex < surahSelect.options.length - 1) {
     surahSelect.selectedIndex++;
     surahSelect.dispatchEvent(new Event("change"));
   }
@@ -234,17 +200,26 @@ prevSurahBtn.addEventListener("click", () => {
   }
 });
 
-// Update both buttons whenever the surah changes
+// ── Surah Nav Button State ──
 function updateSurahNavBtns() {
   const surahSelect = document.getElementById("surah");
-  prevSurahBtn.disabled = surahSelect.selectedIndex <= 0;
+  // options.length > 1 means there are real surahs beyond the default placeholder
+  const hasOptions = surahSelect.options.length > 1;
+  prevSurahBtn.disabled = !hasOptions || surahSelect.selectedIndex <= 0;
   nextSurahBtn.disabled =
-    surahSelect.selectedIndex >= surahSelect.options.length - 1;
+    !hasOptions || surahSelect.selectedIndex >= surahSelect.options.length - 1;
 }
 
+// Update nav buttons when the user picks a surah from the dropdown
 document.getElementById("surah").addEventListener("change", updateSurahNavBtns);
 
+// Update nav buttons as soon as selects.js finishes populating the surah list
+window.addEventListener("surahListUpdated", updateSurahNavBtns);
+
+// ── Audio Ended: reset icon, auto-advance, update nav buttons ──
 audioPlayer.addEventListener("ended", () => {
+  playIcon.src = playIconUrl.href;
+
   const surahSelect = document.getElementById("surah");
   if (
     !audioPlayer.loop &&
@@ -253,5 +228,6 @@ audioPlayer.addEventListener("ended", () => {
     surahSelect.selectedIndex++;
     surahSelect.dispatchEvent(new Event("change"));
   }
+
   updateSurahNavBtns();
 });

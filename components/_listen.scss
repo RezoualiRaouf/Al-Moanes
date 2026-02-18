@@ -77,6 +77,38 @@
   justify-content: center;
 }
 
+/* ── Default order (large screens, follows this explicitly) ── */
+#playBtn {
+  order: 1;
+}
+#prevSurahBtn {
+  order: 2;
+}
+.player__progress-container {
+  order: 3;
+}
+#nextSurahBtn {
+  order: 4;
+}
+#muteBtn {
+  order: 5;
+}
+#loopBtn {
+  order: 6;
+}
+#prevSecBtn {
+  order: 7;
+}
+#skipSecBtn {
+  order: 8;
+}
+.player__time {
+  order: 9;
+}
+#downloadBtn {
+  order: 10;
+}
+
 .player__btn {
   display: flex;
   align-items: center;
@@ -334,19 +366,20 @@
     height: 18px;
   }
 
+  /* ── Swapped: surah nav now flanks progress, sec-skip moved out ── */
   #playBtn {
     order: 1;
   }
-  #prevSecBtn {
+  #prevSurahBtn {
     order: 2;
   }
-  #skipSecBtn {
+  #nextSurahBtn {
     order: 3;
   }
   .player__progress-container {
     order: 4;
   }
-  #prevSurahBtn {
+  #prevSecBtn {
     order: 5;
   }
   #muteBtn {
@@ -361,7 +394,7 @@
   #loopBtn {
     order: 9;
   }
-  #nextSurahBtn {
+  #skipSecBtn {
     order: 10;
   }
 }
@@ -390,7 +423,8 @@
     height: 26px;
   }
 
-  #prevSecBtn {
+  /* ── Swapped: surah nav in row 1, sec-skip in row 4 ── */
+  #prevSurahBtn {
     grid-column: 2;
     grid-row: 1;
     width: 36px;
@@ -398,12 +432,12 @@
     justify-self: center;
   }
 
-  #prevSecBtn img {
+  #prevSurahBtn img {
     width: 16px;
     height: 16px;
   }
 
-  #skipSecBtn {
+  #nextSurahBtn {
     grid-column: 3;
     grid-row: 1;
     width: 36px;
@@ -411,7 +445,7 @@
     justify-self: center;
   }
 
-  #skipSecBtn img {
+  #nextSurahBtn img {
     width: 16px;
     height: 16px;
   }
@@ -467,7 +501,7 @@
     justify-self: center;
   }
 
-  #prevSurahBtn {
+  #prevSecBtn {
     grid-column: 1;
     grid-row: 4;
     width: 36px;
@@ -475,7 +509,7 @@
     justify-self: center;
   }
 
-  #prevSurahBtn img {
+  #prevSecBtn img {
     width: 18px;
     height: 18px;
   }
@@ -493,7 +527,7 @@
     height: 20px;
   }
 
-  #nextSurahBtn {
+  #skipSecBtn {
     grid-column: 3;
     grid-row: 4;
     width: 36px;
@@ -501,7 +535,7 @@
     justify-self: center;
   }
 
-  #nextSurahBtn img {
+  #skipSecBtn img {
     width: 18px;
     height: 18px;
   }

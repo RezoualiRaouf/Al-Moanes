@@ -156,6 +156,9 @@ function onNarrationChange() {
       }
     });
   });
+
+  // Notify player.js that the surah list has been populated
+  window.dispatchEvent(new CustomEvent("surahListUpdated"));
 }
 
 // Load selected surah audio
@@ -249,9 +252,11 @@ async function loadPrevSelect() {
     });
 
     // Set surah dropdown value
-
     surahSelect.value = currentUserSelect.surahServer;
     audioPlayer.src = currentUserSelect.surahServer;
+
+    // Notify player.js that the surah list has been populated
+    window.dispatchEvent(new CustomEvent("surahListUpdated"));
   } catch (error) {
     console.error("Error loading previous selections:", error);
   }
