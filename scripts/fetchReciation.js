@@ -88,7 +88,6 @@ function onReciterChange(e) {
 
   // Find selected reciter
   const selectedReciter = allReciters.find((r) => r.id == reciterId);
-
   if (!selectedReciter) return;
 
   // store user selected reciter id
@@ -146,13 +145,14 @@ function onNarrationChange() {
 
   const surahNames = surahData.suwar;
   surahList = surahList.split(",");
+  const reciterName = reciterSelect.options[reciterSelect.selectedIndex].text;
 
   // Load surahs with server id and name
   surahList.forEach((surah) => {
     surahNames.forEach((surahName) => {
       if (surahName.id == surah) {
         const paddedId = String(surahName.id).padStart(3, "0");
-        surahSelect.innerHTML += `<option value="${surahServer}${paddedId}.mp3" id="${surahName.id}">${surahName.name}</option>`;
+        surahSelect.innerHTML += `<option value="${surahServer}${paddedId}.mp3" data-reciter="${reciterName}" id="${surahName.id}">${surahName.name}</option>`;
       }
     });
   });
@@ -225,7 +225,7 @@ async function loadPrevSelect() {
       narrationSelect.innerHTML = reciter.moshaf
         .map(
           (m) =>
-            `<option value="${m.id}" data-server="${m.server}" data-surahlist="${m.surah_list}">${m.name}</option>`,
+            `<option value="${m.id}" data-server="${m.server}"  data-surahlist="${m.surah_list}">${m.name}</option>`,
         )
         .join("");
     }
@@ -243,7 +243,7 @@ async function loadPrevSelect() {
       surahData.suwar.forEach((surahName) => {
         if (surahName.id == surah) {
           const paddedId = String(surahName.id).padStart(3, "0");
-          surahSelect.innerHTML += `<option value="${surahServer}${paddedId}.mp3" id="${surahName.id}">${surahName.name}</option>`;
+          surahSelect.innerHTML += `<option value="${surahServer}${paddedId}.mp3" data-reciter="${reciter.name}" id="${surahName.id}">${surahName.name}</option>`;
         }
       });
     });
@@ -282,11 +282,6 @@ surahSelect.addEventListener("change", fetchSurah);
 
 // Listen for language change events from languageSwitcher.js
 window.addEventListener("languageChanged", onLanguageChange);
-
-// Initialize on page load
-document.addEventListener("DOMContentLoaded", () => {
-  initializeData();
-});
 
 // initialize when DOM is loaded
 if (document.readyState === "loading") {

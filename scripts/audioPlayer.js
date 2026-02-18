@@ -32,6 +32,10 @@ function resetPlayer() {
   playIcon.src = playIconUrl.href;
 }
 
+const prevSurahBtn = document.getElementById("prevSurahBtn");
+const downloadBtn = document.getElementById("downloadBtn");
+const loopBtn = document.getElementById("loopBtn");
+const nextSurahBtn = document.getElementById("nextSurahBtn");
 const audioPlayer = document.getElementById("audioPlayer");
 const playBtn = document.getElementById("playBtn");
 const playIcon = document.getElementById("playIcon");
@@ -136,4 +140,118 @@ progressBar.addEventListener("click", (e) => {
 // Reset play button when audio ends
 audioPlayer.addEventListener("ended", () => {
   playIcon.src = playIconUrl.href;
+});
+
+audioPlayer.addEventListener("loadedmetadata", () => {
+  downloadBtn.disabled = false;
+});
+
+audioPlayer.addEventListener("loadstart", () => {
+  downloadBtn.disabled = true;
+});
+
+// Download the current surah
+downloadBtn.addEventListener("click", async () => {
+  const src = audioPlayer.src;
+  if (!src || src === window.location.href) return;
+
+  // Get surah name from the select dropdown for the filename
+  const surahSelect = document.getElementById("surah");
+  const selectedSurah = surahSelect.options[surahSelect.selectedIndex];
+  const surahName = selectedSurah.text;
+  const reciterName = selectedSurah.dataset.reciter;
+  const filename = `${reciterName}_${surahName}.mp3`;
+
+  try {
+    downloadBtn.disabled = true;
+    downloadBtn.classList.add("player__btn--downloading");
+
+    const response = await fetch(src);
+    const blob = await response.blob();
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  } catch (err) {
+    console.error("Download failed:", err);
+  } finally {
+    downloadBtn.disabled = false;
+    downloadBtn.classList.remove("player__btn--downloading");
+  }
+});
+
+// ── Loop toggle ──
+loopBtn.addEventListener("click", () => {
+  audioPlayer.loop = !audioPlayer.loop;
+  const isLooping = audioPlayer.loop;
+  loopBtn.setAttribute("aria-pressed", isLooping);
+  loopBtn.setAttribute("aria-label", isLooping ? "Loop on" : "Loop off");
+});
+
+// ── Next Surah ──
+nextSurahBtn.addEventListener("click", () => {
+  const surahSelect = document.getElementById("surah");
+  const currentIndex = surahSelect.selectedIndex;
+  if (currentIndex < surahSelect.options.length - 1) {
+    surahSelect.selectedIndex = currentIndex + 1;
+    surahSelect.dispatchEvent(new Event("change")); // triggers your existing load logic
+  }
+});
+
+// Enable/disable next button based on position in list
+function updateNextBtn() {
+  const surahSelect = document.getElementById("surah");
+  nextSurahBtn.disabled =
+    surahSelect.selectedIndex >= surahSelect.options.length - 1;
+}
+
+// Call whenever surah changes
+document.getElementById("surah").addEventListener("change", updateNextBtn);
+
+audioPlayer.addEventListener("ended", () => {
+  updateNextBtn();
+  const surahSelect = document.getElementById("surah");
+  if (
+    !audioPlayer.loop &&
+    surahSelect.selectedIndex < surahSelect.options.length - 1
+  ) {
+    surahSelect.selectedIndex++;
+    surahSelect.dispatchEvent(new Event("change"));
+  }
+});
+
+// ── Prev Surah ──
+prevSurahBtn.addEventListener("click", () => {
+  const surahSelect = document.getElementById("surah");
+  if (surahSelect.selectedIndex > 0) {
+    surahSelect.selectedIndex--;
+    surahSelect.dispatchEvent(new Event("change"));
+  }
+});
+
+// Update both buttons whenever the surah changes
+function updateSurahNavBtns() {
+  const surahSelect = document.getElementById("surah");
+  prevSurahBtn.disabled = surahSelect.selectedIndex <= 0;
+  nextSurahBtn.disabled =
+    surahSelect.selectedIndex >= surahSelect.options.length - 1;
+}
+
+document.getElementById("surah").addEventListener("change", updateSurahNavBtns);
+
+audioPlayer.addEventListener("ended", () => {
+  const surahSelect = document.getElementById("surah");
+  if (
+    !audioPlayer.loop &&
+    surahSelect.selectedIndex < surahSelect.options.length - 1
+  ) {
+    surahSelect.selectedIndex++;
+    surahSelect.dispatchEvent(new Event("change"));
+  }
+  updateSurahNavBtns();
 });

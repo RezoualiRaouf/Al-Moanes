@@ -1,5 +1,4 @@
-/* Audio Player Styles */
-
+/* ── Listen section ── */
 .listen__section {
   display: grid;
   grid-template-columns: 1fr;
@@ -27,7 +26,6 @@
   color: var(--color-primary-dark);
 }
 
-// Select/Dropdown
 .listen__select {
   padding: 10px 12px;
   border-radius: 8px;
@@ -62,7 +60,6 @@
 .listen__player {
   background: var(--color-accent-light);
   border-radius: var(--radius-md);
-  padding: var(--spacing-xl);
   grid-column: 1 / -1;
   align-self: center;
   justify-self: center;
@@ -105,10 +102,12 @@
   width: 40px;
   height: 40px;
   border-radius: var(--radius-full);
-  background-color: var(--color-secondary);
   cursor: pointer;
   transition: all var(--transition-base);
   flex-shrink: 0;
+  border: none;
+  background: none;
+  padding: 0;
 }
 
 .player__btn-small img {
@@ -174,6 +173,42 @@
   direction: ltr;
 }
 
+.player__btn--download {
+  opacity: 0.45;
+  transition:
+    opacity var(--transition-base),
+    transform var(--transition-base);
+}
+
+.player__btn--download:not([disabled]) {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.player__btn--download[disabled] {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.player__btn--downloading img {
+  animation: spin 1s linear infinite;
+}
+
+.player__btn--loop {
+  opacity: 0.4;
+  transition:
+    opacity var(--transition-base),
+    filter var(--transition-base);
+}
+
+.player__btn--loop:hover {
+  opacity: 0.75;
+}
+
+.player__btn--loop[aria-pressed="true"] {
+  opacity: 1;
+}
+
 @media (min-width: 768px) {
   .listen__section {
     grid-template-columns: repeat(2, 1fr);
@@ -183,13 +218,11 @@
     margin-top: 100px;
   }
 
-  // First two dropdowns stay in their columns
   .listen__card:nth-child(1),
   .listen__card:nth-child(2) {
     grid-column: auto;
   }
 
-  // Third dropdown (Surah) - centered and spanning both columns
   .listen__card:nth-child(3) {
     grid-column: 1 / -1;
     max-width: 50%;
@@ -197,7 +230,6 @@
     justify-self: center;
   }
 
-  /* Audio player spans both columns */
   .listen__player {
     grid-column: 1 / -1;
   }
@@ -231,7 +263,6 @@
     margin-top: 150px;
   }
 
-  // All three dropdowns get their own columns
   .listen__card:nth-child(1),
   .listen__card:nth-child(2),
   .listen__card:nth-child(3) {
@@ -256,16 +287,6 @@
     padding-inline-end: 40px;
     padding-inline-start: 16px;
   }
-}
-
-html[dir="rtl"] .listen__select {
-  background-position: left 12px center;
-  padding-inline-start: 40px;
-  padding-inline-end: 12px;
-}
-
-html[dir="rtl"] .player__controls {
-  flex-direction: row-reverse;
 }
 
 @media (max-width: 480px) {
@@ -312,42 +333,56 @@ html[dir="rtl"] .player__controls {
     width: 18px;
     height: 18px;
   }
+
+  #playBtn {
+    order: 1;
+  }
+  #prevSecBtn {
+    order: 2;
+  }
+  #skipSecBtn {
+    order: 3;
+  }
+  .player__progress-container {
+    order: 4;
+  }
+  #prevSurahBtn {
+    order: 5;
+  }
+  #muteBtn {
+    order: 6;
+  }
+  .player__time {
+    order: 7;
+  }
+  #downloadBtn {
+    order: 8;
+  }
+  #loopBtn {
+    order: 9;
+  }
+  #nextSurahBtn {
+    order: 10;
+  }
 }
 
 @media (max-width: 400px) {
-  .listen__player {
-    padding: 16px 12px;
-  }
-
   .player__controls {
     display: grid;
-    grid-template-columns: auto auto auto;
-    grid-template-rows: auto auto auto;
-    gap: 12px 10px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto auto auto;
+    gap: 14px 0;
     width: 100%;
-    justify-content: center;
+    justify-items: center;
     align-items: center;
   }
 
-  #prevSecBtn {
+  #playBtn {
     grid-column: 1;
     grid-row: 1;
-    width: 40px;
-    height: 40px;
-    justify-self: center;
-  }
-
-  #prevSecBtn img {
-    width: 18px;
-    height: 18px;
-  }
-
-  #playBtn {
-    grid-column: 2;
-    grid-row: 1;
-    justify-self: center;
     width: 52px;
     height: 52px;
+    justify-self: center;
   }
 
   #playBtn img {
@@ -355,17 +390,30 @@ html[dir="rtl"] .player__controls {
     height: 26px;
   }
 
+  #prevSecBtn {
+    grid-column: 2;
+    grid-row: 1;
+    width: 36px;
+    height: 36px;
+    justify-self: center;
+  }
+
+  #prevSecBtn img {
+    width: 16px;
+    height: 16px;
+  }
+
   #skipSecBtn {
     grid-column: 3;
     grid-row: 1;
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     justify-self: center;
   }
 
   #skipSecBtn img {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
   }
 
   .player__progress-container {
@@ -374,27 +422,6 @@ html[dir="rtl"] .player__controls {
     min-width: 0;
     padding: 0 8px;
     width: 100%;
-  }
-
-  #muteBtn {
-    grid-column: 1;
-    grid-row: 3;
-    width: 36px;
-    height: 36px;
-    justify-self: start;
-  }
-
-  #muteBtn img {
-    width: 20px;
-    height: 20px;
-  }
-
-  .player__time {
-    grid-column: 2 / -1;
-    grid-row: 3;
-    justify-self: end;
-    font-size: 0.8125rem;
-    gap: 4px;
   }
 
   #progressBar {
@@ -410,14 +437,78 @@ html[dir="rtl"] .player__controls {
     width: 14px;
     height: 14px;
   }
+
+  #muteBtn {
+    grid-column: 1;
+    grid-row: 3;
+    width: 36px;
+    height: 36px;
+    justify-self: center;
+  }
+
+  #muteBtn img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .player__time {
+    grid-column: 2;
+    grid-row: 3;
+    justify-self: center;
+    font-size: 0.8125rem;
+    gap: 3px;
+  }
+
+  #downloadBtn {
+    grid-column: 3;
+    grid-row: 3;
+    width: 36px;
+    height: 36px;
+    justify-self: center;
+  }
+
+  #prevSurahBtn {
+    grid-column: 1;
+    grid-row: 4;
+    width: 36px;
+    height: 36px;
+    justify-self: center;
+  }
+
+  #prevSurahBtn img {
+    width: 18px;
+    height: 18px;
+  }
+
+  #loopBtn {
+    grid-column: 2;
+    grid-row: 4;
+    width: 36px;
+    height: 36px;
+    justify-self: center;
+  }
+
+  #loopBtn img {
+    width: 20px;
+    height: 20px;
+  }
+
+  #nextSurahBtn {
+    grid-column: 3;
+    grid-row: 4;
+    width: 36px;
+    height: 36px;
+    justify-self: center;
+  }
+
+  #nextSurahBtn img {
+    width: 18px;
+    height: 18px;
+  }
 }
 
-@media (max-width: 400px) {
-  html[dir="rtl"] .player__time {
-    justify-self: start;
-  }
-
-  html[dir="rtl"] #muteBtn {
-    justify-self: end;
-  }
+html[dir="rtl"] .listen__select {
+  background-position: left 12px center;
+  padding-inline-start: 40px;
+  padding-inline-end: 12px;
 }

@@ -15,7 +15,6 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
     <link rel="shortcut icon" href="/assets/favicon.ico">
     <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" sizes="180x180">
-    <meta name="theme-color" content="#ffffff">
   </head>
   <body>
       <div id="page-loader">
@@ -142,26 +141,28 @@
           />
         </nav>
 
-        <!-- HOME SECTION -->
-        <section id="home" class="hero__section">
+        <section id="home" class="hero__section" aria-labelledby="hero-heading">
           <div class="hero__content">
+
+            <h1 class="hero__title" id="hero-heading" data-i18n="heroTitle">
+            Your companion in recitation
+            </h1>
+
             <p class="hero__text" data-i18n="heroSubTitle">
-              Listen to beautiful Quran recitations from your favorite readers
-              with access to over 250 trusted reciters and multiple recitations
-              from across the Islamic world.
+              Listen to beautiful Quran recitations from your favorite readers with access to over 250 trusted reciters and multiple recitations from across the Islamic world.
             </p>
-            <button class="hero__btn">
-              <span data-i18n="ctaButton"> Install App</span>
-              <img src="/assets/download.svg" alt="install" />
-            </button>
+
+              <button 
+                class="hero__btn" 
+                onclick="document.getElementById('recitation').scrollIntoView({behavior:'smooth'})"
+              >
+                <img src="/assets/hear.svg" alt="" aria-hidden="true" />
+                <span data-i18n="ctaButton">Start Listening</span>
+              </button>
           </div>
-          <!-- Logo -->
-          <div class="hero__logo_container">
-            <img
-              class="hero__logo_img"
-              src="/assets/Al-Moanes.png"
-              alt="AL-Moanes logo"
-            />
+
+          <div class="hero__logo_container" aria-hidden="true">
+            <img class="hero__logo_img" src="/assets/Al-Moanes.png" alt="" />
           </div>
         </section>
 
@@ -240,12 +241,47 @@
                 <img id="muteBtnIcon" src="/assets/unmute.svg" alt="Mute" />
               </button>
 
+              <button
+              id="loopBtn"
+              class="player__btn player__btn--loop"
+              title="Loop Surah"
+              aria-label="Loop off"
+              aria-pressed="false"
+            >
+              <img src="/assets/loop.svg" alt="Loop" />
+            </button>
+              
+            <button
+              id="nextSurahBtn"
+              class="player__btn-small"
+              title="Next Surah"
+              aria-label="Next Surah"
+              disabled
+            >
+              <img src="/assets/next.svg" alt="Next Surah" />
+            </button>
+            
+            <button
+              id="prevSurahBtn"
+              class="player__btn-small"
+              title="Previous Surah"
+              aria-label="Previous Surah"
+              disabled
+            >
+              <img src="/assets/prev.svg" alt="Previous Surah" />
+            </button>
+            
               <!-- Time Display -->
               <div class="player__time">
                 <span id="surahCurrentTime">0:00</span>
                 <span>/</span>
                 <span id="surahDuration">0:00</span>
               </div>
+
+              <!-- Download Button -->
+              <button id="downloadBtn" class="player__btn player__btn--download" title="Download Surah" disabled>
+                <img src="/assets/Downlaod-surah.svg" alt="Download" />
+              </button>
             </div>
           </div>
         </section>

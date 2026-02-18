@@ -1,6 +1,7 @@
-/* The Seasons Font */
+/* ========================================
+   The Seasons Font
+   ======================================== */
 
-/* Regular */
 @font-face {
   font-family: "The Seasons";
   src: url("/font/The.Seasons/The.Seasons/The Seasons Regular.ttf")
@@ -10,7 +11,6 @@
   font-display: swap;
 }
 
-/* Italic */
 @font-face {
   font-family: "The Seasons";
   src: url("/font/The.Seasons/The.Seasons/The Seasons Italic.ttf")
@@ -20,7 +20,6 @@
   font-display: swap;
 }
 
-/* Light */
 @font-face {
   font-family: "The Seasons";
   src: url("/font/The.Seasons/The.Seasons/The Seasons Light.ttf")
@@ -30,7 +29,6 @@
   font-display: swap;
 }
 
-/* Light Italic */
 @font-face {
   font-family: "The Seasons";
   src: url("/font/The.Seasons/The.Seasons/The Seasons Light Italic.ttf")
@@ -40,7 +38,6 @@
   font-display: swap;
 }
 
-/* Bold */
 @font-face {
   font-family: "The Seasons";
   src: url("/font/The.Seasons/The.Seasons/The Seasons Bold.ttf")
@@ -50,7 +47,6 @@
   font-display: swap;
 }
 
-/* Bold Italic */
 @font-face {
   font-family: "The Seasons";
   src: url("/font/The.Seasons/The.Seasons/The Seasons Bold Italic.ttf")
@@ -64,7 +60,6 @@
    Zalando Sans Semi Expanded Font
    ======================================== */
 
-/* Extra Light (200) */
 @font-face {
   font-family: "Zalando Sans Semi Expanded";
   src: url("/font/Zalando_Sans_SemiExpanded/static/ZalandoSansSemiExpanded-ExtraLight.ttf")
@@ -83,7 +78,6 @@
   font-display: swap;
 }
 
-/* Light (300) */
 @font-face {
   font-family: "Zalando Sans Semi Expanded";
   src: url("/font/Zalando_Sans_SemiExpanded/static/ZalandoSansSemiExpanded-Light.ttf")
@@ -102,7 +96,6 @@
   font-display: swap;
 }
 
-/* Regular (400) */
 @font-face {
   font-family: "Zalando Sans Semi Expanded";
   src: url("/font/Zalando_Sans_SemiExpanded/static/ZalandoSansSemiExpanded-Regular.ttf")
@@ -121,7 +114,6 @@
   font-display: swap;
 }
 
-/* Medium (500) */
 @font-face {
   font-family: "Zalando Sans Semi Expanded";
   src: url("/font/Zalando_Sans_SemiExpanded/static/ZalandoSansSemiExpanded-Medium.ttf")
@@ -140,7 +132,6 @@
   font-display: swap;
 }
 
-/* Semi Bold (600) */
 @font-face {
   font-family: "Zalando Sans Semi Expanded";
   src: url("/font/Zalando_Sans_SemiExpanded/static/ZalandoSansSemiExpanded-SemiBold.ttf")
@@ -159,7 +150,6 @@
   font-display: swap;
 }
 
-/* Bold (700) */
 @font-face {
   font-family: "Zalando Sans Semi Expanded";
   src: url("/font/Zalando_Sans_SemiExpanded/static/ZalandoSansSemiExpanded-Bold.ttf")
@@ -178,7 +168,6 @@
   font-display: swap;
 }
 
-/* Extra Bold (800) */
 @font-face {
   font-family: "Zalando Sans Semi Expanded";
   src: url("/font/Zalando_Sans_SemiExpanded/static/ZalandoSansSemiExpanded-ExtraBold.ttf")
@@ -197,7 +186,6 @@
   font-display: swap;
 }
 
-/* Black (900) */
 @font-face {
   font-family: "Zalando Sans Semi Expanded";
   src: url("/font/Zalando_Sans_SemiExpanded/static/ZalandoSansSemiExpanded-Black.ttf")
@@ -220,38 +208,117 @@
    Markazi Text Font (Arabic)
    ======================================== */
 
-/* Regular (400) */
 @font-face {
   font-family: "Markazi Text";
-  src: url("/font/static/MarkaziText-Regular.ttf") format("truetype");
+  src: url("/font/Markazi_Text/static/MarkaziText-Regular.ttf")
+    format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
-/* Medium (500) */
 @font-face {
   font-family: "Markazi Text";
-  src: url("/font/static/MarkaziText-Medium.ttf") format("truetype");
+  src: url("/font/Markazi_Text/static/MarkaziText-Medium.ttf")
+    format("truetype");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
-/* Semi Bold (600) */
 @font-face {
   font-family: "Markazi Text";
-  src: url("/font/static/MarkaziText-SemiBold.ttf") format("truetype");
+  src: url("/font/Markazi_Text/static/MarkaziText-SemiBold.ttf")
+    format("truetype");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 
-/* Bold (700) */
 @font-face {
   font-family: "Markazi Text";
-  src: url("/font/static/MarkaziText-Bold.ttf") format("truetype");
+  src: url("/font/Markazi_Text/static/MarkaziText-Bold.ttf") format("truetype");
   font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ========================================
+   Birthstone Font (Display / Calligraphy)
+   ======================================== */
+
+@font-face {
+  font-family: "Birthstone";
+  src: url("/font/Birthstone/Birthstone-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ========================================
+   Cairo Font (Arabic + Latin)
+   ======================================== */
+
+@font-face {
+  font-family: "Cairo";
+  src: url("/font/Cairo/static/Cairo-ExtraLight.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cairo";
+  src: url("/font/Cairo/static/Cairo-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cairo";
+  src: url("/font/Cairo/static/Cairo-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cairo";
+  src: url("/font/Cairo/static/Cairo-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cairo";
+  src: url("/font/Cairo/static/Cairo-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cairo";
+  src: url("/font/Cairo/static/Cairo-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cairo";
+  src: url("/font/Cairo/static/Cairo-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cairo";
+  src: url("/font/Cairo/static/Cairo-Black.ttf") format("truetype");
+  font-weight: 900;
   font-style: normal;
   font-display: swap;
 }

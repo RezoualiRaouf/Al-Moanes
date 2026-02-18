@@ -15,10 +15,11 @@ const translations = {
     arabic: "Arabic",
     english: "English",
 
-    //  Hero
+    // Hero
+    heroTitle: "Your companion in recitation",
     heroSubTitle:
       "Listen to beautiful Quran recitations from your favorite readers with access to over 250 trusted reciters and multiple recitations from across the Islamic world.",
-    ctaButton: "Install extation",
+    ctaButton: "Start Listening",
 
     // Recitaion
     selectReciter: "Select Reciter:",
@@ -89,9 +90,10 @@ const translations = {
     english: "الإنجليزية",
 
     //  Hero
+    heroTitle: "المؤنس رفيقك في التلاوة",
     heroSubTitle:
       "استمع إلى تلاوات قرآنية جميلة من قرائك المفضلين مع إمكانية الوصول إلى أكثر من 250 قارئًا موثوقًا به وتلاوات متعددة من جميع أنحاء العالم الإسلامي.",
-    ctaButton: "تحميل التطبيق",
+    ctaButton: "إبدأ في الإستماع",
 
     // Recitaion
     selectReciter: "إختر قارئ",
