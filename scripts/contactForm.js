@@ -2,23 +2,14 @@ import { update } from "lodash";
 import { isRTL } from "./audioPlayer";
 
 const CONFIG = {
-  // Email credentials
-  get EMAILJS_PUBLIC_KEY() {
-    return window.EMAIL_CONFIG?.EMAILJS_PUBLIC_KEY || "";
-  },
-  get EMAILJS_SERVICE_ID() {
-    return window.EMAIL_CONFIG?.EMAILJS_SERVICE_ID || "";
-  },
-  get EMAILJS_TEMPLATE_ID() {
-    return window.EMAIL_CONFIG?.EMAILJS_TEMPLATE_ID || "";
-  },
-  // Submission limits
+  EMAILJS_PUBLIC_KEY: process.env.EMAILJS_PUBLIC_KEY,
+  EMAILJS_SERVICE_ID: process.env.EMAILJS_SERVICE_ID,
+  EMAILJS_TEMPLATE_ID: process.env.EMAILJS_TEMPLATE_ID,
+  // rest of your config stays the same...
   MAX_SUBMISSIONS_PER_DAY: 2,
-  LOCK_DURATION_MS: 24 * 60 * 60 * 1000, // 24 hours
-  // Update intervals
-  HOUR_UPDATE_INTERVAL: 60 * 60 * 1000, // 1 hour
-  MINUTE_UPDATE_INTERVAL: 5 * 60 * 1000, // 5 minutes
-  // LocalStorage keys
+  LOCK_DURATION_MS: 24 * 60 * 60 * 1000,
+  HOUR_UPDATE_INTERVAL: 60 * 60 * 1000,
+  MINUTE_UPDATE_INTERVAL: 5 * 60 * 1000,
   STORAGE_KEYS: {
     LOCK_RESET_TIME: "contactForm_lockResetTime",
     DAILY_SUBMISSIONS: "contactForm_dailySubmissions",
