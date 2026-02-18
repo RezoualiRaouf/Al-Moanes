@@ -226,12 +226,13 @@ main.sidebar-hidden {
   gap: 0.5rem;
   padding: 0.5rem 1rem;
   border-radius: 6px;
-  position: relative;
   background: linear-gradient(var(--bg-hover), var(--bg-hover)) no-repeat;
   background-size: 0% 100%;
   background-position: left center;
   transition: all 0.3s ease;
   list-style: none;
+  position: relative;
+  cursor: pointer;
 }
 
 /* Exclude the dropdown li elements from hover effects */
@@ -250,6 +251,17 @@ main.sidebar-hidden {
   display: none;
 }
 
+.nav-links li::before,
+.nav-links li::after,
+.dropDown-btn::before,
+.dropDown-lang-btn::before,
+.dropDown-btn::after,
+.dropDown-lang-btn::after,
+.sub-menu button::before,
+.sub-menu button::after {
+  pointer-events: none; /* This makes clicks pass through to the link underneath */
+}
+
 .nav-links li:hover {
   background-size: 100% 100%;
   border-radius: 8px;
@@ -262,6 +274,11 @@ main.sidebar-hidden {
 }
 
 .nav-links a {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 2;
   color: var(--color-primary-light);
   text-decoration: none;
   align-items: center;

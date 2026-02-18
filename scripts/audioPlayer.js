@@ -3,6 +3,25 @@ const pauseIconUrl = new URL("../assets/pause-audio.svg", import.meta.url);
 const muteIconUrl = new URL("../assets/mute.svg", import.meta.url);
 const unmuteIconUrl = new URL("../assets/unmute.svg", import.meta.url);
 
+const prevSurahBtn = document.getElementById("prevSurahBtn");
+const downloadBtn = document.getElementById("downloadBtn");
+const loopBtn = document.getElementById("loopBtn");
+const nextSurahBtn = document.getElementById("nextSurahBtn");
+const audioPlayer = document.getElementById("audioPlayer");
+const playBtn = document.getElementById("playBtn");
+const playIcon = document.getElementById("playIcon");
+const muteBtn = document.getElementById("muteBtn");
+const muteBtnIcon = document.getElementById("muteBtnIcon");
+const skipSecBtn = document.getElementById("skipSecBtn");
+const prevSecBtn = document.getElementById("prevSecBtn");
+const progressBar = document.getElementById("progressBar");
+const surahCurrentTime = document.getElementById("surahCurrentTime");
+const surahDuration = document.getElementById("surahDuration");
+
+export const isRTL = () => {
+  return localStorage.getItem("language") === "ar";
+};
+
 function formatTime(seconds) {
   if (!isFinite(seconds) || seconds < 0) {
     return "00:00";
@@ -30,25 +49,6 @@ function resetPlayer() {
   surahDuration.innerText = "00:00";
   playIcon.src = playIconUrl.href;
 }
-
-const prevSurahBtn = document.getElementById("prevSurahBtn");
-const downloadBtn = document.getElementById("downloadBtn");
-const loopBtn = document.getElementById("loopBtn");
-const nextSurahBtn = document.getElementById("nextSurahBtn");
-const audioPlayer = document.getElementById("audioPlayer");
-const playBtn = document.getElementById("playBtn");
-const playIcon = document.getElementById("playIcon");
-const muteBtn = document.getElementById("muteBtn");
-const muteBtnIcon = document.getElementById("muteBtnIcon");
-const skipSecBtn = document.getElementById("skipSecBtn");
-const prevSecBtn = document.getElementById("prevSecBtn");
-const progressBar = document.getElementById("progressBar");
-const surahCurrentTime = document.getElementById("surahCurrentTime");
-const surahDuration = document.getElementById("surahDuration");
-
-export const isRTL = () => {
-  return localStorage.getItem("language") === "ar";
-};
 
 // ── Play/Pause Button ──
 playBtn.addEventListener("click", () => {
@@ -203,7 +203,6 @@ prevSurahBtn.addEventListener("click", () => {
 // ── Surah Nav Button State ──
 function updateSurahNavBtns() {
   const surahSelect = document.getElementById("surah");
-  // options.length > 1 means there are real surahs beyond the default placeholder
   const hasOptions = surahSelect.options.length > 1;
   prevSurahBtn.disabled = !hasOptions || surahSelect.selectedIndex <= 0;
   nextSurahBtn.disabled =
@@ -213,10 +212,8 @@ function updateSurahNavBtns() {
 // Update nav buttons when the user picks a surah from the dropdown
 document.getElementById("surah").addEventListener("change", updateSurahNavBtns);
 
-// Update nav buttons as soon as selects.js finishes populating the surah list
 window.addEventListener("surahListUpdated", updateSurahNavBtns);
 
-// ── Audio Ended: reset icon, auto-advance, update nav buttons ──
 audioPlayer.addEventListener("ended", () => {
   playIcon.src = playIconUrl.href;
 

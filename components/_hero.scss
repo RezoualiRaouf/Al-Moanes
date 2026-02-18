@@ -5,7 +5,7 @@
   padding-block: 32px;
   padding-inline: 20px;
   align-items: center;
-  margin-block: 36px 48px;
+  margin-block: 140px 190px;
 }
 
 .hero__content {
@@ -153,7 +153,7 @@ html[dir="rtl"] .hero__btn {
   }
 }
 
-@media (min-width: 768px) {
+@media (max-width: 768px) {
   .hero__section {
     gap: 40px;
     padding-block: 48px;
@@ -184,13 +184,18 @@ html[dir="rtl"] .hero__btn {
   }
 }
 
+@media (max-width: 1024px) {
+  .hero__section {
+    margin-top: 80px;
+  }
+}
+
 @media (min-width: 1024px) {
   .hero__section {
     grid-template-columns: repeat(2, 1fr);
     gap: 72px;
     padding-inline: 80px;
     padding-inline-start: 140px;
-    margin-block: 60px 100px;
   }
 
   .hero__content {
