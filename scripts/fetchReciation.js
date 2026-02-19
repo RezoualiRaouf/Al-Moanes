@@ -1,9 +1,13 @@
 const playIconUrl = new URL("../assets/play-audio.svg", import.meta.url);
 const playIcon = document.getElementById("playIcon");
-const reciterSelect = document.getElementById("reciter");
 const narrationSelect = document.getElementById("narration");
 const surahSelect = document.getElementById("surah");
 const audioPlayer = document.getElementById("audioPlayer");
+
+// Custom reciter search elements
+const reciterSearchInput = document.getElementById("reciterSearchInput");
+const reciterList = document.getElementById("reciterList");
+const reciterSearchWrapper = document.getElementById("reciterSearchWrapper");
 
 window.currentUserSelect = {
   reciterID: "",
@@ -14,15 +18,23 @@ window.currentUserSelect = {
 
 const defaultOptions = {
   en: {
-    reciter: `<option value="">Select reciter</option>`,
     narration: `<option value="">Select narration</option>`,
     surah: `<option value="">Select surah</option>`,
   },
   ar: {
-    reciter: `<option value="">إختر قارئ</option>`,
     narration: `<option value="">إختر المصحف</option>`,
     surah: `<option value="">إختر السورة</option>`,
   },
+};
+
+const searchPlaceholders = {
+  en: "Search reciter...",
+  ar: "ابحث عن قارئ...",
+};
+
+const emptyMessages = {
+  en: "No results found",
+  ar: "لا يوجد نتائج",
 };
 
 let allReciters = [];
@@ -35,12 +47,155 @@ function isEmptyValue(v) {
   );
 }
 
-// Inserts default options in dropdowns
+// ── Custom Reciter Search Dropdown ──────────────────────────────────────────
+
+function buildReciterList(reciters) {
+  reciterList.innerHTML = "";
+
+  if (reciters.length === 0) {
+    const li = document.createElement("li");
+    li.className = "reciter-search__item reciter-search__item--empty";
+    li.textContent = emptyMessages[lang] || emptyMessages.en;
+    reciterList.appendChild(li);
+    return;
+  }
+
+  reciters.forEach((reciter) => {
+    const li = document.createElement("li");
+    li.className = "reciter-search__item";
+
+    // Highlight matching text
+    const query = reciterSearchInput.value.trim();
+    if (query) {
+      const regex = new RegExp(
+        `(${query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`,
+        "gi",
+      );
+      li.innerHTML = reciter.name.replace(
+        regex,
+        `<mark class="reciter-search__highlight">$1</mark>`,
+      );
+    } else {
+      li.textContent = reciter.name;
+    }
+
+    li.dataset.id = reciter.id;
+    li.dataset.name = reciter.name;
+
+    // Use mousedown so it fires before blur closes the list
+    li.addEventListener("mousedown", (e) => {
+      e.preventDefault();
+      selectReciter(reciter);
+    });
+
+    reciterList.appendChild(li);
+  });
+}
+
+function showReciterList(reciters) {
+  buildReciterList(reciters);
+  reciterList.hidden = false;
+}
+
+function hideReciterList() {
+  reciterList.hidden = true;
+}
+
+function selectReciter(reciter) {
+  reciterSearchInput.value = reciter.name;
+  reciterSearchInput.dataset.selectedId = reciter.id;
+  hideReciterList();
+  currentUserSelect.reciterID = reciter.id;
+  onReciterSelected(reciter.id);
+  // Auto-focus narration after a tick so the DOM has updated
+  setTimeout(() => narrationSelect.focus(), 50);
+}
+
+function filterReciters() {
+  const query = reciterSearchInput.value.trim().toLowerCase();
+  // Clear selection if user edits after selecting
+  reciterSearchInput.dataset.selectedId = "";
+
+  const filtered = query
+    ? allReciters.filter((r) => r.name.toLowerCase().includes(query))
+    : allReciters;
+
+  showReciterList(filtered);
+}
+
+reciterSearchInput.addEventListener("input", filterReciters);
+
+reciterSearchInput.addEventListener("focus", () => {
+  const query = reciterSearchInput.value.trim().toLowerCase();
+  const filtered = query
+    ? allReciters.filter((r) => r.name.toLowerCase().includes(query))
+    : allReciters;
+  showReciterList(filtered);
+});
+
+reciterSearchInput.addEventListener("blur", () => {
+  // Delay to allow mousedown on list items to fire first
+  setTimeout(hideReciterList, 160);
+});
+
+// Close dropdown when clicking outside the wrapper
+document.addEventListener("click", (e) => {
+  if (!e.target.closest("#reciterSearchWrapper")) {
+    hideReciterList();
+  }
+});
+
+// Keyboard navigation
+reciterSearchInput.addEventListener("keydown", (e) => {
+  if (reciterList.hidden) return;
+
+  const items = reciterList.querySelectorAll(
+    ".reciter-search__item:not(.reciter-search__item--empty)",
+  );
+  const active = reciterList.querySelector(".reciter-search__item--active");
+  let idx = Array.from(items).indexOf(active);
+
+  if (e.key === "ArrowDown") {
+    e.preventDefault();
+    if (active) active.classList.remove("reciter-search__item--active");
+    idx = (idx + 1) % items.length;
+    items[idx]?.classList.add("reciter-search__item--active");
+    items[idx]?.scrollIntoView({ block: "nearest" });
+  } else if (e.key === "ArrowUp") {
+    e.preventDefault();
+    if (active) active.classList.remove("reciter-search__item--active");
+    idx = (idx - 1 + items.length) % items.length;
+    items[idx]?.classList.add("reciter-search__item--active");
+    items[idx]?.scrollIntoView({ block: "nearest" });
+  } else if (e.key === "Enter") {
+    e.preventDefault();
+    if (active) {
+      const id = active.dataset.id;
+      const name = active.dataset.name;
+      selectReciter({ id, name });
+    }
+  } else if (e.key === "Escape") {
+    hideReciterList();
+    reciterSearchInput.blur();
+  }
+});
+
+// ── Helpers ─────────────────────────────────────────────────────────────────
+
 const setDefaults = (dropDown, key) => {
   dropDown.innerHTML = defaultOptions[lang][key];
 };
 
-// Fetch Surah Names from API
+const resetReciterSearch = (clearInput = true) => {
+  if (clearInput) {
+    reciterSearchInput.value = "";
+    reciterSearchInput.dataset.selectedId = "";
+  }
+  hideReciterList();
+};
+
+// ── Fetch Data ───────────────────────────────────────────────────────────────
+
 async function fetchSurahNames() {
   try {
     const surahAPI = `https://mp3quran.net/api/v3/suwar?language=${lang}`;
@@ -53,48 +208,31 @@ async function fetchSurahNames() {
   }
 }
 
-// Fetch Reciters from API
 async function fetchReciters() {
   try {
     const res = await fetch(
       `https://www.mp3quran.net/api/v3/reciters?language=${lang}`,
     );
     const data = await res.json();
-
-    // Save data
     allReciters = data.reciters;
-
-    // Fill reciter dropdown
-    reciterSelect.innerHTML =
-      defaultOptions[lang]["reciter"] +
-      data.reciters
-        .map((r) => `<option value="${r.id}">${r.name}</option>`)
-        .join("");
   } catch (error) {
     console.error("Error fetching reciters:", error);
   }
 }
 
-// Handle reciter selection change
-function onReciterChange(e) {
-  const reciterId = e.target.value;
+// ── Reciter Selected ─────────────────────────────────────────────────────────
 
-  // Catch if user chooses a default value
+function onReciterSelected(reciterId) {
   if (!reciterId) {
-    narrationSelect.innerHTML = defaultOptions[lang]["narration"];
-    surahSelect.innerHTML = defaultOptions[lang]["surah"];
+    setDefaults(narrationSelect, "narration");
+    setDefaults(surahSelect, "surah");
     return;
   }
 
-  // Find selected reciter
   const selectedReciter = allReciters.find((r) => r.id == reciterId);
   if (!selectedReciter) return;
 
-  // store user selected reciter id
-  currentUserSelect.reciterID = selectedReciter.id;
-
   if (selectedReciter.moshaf.length > 1) {
-    // Fill narration dropdown with default value + narrations
     narrationSelect.innerHTML =
       defaultOptions[lang]["narration"] +
       selectedReciter.moshaf
@@ -103,41 +241,36 @@ function onReciterChange(e) {
             `<option value="${m.id}" data-server="${m.server}" data-surahlist="${m.surah_list}">${m.name}</option>`,
         )
         .join("");
-    // Set surah options to default when the reciter is changed
-    surahSelect.innerHTML = defaultOptions[lang]["surah"];
+    setDefaults(surahSelect, "surah");
+    // narration already focused by selectReciter(); nothing extra needed
   } else {
-    // Fill narration dropdown with the only narration available
     narrationSelect.innerHTML = selectedReciter.moshaf
       .map(
         (m) =>
           `<option value="${m.id}" data-server="${m.server}" data-surahlist="${m.surah_list}">${m.name}</option>`,
       )
       .join("");
-    // Set surah options to default when the reciter is changed
-    surahSelect.innerHTML = defaultOptions[lang]["surah"];
-    onNarrationChange();
+    setDefaults(surahSelect, "surah");
+    // Only one narration — populate surahs and jump straight to surah select
+    onNarrationChange({ autoFocus: true });
   }
 }
 
-// Handle narration selection change
-function onNarrationChange() {
-  // Set surah options to default when the narration is changed
-  surahSelect.innerHTML = defaultOptions[lang]["surah"];
+// ── Narration Change ─────────────────────────────────────────────────────────
 
-  // Get selected narration element
+function onNarrationChange({ autoFocus = false } = {}) {
+  setDefaults(surahSelect, "surah");
+
   const selectedNarration =
     narrationSelect.options[narrationSelect.selectedIndex];
 
   if (!selectedNarration || !selectedNarration.value) return;
 
-  // store user selected narration id
   currentUserSelect.narrationID = selectedNarration.value;
 
-  // Get data from that option
   const surahServer = selectedNarration.dataset.server;
   let surahList = selectedNarration.dataset.surahlist;
 
-  // Get suwar names from the fetchSurahNames()
   if (!surahData || !surahData.suwar) {
     console.error("Surah data not loaded");
     return;
@@ -145,9 +278,8 @@ function onNarrationChange() {
 
   const surahNames = surahData.suwar;
   surahList = surahList.split(",");
-  const reciterName = reciterSelect.options[reciterSelect.selectedIndex].text;
+  const reciterName = reciterSearchInput.value;
 
-  // Load surahs with server id and name
   surahList.forEach((surah) => {
     surahNames.forEach((surahName) => {
       if (surahName.id == surah) {
@@ -157,12 +289,15 @@ function onNarrationChange() {
     });
   });
 
-  // Notify player.js that the surah list has been populated
   window.dispatchEvent(new CustomEvent("surahListUpdated"));
+
+  // Auto-focus surah: always when narration changes or when called with autoFocus flag
+  setTimeout(() => surahSelect.focus(), 50);
 }
 
-// Load selected surah audio
-function fetchSurah(e) {
+// ── Surah Change ─────────────────────────────────────────────────────────────
+
+function fetchSurah() {
   const selectedSurah = surahSelect.options[surahSelect.selectedIndex];
 
   if (!selectedSurah || !selectedSurah.value || selectedSurah.value === "") {
@@ -173,26 +308,25 @@ function fetchSurah(e) {
   audioPlayer.src = selectedSurah.value;
   audioPlayer.load();
 
-  // store user selected surah server after loading
   currentUserSelect.surahServer = selectedSurah.value;
   currentUserSelect.surahID = selectedSurah.id;
-  // store user selections to load next time
   localStorage.setItem("quranSelections", JSON.stringify(currentUserSelect));
 }
 
-// Initialize data - fetch surah names and reciters
+// ── Initialize ───────────────────────────────────────────────────────────────
+
 async function initializeData() {
-  // Update lang variable from current language
   lang = localStorage.getItem("language") || "en";
 
-  // Set default options in dropdowns
-  setDefaults(reciterSelect, "reciter");
+  reciterSearchInput.placeholder =
+    searchPlaceholders[lang] || searchPlaceholders.en;
+  resetReciterSearch(true);
   setDefaults(narrationSelect, "narration");
   setDefaults(surahSelect, "surah");
 
-  // Fetch data
   surahData = await fetchSurahNames();
   await fetchReciters();
+
   const saved = localStorage.getItem("quranSelections");
   if (saved) {
     Object.assign(currentUserSelect, JSON.parse(saved));
@@ -201,20 +335,20 @@ async function initializeData() {
 }
 
 async function loadPrevSelect() {
-  // Only restore if user has made selections
   if (!currentUserSelect.reciterID) return;
 
   try {
     const api = `https://www.mp3quran.net/api/v3/reciters?language=${lang}&reciter=${currentUserSelect.reciterID}`;
     const res = await fetch(api);
     const data = await res.json();
-    const reciter = data.reciters[0];
     if (!data.reciters || !data.reciters[0]) return;
+    const reciter = data.reciters[0];
 
-    // Set reciter dropdown value
-    reciterSelect.value = currentUserSelect.reciterID;
+    // Restore search input with reciter name
+    reciterSearchInput.value = reciter.name;
+    reciterSearchInput.dataset.selectedId = reciter.id;
 
-    // Populate and set narration dropdown
+    // Populate narration dropdown
     if (reciter.moshaf.length > 1) {
       narrationSelect.innerHTML =
         defaultOptions[lang]["narration"] +
@@ -228,7 +362,7 @@ async function loadPrevSelect() {
       narrationSelect.innerHTML = reciter.moshaf
         .map(
           (m) =>
-            `<option value="${m.id}" data-server="${m.server}"  data-surahlist="${m.surah_list}">${m.name}</option>`,
+            `<option value="${m.id}" data-server="${m.server}" data-surahlist="${m.surah_list}">${m.name}</option>`,
         )
         .join("");
     }
@@ -251,44 +385,43 @@ async function loadPrevSelect() {
       });
     });
 
-    // Set surah dropdown value
     surahSelect.value = currentUserSelect.surahServer;
     audioPlayer.src = currentUserSelect.surahServer;
 
-    // Notify player.js that the surah list has been populated
     window.dispatchEvent(new CustomEvent("surahListUpdated"));
   } catch (error) {
     console.error("Error loading previous selections:", error);
   }
 }
 
-// Refresh data when language changes
+// ── Language Change ───────────────────────────────────────────────────────────
+
 async function onLanguageChange(event) {
-  // Update lang variable
   lang = event.detail.lang;
 
-  // Pause audio if playing
+  // Update placeholder for the new language
+  reciterSearchInput.placeholder =
+    searchPlaceholders[lang] || searchPlaceholders.en;
+
   if (audioPlayer) {
     audioPlayer.pause();
     playIcon.src = playIconUrl.href;
   }
 
   await initializeData();
+
   let anyEmpty = Object.values(currentUserSelect).some(isEmptyValue);
   if (!anyEmpty) {
     loadPrevSelect();
   }
 }
 
-// Event listeners for dropdowns
-reciterSelect.addEventListener("change", onReciterChange);
+// ── Event Listeners ──────────────────────────────────────────────────────────
+
 narrationSelect.addEventListener("change", onNarrationChange);
 surahSelect.addEventListener("change", fetchSurah);
-
-// Listen for language change events from languageSwitcher.js
 window.addEventListener("languageChanged", onLanguageChange);
 
-// initialize when DOM is loaded
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initializeData);
 } else {

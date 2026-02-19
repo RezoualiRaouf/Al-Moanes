@@ -1,94 +1,137 @@
-const sidebar = document.getElementById("sideBar");
-const main = document.querySelector("main");
-const toggleBtn = document.querySelector(".sidebar-toggle");
-
-// Sidebar Toggle
-document.addEventListener("DOMContentLoaded", function () {
-  // Check if there's a saved state in localStorage
-  const sidebarState = localStorage.getItem("sidebarState");
-  if (sidebarState === "hidden") {
-    sidebar.classList.add("hidden");
-    main.classList.add("sidebar-hidden");
-    toggleBtn.classList.add("collapsed");
-  }
-
-  // Toggle sidebar on button click
-  if (toggleBtn) {
-    toggleBtn.addEventListener("click", function () {
-      sidebar.classList.toggle("hidden");
-      main.classList.toggle("sidebar-hidden");
-      toggleBtn.classList.toggle("collapsed");
-
-      // Save state
-      if (sidebar.classList.contains("hidden")) {
-        localStorage.setItem("sidebarState", "hidden");
-      } else {
-        localStorage.setItem("sidebarState", "visible");
-      }
-    });
-  }
-});
-
-// Handle all dropdown buttons in the sidebar
-const dropdownButtons = document.querySelectorAll(
-  ".dropDown-btn, .dropDown-lang-btn",
-);
-
-// Open current dropDown and close the other if open
-dropdownButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const parentLi = button.closest("li");
-    const submenu = parentLi.querySelector(".sub-menu");
-    const arrow = button.querySelector(".dropDone-arrow");
-
-    submenu.classList.toggle("show");
-    arrow.classList.toggle("rotate");
-
-    dropdownButtons.forEach((otherButton) => {
-      if (otherButton !== button) {
-        const otherParentLi = otherButton.closest("li");
-        const otherSubmenu = otherParentLi.querySelector(".sub-menu");
-        const otherArrow = otherButton.querySelector(".dropDone-arrow");
-
-        otherSubmenu.classList.remove("show");
-        otherArrow.classList.remove("rotate");
-      }
-    });
-  });
-});
-
-// Close dropdowns when clicking outside
-document.addEventListener("click", (event) => {
-  const isDropdownButton = event.target.closest(
+(function () {
+  const sideBar = document.getElementById("sideBar");
+  const sidebarToggle = document.querySelector(".sidebar-toggle");
+  const mainEl = document.querySelector("main");
+  const dropdownBtns = document.querySelectorAll(
     ".dropDown-btn, .dropDown-lang-btn",
   );
-  const isSubmenu = event.target.closest(".sub-menu");
+  const backToTop = document.querySelector(".back_to_top");
 
-  if (!isDropdownButton && !isSubmenu) {
-    dropdownButtons.forEach((button) => {
-      const parentLi = button.closest("li");
-      const submenu = parentLi.querySelector(".sub-menu");
-      const arrow = button.querySelector(".dropDone-arrow");
-
-      submenu.classList.remove("show");
-      arrow.classList.remove("rotate");
+  function setSubMenuTabIndex(subMenu, reachable) {
+    const focusables = subMenu.querySelectorAll(
+      'a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])',
+    );
+    focusables.forEach((el) => {
+      el.setAttribute("tabindex", reachable ? "0" : "-1");
     });
   }
-});
 
-const backToTopButton = document.querySelector(".back_to_top");
-
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 300) {
-    backToTopButton.classList.add("show");
-  } else {
-    backToTopButton.classList.remove("show");
+  function openSubMenu(btn, subMenu, arrow) {
+    subMenu.classList.add("show");
+    if (arrow) arrow.classList.add("rotate");
+    btn.setAttribute("aria-expanded", "true");
+    setSubMenuTabIndex(subMenu, true);
   }
-});
 
-backToTopButton.addEventListener("click", () => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth",
+  function closeSubMenu(btn, subMenu, arrow) {
+    subMenu.classList.remove("show");
+    if (arrow) arrow.classList.remove("rotate");
+    btn.setAttribute("aria-expanded", "false");
+    setSubMenuTabIndex(subMenu, false);
+  }
+
+  document.querySelectorAll(".sub-menu").forEach((subMenu) => {
+    setSubMenuTabIndex(subMenu, false);
   });
-});
+
+  dropdownBtns.forEach((btn) => {
+    const subMenu =
+      btn.closest("li")?.querySelector(".sub-menu") ?? btn.nextElementSibling;
+    const arrow = btn.querySelector(".dropDone-arrow");
+
+    if (!subMenu) return;
+
+    btn.setAttribute("aria-expanded", "false");
+    btn.setAttribute("aria-haspopup", "true");
+
+    btn.addEventListener("click", () => {
+      const isOpen = subMenu.classList.contains("show");
+      if (isOpen) {
+        closeSubMenu(btn, subMenu, arrow);
+      } else {
+        dropdownBtns.forEach((otherBtn) => {
+          if (otherBtn === btn) return;
+          const otherSub =
+            otherBtn.closest("li")?.querySelector(".sub-menu") ??
+            otherBtn.nextElementSibling;
+          const otherArrow = otherBtn.querySelector(".dropDone-arrow");
+          if (otherSub?.classList.contains("show")) {
+            closeSubMenu(otherBtn, otherSub, otherArrow);
+          }
+        });
+        openSubMenu(btn, subMenu, arrow);
+      }
+    });
+
+    subMenu.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        closeSubMenu(btn, subMenu, arrow);
+        btn.focus();
+      }
+    });
+  });
+
+  if (sidebarToggle && sideBar && mainEl) {
+    // Restore last state from localStorage
+    const savedHidden = localStorage.getItem("sidebarHidden") === "true";
+    if (savedHidden) {
+      sideBar.classList.add("hidden");
+      mainEl.classList.add("sidebar-hidden");
+      sidebarToggle.classList.add("collapsed");
+    }
+
+    sidebarToggle.addEventListener("click", () => {
+      const isHidden = sideBar.classList.contains("hidden");
+
+      if (isHidden) {
+        // Show sidebar
+        sideBar.classList.remove("hidden");
+        mainEl.classList.remove("sidebar-hidden");
+        sidebarToggle.classList.remove("collapsed");
+        localStorage.setItem("sidebarHidden", "false");
+      } else {
+        // Hide sidebar
+        sideBar.classList.add("hidden");
+        mainEl.classList.add("sidebar-hidden");
+        sidebarToggle.classList.add("collapsed");
+        localStorage.setItem("sidebarHidden", "true");
+      }
+    });
+  }
+
+  if (backToTop) {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 300) {
+        backToTop.classList.add("show");
+      } else {
+        backToTop.classList.remove("show");
+      }
+    });
+
+    backToTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    // Keyboard support for the back-to-top button
+    backToTop.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    });
+  }
+
+  document.addEventListener("click", (e) => {
+    if (sideBar && !sideBar.contains(e.target)) {
+      dropdownBtns.forEach((btn) => {
+        const subMenu =
+          btn.closest("li")?.querySelector(".sub-menu") ??
+          btn.nextElementSibling;
+        const arrow = btn.querySelector(".dropDone-arrow");
+        if (subMenu?.classList.contains("show")) {
+          closeSubMenu(btn, subMenu, arrow);
+        }
+      });
+    }
+  });
+})();

@@ -170,10 +170,22 @@
         <section id="recitation" class="listen__section">
           <!-- Reciter Dropdown -->
           <div class="listen__card">
-            <label for="reciter" class="listen__label" data-i18n="selectReciter"
+            <label for="reciterSearchInput" class="listen__label" data-i18n="selectReciter"
               >Select Reciter:</label
             >
-            <select id="reciter" class="listen__select"></select>
+            <div class="reciter-search" id="reciterSearchWrapper">
+              <div class="reciter-search__input-wrap">
+                <input
+                  type="text"
+                  id="reciterSearchInput"
+                  class="listen__select reciter-search__input"
+                  placeholder="Search reciter..."
+                  autocomplete="off"
+                  spellcheck="false"
+                />
+              </div>
+              <ul class="reciter-search__list" id="reciterList" hidden></ul>
+            </div>
           </div>
 
           <!-- Narration Dropdown -->
