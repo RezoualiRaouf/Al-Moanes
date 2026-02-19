@@ -1,9 +1,7 @@
 {
   "devDependencies": {
     "@parcel/transformer-sass": "^2.16.3",
-    "autoprefixer": "^10.4.23",
-    "parcel": "^2.16.3",
-    "parcel-namer-rewrite": "^2.0.0-rc.3"
+    "parcel": "^2.16.3"
   },
   "scripts": {
     "dev": "parcel index.html",
