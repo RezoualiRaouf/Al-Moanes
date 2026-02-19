@@ -4,7 +4,7 @@ const CONFIG = {
   EMAILJS_PUBLIC_KEY: process.env.EMAILJS_PUBLIC_KEY,
   EMAILJS_SERVICE_ID: process.env.EMAILJS_SERVICE_ID,
   EMAILJS_TEMPLATE_ID: process.env.EMAILJS_TEMPLATE_ID,
-  // rest of your config stays the same...
+
   MAX_SUBMISSIONS_PER_DAY: 2,
   LOCK_DURATION_MS: 24 * 60 * 60 * 1000,
   HOUR_UPDATE_INTERVAL: 60 * 60 * 1000,
