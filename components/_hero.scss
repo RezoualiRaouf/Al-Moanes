@@ -122,12 +122,19 @@ html[dir="rtl"] .hero__btn {
   flex-direction: row-reverse;
 }
 
+@media (max-width: 1024px) {
+  .hero__section {
+    margin-block: 48px 120px;
+  }
+}
+
 @media (max-width: 400px) {
   .hero__section {
     gap: 20px;
     padding-block: 24px;
     padding-inline: 16px;
     margin-block: 28px 36px;
+    margin-top: 40px;
   }
 
   .hero__title {
@@ -184,12 +191,6 @@ html[dir="rtl"] .hero__btn {
   }
 }
 
-@media (max-width: 1024px) {
-  .hero__section {
-    margin-top: 80px;
-  }
-}
-
 @media (min-width: 1024px) {
   .hero__section {
     grid-template-columns: repeat(2, 1fr);
@@ -229,7 +230,7 @@ html[dir="rtl"] .hero__btn {
 @media (min-width: 1280px) {
   .hero__section {
     gap: 96px;
-    padding-inline-start: 180px;
+    padding-inline-start: 280px;
   }
 }
 

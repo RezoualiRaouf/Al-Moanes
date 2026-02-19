@@ -124,6 +124,7 @@ html[dir="rtl"] .tooltip-content {
     z-index: 9999;
     opacity: 0;
     visibility: hidden;
+    isolation: isolate;
   }
 
   .tooltip-trigger:hover + .tooltip-content,
