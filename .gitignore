@@ -133,6 +133,3 @@ dist
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
-
-# EmailJS Configuration
-config.js

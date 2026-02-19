@@ -16,10 +16,9 @@
   padding: 32px;
   border-radius: 12px;
   border: 2px solid var(--bg-hover);
-  box-sizing: border-box; /* Added */
+  box-sizing: border-box;
 }
 
-/* Contact Info */
 .contact__info {
   display: flex;
   flex-direction: column;
@@ -45,7 +44,6 @@
   padding-left: 10px;
 }
 
-/* Contribution Links */
 .contribute__links {
   display: flex;
   flex-direction: column;
@@ -97,15 +95,14 @@
   color: var(--color-primary);
 }
 
-/* Contact Form Wrapper - FIXED */
 .contact__form_wrapper {
   background: transparent;
-  padding: 24px; /* Reduced from 32px for small screens */
+  padding: 24px;
   border-radius: 12px;
   border: 2px solid var(--color-primary-light);
-  box-sizing: border-box; /* Added */
-  width: 100%; /* Added */
-  max-width: 100%; /* Added */
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
 }
 
 .contact__form_header {
@@ -130,19 +127,17 @@
   gap: 16px;
 }
 
-/* Form Group - FIXED */
 .form__group {
   display: flex;
   flex-direction: column;
-  width: 100%; /* Added */
-  max-width: 100%; /* Added */
-  box-sizing: border-box; /* Added */
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
-/* Form Input - FIXED */
 .form__input {
   width: 100%;
-  max-width: 100%; /* Added to prevent overflow */
+  max-width: 100%;
   padding: 12px 16px;
   font-family: var(--font-body);
   font-size: 1rem;
@@ -152,7 +147,7 @@
   border-radius: 8px;
   transition: all 0.3s ease;
   outline: none;
-  box-sizing: border-box; /* Added - THIS IS CRITICAL */
+  box-sizing: border-box;
 }
 
 .form__input::placeholder {
@@ -216,7 +211,6 @@
   flex-shrink: 0;
 }
 
-/* Responsive Design */
 @media (min-width: 1024px) {
   .contact__section {
     padding: 100px 60px;
@@ -228,7 +222,7 @@
   }
 
   .contact__form_wrapper {
-    padding: 40px; /* Restored larger padding for desktop */
+    padding: 40px;
   }
 }
 
@@ -248,7 +242,7 @@
   }
 
   .contact__form_wrapper {
-    padding: 32px; /* Moderate padding for tablet */
+    padding: 32px;
   }
 }
 
@@ -266,17 +260,16 @@
   }
 
   .contact__form_wrapper {
-    padding: 20px; /* Even smaller padding for mobile */
+    padding: 20px;
   }
 
   .popup-content {
     padding: 32px 24px;
   }
 
-  /* Extra small screens - make inputs even more compact */
   .form__input {
     padding: 10px 12px;
-    font-size: 0.9375rem; /* 15px */
+    font-size: 0.9375rem;
   }
 
   .contact__form_title {
@@ -284,12 +277,10 @@
   }
 }
 
-/* RTL Support */
 html[dir="rtl"] .contribute__link:hover {
   transform: translateX(-4px);
 }
 
-// revers fund icon in RTL
 html[dir="rtl"] .contribute__link:first-child img {
   transform: scaleX(-1);
 }
@@ -303,7 +294,6 @@ html[dir="rtl"] .contact__description {
   padding-right: 10px;
 }
 
-/* Mobile Bottom Navigation Bar */
 .mobile-nav {
   display: none;
   position: fixed;
@@ -381,7 +371,6 @@ html[dir="rtl"] .contact__description {
   opacity: 1;
 }
 
-// Mobile Menu Overlay
 .mobile-menu-overlay {
   display: none;
   position: fixed;
@@ -483,16 +472,7 @@ html[dir="rtl"] .contact__description {
   font-family: var(--font-sans);
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-/* Hide sidebar on mobile, show bottom nav */
+/* Hide sidebar on mobile */
 @media (max-width: 767px) {
   #sideBar {
     transform: translateX(-100%);
