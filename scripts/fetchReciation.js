@@ -47,7 +47,7 @@ function isEmptyValue(v) {
   );
 }
 
-// ── Custom Reciter Search Dropdown ──────────────────────────────────────────
+// Search Dropdown
 
 function buildReciterList(reciters) {
   reciterList.innerHTML = "";
@@ -180,8 +180,6 @@ reciterSearchInput.addEventListener("keydown", (e) => {
   }
 });
 
-// ── Helpers ─────────────────────────────────────────────────────────────────
-
 const setDefaults = (dropDown, key) => {
   dropDown.innerHTML = defaultOptions[lang][key];
 };
@@ -194,7 +192,7 @@ const resetReciterSearch = (clearInput = true) => {
   hideReciterList();
 };
 
-// ── Fetch Data ───────────────────────────────────────────────────────────────
+// Fetch Data
 
 async function fetchSurahNames() {
   try {
@@ -220,7 +218,7 @@ async function fetchReciters() {
   }
 }
 
-// ── Reciter Selected ─────────────────────────────────────────────────────────
+// Reciter Selected
 
 function onReciterSelected(reciterId) {
   if (!reciterId) {
@@ -256,7 +254,7 @@ function onReciterSelected(reciterId) {
   }
 }
 
-// ── Narration Change ─────────────────────────────────────────────────────────
+// Narration Change
 
 function onNarrationChange({ autoFocus = false } = {}) {
   setDefaults(surahSelect, "surah");
@@ -295,7 +293,7 @@ function onNarrationChange({ autoFocus = false } = {}) {
   setTimeout(() => surahSelect.focus(), 50);
 }
 
-// ── Surah Change ─────────────────────────────────────────────────────────────
+// Surah Change
 
 function fetchSurah() {
   const selectedSurah = surahSelect.options[surahSelect.selectedIndex];
@@ -313,7 +311,7 @@ function fetchSurah() {
   localStorage.setItem("quranSelections", JSON.stringify(currentUserSelect));
 }
 
-// ── Initialize ───────────────────────────────────────────────────────────────
+// Initialize
 
 async function initializeData() {
   lang = localStorage.getItem("language") || "en";
@@ -394,7 +392,7 @@ async function loadPrevSelect() {
   }
 }
 
-// ── Language Change ───────────────────────────────────────────────────────────
+// Language Change
 
 async function onLanguageChange(event) {
   lang = event.detail.lang;
@@ -416,7 +414,7 @@ async function onLanguageChange(event) {
   }
 }
 
-// ── Event Listeners ──────────────────────────────────────────────────────────
+// Event Listeners
 
 narrationSelect.addEventListener("change", onNarrationChange);
 surahSelect.addEventListener("change", fetchSurah);
