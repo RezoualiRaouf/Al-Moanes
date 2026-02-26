@@ -1,17 +1,18 @@
 <p align="center">
-  <img src="./assets/Al-Moanes-mini-logo.png" alt="Al-Moanes logo" width="350"/>
-</p>
+  <img src="./assets/Al-Moanes-mini-logo.png" alt="Al-Moanes logo" width="350"/><br/>
 
-<p align="center">
-    <a href="https://github.com/RezoualiRaouf/Al-Moanes/stargazers">
+  <!-- badges -->
+  <a href="https://github.com/RezoualiRaouf/Al-Moanes/stargazers">
     <img src="https://img.shields.io/github/stars/RezoualiRaouf/Al-Moanes?style=social" alt="GitHub Stars" />
-  
+  </a>
   <a href="./LICENSE">
     <img src="https://img.shields.io/badge/license-MIT-green" alt="MIT License" />
   </a>
-  <a href="https://techforpalestine.org/">
-    <img src="https://img.shields.io/badge/🇵🇸%20Tech%20For%20Palestine-black?style=flat" alt="Tech For Palestine" />
-  </a>
+</p>
+
+<p align="center">
+  <strong>Live site:</strong> <a href="https://al-moanes.netlify.app">al-moanes.netlify.app</a> &nbsp; • &nbsp;
+  <strong>Android APK:</strong> <a href="https://github.com/RezoualiRaouf/Al-Moanes/releases">Download from Releases</a>
 </p>
 
 ---
