@@ -36,7 +36,7 @@ async function handleSubscription(e) {
       body: JSON.stringify({ email }),
     });
     emailInput.value = "";
-    setButtonState(submitButton, "success", "✓ Subscribed!");
+    setButtonState(submitButton, "success", "Subscribed!");
   } catch {
     setButtonState(submitButton, "error", "Try again");
   } finally {
