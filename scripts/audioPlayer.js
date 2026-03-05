@@ -50,7 +50,7 @@ function resetPlayer() {
   playIcon.src = playIconUrl.href;
 }
 
-// ── Play/Pause Button ──
+// Play/Pause Button
 playBtn.addEventListener("click", () => {
   if (audioPlayer.paused) {
     audioPlayer.play();
@@ -61,13 +61,13 @@ playBtn.addEventListener("click", () => {
   }
 });
 
-// ── Mute/Unmute Button ──
+// Mute/Unmute Button
 muteBtn.addEventListener("click", () => {
   audioPlayer.muted = !audioPlayer.muted;
   muteBtnIcon.src = audioPlayer.muted ? muteIconUrl.href : unmuteIconUrl.href;
 });
 
-// ── Update Progress Bar and Time Display ──
+// Update Progress Bar and Time Display
 audioPlayer.addEventListener("timeupdate", () => {
   if (isFinite(audioPlayer.duration)) {
     let percentage = (audioPlayer.currentTime / audioPlayer.duration) * 100;
@@ -77,18 +77,18 @@ audioPlayer.addEventListener("timeupdate", () => {
   }
 });
 
-// ── Reset when new audio starts loading ──
+// Reset when new audio starts loading
 audioPlayer.addEventListener("loadstart", () => {
   resetPlayer();
 });
 
-// ── Update duration when metadata is loaded ──
+// Update duration when metadata is loaded
 audioPlayer.addEventListener("loadedmetadata", () => {
   surahDuration.innerText = formatTime(audioPlayer.duration);
   progressBar.value = 0;
 });
 
-// ── Skip Forward 10 Seconds ──
+// Skip Forward 10 Seconds
 skipSecBtn.addEventListener("click", () => {
   if (isRTL()) {
     audioPlayer.currentTime = Math.max(0, (audioPlayer.currentTime || 0) - 10);
@@ -100,7 +100,7 @@ skipSecBtn.addEventListener("click", () => {
   }
 });
 
-// ── Rewind 10 Seconds ──
+// Rewind 10 Seconds
 prevSecBtn.addEventListener("click", () => {
   if (isRTL()) {
     audioPlayer.currentTime = Math.min(
@@ -112,14 +112,14 @@ prevSecBtn.addEventListener("click", () => {
   }
 });
 
-// ── Progress Bar - Seek by Dragging ──
+// Progress Bar - Seek by Dragging
 progressBar.addEventListener("input", () => {
   if (isFinite(audioPlayer.duration)) {
     audioPlayer.currentTime = (progressBar.value / 100) * audioPlayer.duration;
   }
 });
 
-// ── Progress Bar - Seek by Clicking ──
+// Progress Bar - Seek by Clicking
 progressBar.addEventListener("click", (e) => {
   if (isFinite(audioPlayer.duration)) {
     const rect = progressBar.getBoundingClientRect();
@@ -132,7 +132,7 @@ progressBar.addEventListener("click", (e) => {
   }
 });
 
-// ── Download the current surah ──
+// Download the current surah
 audioPlayer.addEventListener("loadedmetadata", () => {
   downloadBtn.disabled = false;
 });
@@ -174,7 +174,7 @@ downloadBtn.addEventListener("click", async () => {
   }
 });
 
-// ── Loop Toggle ──
+// Loop Toggle
 loopBtn.addEventListener("click", () => {
   audioPlayer.loop = !audioPlayer.loop;
   const isLooping = audioPlayer.loop;
@@ -182,7 +182,7 @@ loopBtn.addEventListener("click", () => {
   loopBtn.setAttribute("aria-label", isLooping ? "Loop on" : "Loop off");
 });
 
-// ── Next Surah ──
+// Next Surah
 nextSurahBtn.addEventListener("click", () => {
   const surahSelect = document.getElementById("surah");
   if (surahSelect.selectedIndex < surahSelect.options.length - 1) {
@@ -191,7 +191,7 @@ nextSurahBtn.addEventListener("click", () => {
   }
 });
 
-// ── Prev Surah ──
+// Prev Surah
 prevSurahBtn.addEventListener("click", () => {
   const surahSelect = document.getElementById("surah");
   if (surahSelect.selectedIndex > 0) {
@@ -200,7 +200,7 @@ prevSurahBtn.addEventListener("click", () => {
   }
 });
 
-// ── Surah Nav Button State ──
+// Surah Nav Button State
 function updateSurahNavBtns() {
   const surahSelect = document.getElementById("surah");
   const hasOptions = surahSelect.options.length > 1;
