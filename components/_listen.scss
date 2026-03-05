@@ -19,14 +19,11 @@
 }
 
 .listen__label {
-  color: var(--text-inverse);
-  text-shadow:
-    0 1px 3px rgba(4, 77, 57, 0.6),
-    0 0 8px rgba(4, 77, 57, 0.3);
   font-family: var(--font-display);
   font-weight: 800;
   font-size: 1rem;
   padding-inline-start: 5px;
+  color: var(--color-primary-dark);
 }
 
 .listen__select {
@@ -676,30 +673,5 @@ html[dir="rtl"] .listen__select {
   #skipSecBtn img {
     width: 18px;
     height: 18px;
-  }
-}
-
-@media (min-width: 768px) {
-  .listen__card--aya {
-    max-width: 50%;
-    margin: 0 auto;
-    justify-self: center;
-    width: 100%;
-  }
-}
-
-@media (min-width: 1024px) {
-  .listen__card--aya {
-    max-width: 33.333%;
-  }
-}
-
-@media (max-width: 480px) {
-  .listen__card--aya {
-    max-width: 100%;
-  }
-
-  .reciter-search__list--aya {
-    max-height: 220px;
   }
 }
