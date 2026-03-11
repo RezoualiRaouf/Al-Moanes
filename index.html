@@ -188,46 +188,26 @@
             </div>
           </div>
 
+          <!-- Narration Dropdown -->
           <div class="listen__card">
-            <label for="narrationSearchInput" class="listen__label" data-i18n="selectNarration">
-              Select Rewaya:
-            </label>
-            <div class="reciter-search" id="narrationSearchWrapper">
-              <div class="reciter-search__input-wrap">
-                <input
-                  type="text"
-                  id="narrationSearchInput"
-                  class="listen__select reciter-search__input"
-                  placeholder="Search narration..."
-                  autocomplete="off"
-                  spellcheck="false"
-                />
-              </div>
-              <ul class="reciter-search__list" id="narrationList" hidden></ul>
-            </div>
+            <label
+              for="narration"
+              class="listen__label"
+              data-i18n="selectNarration"
+              >Select Rewaya:</label
+            >
+            <select id="narration" class="listen__select"></select>
           </div>
-        
-        <!-- Surah Dropdown (now searchable) -->
-        <div class="listen__card">
-          <label for="surahSearchInput" class="listen__label" data-i18n="selectSurah"
-            >Select Surah:</label
-          >
-          <div class="reciter-search" id="surahSearchWrapper">
-            <div class="reciter-search__input-wrap">
-              <input
-                type="text"
-                id="surahSearchInput"
-                class="listen__select reciter-search__input"
-                placeholder="Search surah..."
-                autocomplete="off"
-                spellcheck="false"
-              />
-            </div>
-            <ul class="reciter-search__list" id="surahList" hidden></ul>
-          </div>
-        </div>
 
-        <!-- Audio Player -->
+          <!-- Surah Dropdown -->
+          <div class="listen__card">
+            <label for="surah" class="listen__label" data-i18n="selectSurah"
+              >Select Surah:</label
+            >
+            <select id="surah" class="listen__select"></select>
+          </div>
+
+          <!-- Audio Player -->
           <div class="listen__player">
             <audio id="audioPlayer">
               <source src="#" type="audio/mpeg" />
