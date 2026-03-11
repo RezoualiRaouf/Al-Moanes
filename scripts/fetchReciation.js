@@ -1,13 +1,18 @@
 const playIconUrl = new URL("../assets/play-audio.svg", import.meta.url);
 const playIcon = document.getElementById("playIcon");
-const narrationSelect = document.getElementById("narration");
-const surahSelect = document.getElementById("surah");
 const audioPlayer = document.getElementById("audioPlayer");
 
-// Custom reciter search elements
+// Reciter search elements
 const reciterSearchInput = document.getElementById("reciterSearchInput");
 const reciterList = document.getElementById("reciterList");
-const reciterSearchWrapper = document.getElementById("reciterSearchWrapper");
+
+// Narration search elements
+const narrationSearchInput = document.getElementById("narrationSearchInput");
+const narrationList = document.getElementById("narrationList");
+
+// Surah search elements
+const surahSearchInput = document.getElementById("surahSearchInput");
+const surahList = document.getElementById("surahList");
 
 window.currentUserSelect = {
   reciterID: "",
@@ -16,20 +21,17 @@ window.currentUserSelect = {
   surahServer: "",
 };
 
-const defaultOptions = {
+const searchPlaceholders = {
   en: {
-    narration: `<option value="">Select narration</option>`,
-    surah: `<option value="">Select surah</option>`,
+    reciter: "Search reciter...",
+    narration: "Search narration...",
+    surah: "Search surah...",
   },
   ar: {
-    narration: `<option value="">إختر المصحف</option>`,
-    surah: `<option value="">إختر السورة</option>`,
+    reciter: "ابحث عن قارئ...",
+    narration: "ابحث عن المصحف...",
+    surah: "ابحث عن سورة...",
   },
-};
-
-const searchPlaceholders = {
-  en: "Search reciter...",
-  ar: "ابحث عن قارئ...",
 };
 
 const emptyMessages = {
@@ -38,6 +40,8 @@ const emptyMessages = {
 };
 
 let allReciters = [];
+let allNarrations = [];
+let allSurahs = [];
 let surahData = null;
 let lang = localStorage.getItem("language") || "en";
 
@@ -47,7 +51,39 @@ function isEmptyValue(v) {
   );
 }
 
-// Search Dropdown
+// Navigation
+
+function handleDropdownKeydown(e, listEl, onEnter, inputEl) {
+  if (listEl.hidden) return;
+
+  const items = listEl.querySelectorAll(
+    ".reciter-search__item:not(.reciter-search__item--empty)",
+  );
+  const active = listEl.querySelector(".reciter-search__item--active");
+  let idx = Array.from(items).indexOf(active);
+
+  if (e.key === "ArrowDown") {
+    e.preventDefault();
+    if (active) active.classList.remove("reciter-search__item--active");
+    idx = (idx + 1) % items.length;
+    items[idx]?.classList.add("reciter-search__item--active");
+    items[idx]?.scrollIntoView({ block: "nearest" });
+  } else if (e.key === "ArrowUp") {
+    e.preventDefault();
+    if (active) active.classList.remove("reciter-search__item--active");
+    idx = (idx - 1 + items.length) % items.length;
+    items[idx]?.classList.add("reciter-search__item--active");
+    items[idx]?.scrollIntoView({ block: "nearest" });
+  } else if (e.key === "Enter") {
+    e.preventDefault();
+    if (active) onEnter(active);
+  } else if (e.key === "Escape") {
+    listEl.hidden = true;
+    inputEl.blur();
+  }
+}
+
+// Reciter search
 
 function buildReciterList(reciters) {
   reciterList.innerHTML = "";
@@ -60,12 +96,11 @@ function buildReciterList(reciters) {
     return;
   }
 
+  const query = reciterSearchInput.value.trim();
   reciters.forEach((reciter) => {
     const li = document.createElement("li");
     li.className = "reciter-search__item";
 
-    // Highlight matching text
-    const query = reciterSearchInput.value.trim();
     if (query) {
       const regex = new RegExp(
         `(${query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`,
@@ -81,8 +116,6 @@ function buildReciterList(reciters) {
 
     li.dataset.id = reciter.id;
     li.dataset.name = reciter.name;
-
-    // Use mousedown so it fires before blur closes the list
     li.addEventListener("mousedown", (e) => {
       e.preventDefault();
       selectReciter(reciter);
@@ -107,82 +140,8 @@ function selectReciter(reciter) {
   hideReciterList();
   currentUserSelect.reciterID = reciter.id;
   onReciterSelected(reciter.id);
-  // Auto-focus narration after a tick so the DOM has updated
-  setTimeout(() => narrationSelect.focus(), 50);
+  setTimeout(() => narrationSearchInput.focus(), 50);
 }
-
-function filterReciters() {
-  const query = reciterSearchInput.value.trim().toLowerCase();
-  // Clear selection if user edits after selecting
-  reciterSearchInput.dataset.selectedId = "";
-
-  const filtered = query
-    ? allReciters.filter((r) => r.name.toLowerCase().includes(query))
-    : allReciters;
-
-  showReciterList(filtered);
-}
-
-reciterSearchInput.addEventListener("input", filterReciters);
-
-reciterSearchInput.addEventListener("focus", () => {
-  const query = reciterSearchInput.value.trim().toLowerCase();
-  const filtered = query
-    ? allReciters.filter((r) => r.name.toLowerCase().includes(query))
-    : allReciters;
-  showReciterList(filtered);
-});
-
-reciterSearchInput.addEventListener("blur", () => {
-  // Delay to allow mousedown on list items to fire first
-  setTimeout(hideReciterList, 160);
-});
-
-// Close dropdown when clicking outside the wrapper
-document.addEventListener("click", (e) => {
-  if (!e.target.closest("#reciterSearchWrapper")) {
-    hideReciterList();
-  }
-});
-
-// Keyboard navigation
-reciterSearchInput.addEventListener("keydown", (e) => {
-  if (reciterList.hidden) return;
-
-  const items = reciterList.querySelectorAll(
-    ".reciter-search__item:not(.reciter-search__item--empty)",
-  );
-  const active = reciterList.querySelector(".reciter-search__item--active");
-  let idx = Array.from(items).indexOf(active);
-
-  if (e.key === "ArrowDown") {
-    e.preventDefault();
-    if (active) active.classList.remove("reciter-search__item--active");
-    idx = (idx + 1) % items.length;
-    items[idx]?.classList.add("reciter-search__item--active");
-    items[idx]?.scrollIntoView({ block: "nearest" });
-  } else if (e.key === "ArrowUp") {
-    e.preventDefault();
-    if (active) active.classList.remove("reciter-search__item--active");
-    idx = (idx - 1 + items.length) % items.length;
-    items[idx]?.classList.add("reciter-search__item--active");
-    items[idx]?.scrollIntoView({ block: "nearest" });
-  } else if (e.key === "Enter") {
-    e.preventDefault();
-    if (active) {
-      const id = active.dataset.id;
-      const name = active.dataset.name;
-      selectReciter({ id, name });
-    }
-  } else if (e.key === "Escape") {
-    hideReciterList();
-    reciterSearchInput.blur();
-  }
-});
-
-const setDefaults = (dropDown, key) => {
-  dropDown.innerHTML = defaultOptions[lang][key];
-};
 
 const resetReciterSearch = (clearInput = true) => {
   if (clearInput) {
@@ -192,14 +151,262 @@ const resetReciterSearch = (clearInput = true) => {
   hideReciterList();
 };
 
-// Fetch Data
+reciterSearchInput.addEventListener("input", () => {
+  reciterSearchInput.dataset.selectedId = "";
+  const query = reciterSearchInput.value.trim().toLowerCase();
+  const filtered = query
+    ? allReciters.filter((r) => r.name.toLowerCase().includes(query))
+    : allReciters;
+  showReciterList(filtered);
+});
+reciterSearchInput.addEventListener("focus", () => {
+  const query = reciterSearchInput.value.trim().toLowerCase();
+  const filtered = query
+    ? allReciters.filter((r) => r.name.toLowerCase().includes(query))
+    : allReciters;
+  showReciterList(filtered);
+});
+reciterSearchInput.addEventListener("blur", () =>
+  setTimeout(hideReciterList, 160),
+);
+reciterSearchInput.addEventListener("keydown", (e) =>
+  handleDropdownKeydown(
+    e,
+    reciterList,
+    (active) => {
+      selectReciter({ id: active.dataset.id, name: active.dataset.name });
+    },
+    reciterSearchInput,
+  ),
+);
+
+// Narration search
+
+function buildNarrationList(narrations) {
+  narrationList.innerHTML = "";
+
+  if (narrations.length === 0) {
+    const li = document.createElement("li");
+    li.className = "reciter-search__item reciter-search__item--empty";
+    li.textContent = emptyMessages[lang] || emptyMessages.en;
+    narrationList.appendChild(li);
+    return;
+  }
+
+  const query = narrationSearchInput.value.trim();
+  narrations.forEach((narration) => {
+    const li = document.createElement("li");
+    li.className = "reciter-search__item";
+
+    if (query) {
+      const regex = new RegExp(
+        `(${query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`,
+        "gi",
+      );
+      li.innerHTML = narration.name.replace(
+        regex,
+        `<mark class="reciter-search__highlight">$1</mark>`,
+      );
+    } else {
+      li.textContent = narration.name;
+    }
+
+    li.dataset.id = narration.id;
+    li.dataset.name = narration.name;
+    li.dataset.server = narration.server;
+    li.dataset.surahlist = narration.surahList;
+    li.addEventListener("mousedown", (e) => {
+      e.preventDefault();
+      selectNarration(narration);
+    });
+
+    narrationList.appendChild(li);
+  });
+}
+
+function showNarrationList(narrations) {
+  buildNarrationList(narrations);
+  narrationList.hidden = false;
+}
+
+function hideNarrationList() {
+  narrationList.hidden = true;
+}
+
+function selectNarration(narration) {
+  narrationSearchInput.value = narration.name;
+  narrationSearchInput.dataset.selectedId = narration.id;
+  hideNarrationList();
+  currentUserSelect.narrationID = narration.id;
+  onNarrationSelected(narration);
+  setTimeout(() => surahSearchInput.focus(), 50);
+}
+
+const resetNarrationSearch = (clearInput = true) => {
+  if (clearInput) {
+    narrationSearchInput.value = "";
+    narrationSearchInput.dataset.selectedId = "";
+  }
+  hideNarrationList();
+  allNarrations = [];
+};
+
+narrationSearchInput.addEventListener("input", () => {
+  narrationSearchInput.dataset.selectedId = "";
+  const query = narrationSearchInput.value.trim().toLowerCase();
+  const filtered = query
+    ? allNarrations.filter((n) => n.name.toLowerCase().includes(query))
+    : allNarrations;
+  showNarrationList(filtered);
+});
+narrationSearchInput.addEventListener("focus", () => {
+  const query = narrationSearchInput.value.trim().toLowerCase();
+  const filtered = query
+    ? allNarrations.filter((n) => n.name.toLowerCase().includes(query))
+    : allNarrations;
+  showNarrationList(filtered);
+});
+narrationSearchInput.addEventListener("blur", () =>
+  setTimeout(hideNarrationList, 160),
+);
+narrationSearchInput.addEventListener("keydown", (e) =>
+  handleDropdownKeydown(
+    e,
+    narrationList,
+    (active) => {
+      selectNarration({
+        id: active.dataset.id,
+        name: active.dataset.name,
+        server: active.dataset.server,
+        surahList: active.dataset.surahlist,
+      });
+    },
+    narrationSearchInput,
+  ),
+);
+
+// Surah search
+
+function buildSurahList(surahs) {
+  surahList.innerHTML = "";
+
+  if (surahs.length === 0) {
+    const li = document.createElement("li");
+    li.className = "reciter-search__item reciter-search__item--empty";
+    li.textContent = emptyMessages[lang] || emptyMessages.en;
+    surahList.appendChild(li);
+    return;
+  }
+
+  const query = surahSearchInput.value.trim();
+  surahs.forEach((surah) => {
+    const li = document.createElement("li");
+    li.className = "reciter-search__item";
+
+    if (query) {
+      const regex = new RegExp(
+        `(${query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`,
+        "gi",
+      );
+      li.innerHTML = surah.name.replace(
+        regex,
+        `<mark class="reciter-search__highlight">$1</mark>`,
+      );
+    } else {
+      li.textContent = surah.name;
+    }
+
+    li.dataset.value = surah.value;
+    li.dataset.id = surah.id;
+    li.dataset.name = surah.name;
+    li.addEventListener("mousedown", (e) => {
+      e.preventDefault();
+      selectSurah(surah);
+    });
+
+    surahList.appendChild(li);
+  });
+}
+
+function showSurahList(surahs) {
+  buildSurahList(surahs);
+  surahList.hidden = false;
+}
+
+function hideSurahList() {
+  surahList.hidden = true;
+}
+
+function selectSurah(surah) {
+  surahSearchInput.value = surah.name;
+  surahSearchInput.dataset.selectedValue = surah.value;
+  hideSurahList();
+
+  // Load selected surah audio
+  audioPlayer.pause();
+  audioPlayer.src = surah.value;
+  audioPlayer.load();
+
+  currentUserSelect.surahServer = surah.value;
+  currentUserSelect.surahID = surah.id;
+  localStorage.setItem("quranSelections", JSON.stringify(currentUserSelect));
+}
+
+const resetSurahSearch = (clearInput = true) => {
+  if (clearInput) {
+    surahSearchInput.value = "";
+    surahSearchInput.dataset.selectedValue = "";
+  }
+  hideSurahList();
+  allSurahs = [];
+};
+
+surahSearchInput.addEventListener("input", () => {
+  surahSearchInput.dataset.selectedValue = "";
+  const query = surahSearchInput.value.trim().toLowerCase();
+  const filtered = query
+    ? allSurahs.filter((s) => s.name.toLowerCase().includes(query))
+    : allSurahs;
+  showSurahList(filtered);
+});
+surahSearchInput.addEventListener("focus", () => {
+  const query = surahSearchInput.value.trim().toLowerCase();
+  const filtered = query
+    ? allSurahs.filter((s) => s.name.toLowerCase().includes(query))
+    : allSurahs;
+  showSurahList(filtered);
+});
+surahSearchInput.addEventListener("blur", () => setTimeout(hideSurahList, 160));
+surahSearchInput.addEventListener("keydown", (e) =>
+  handleDropdownKeydown(
+    e,
+    surahList,
+    (active) => {
+      selectSurah({
+        value: active.dataset.value,
+        id: active.dataset.id,
+        name: active.dataset.name,
+      });
+    },
+    surahSearchInput,
+  ),
+);
+
+// Close all dropdowns when clicking outside
+document.addEventListener("click", (e) => {
+  if (!e.target.closest("#reciterSearchWrapper")) hideReciterList();
+  if (!e.target.closest("#narrationSearchWrapper")) hideNarrationList();
+  if (!e.target.closest("#surahSearchWrapper")) hideSurahList();
+});
+
+// API calls
 
 async function fetchSurahNames() {
   try {
-    const surahAPI = `https://mp3quran.net/api/v3/suwar?language=${lang}`;
-    const res = await fetch(surahAPI);
-    const data = await res.json();
-    return data;
+    const res = await fetch(
+      `https://mp3quran.net/api/v3/suwar?language=${lang}`,
+    );
+    return await res.json();
   } catch (error) {
     console.error("Error fetching surah names:", error);
     return null;
@@ -218,113 +425,85 @@ async function fetchReciters() {
   }
 }
 
-// Reciter Selected
+// Reciter selected
 
 function onReciterSelected(reciterId) {
   if (!reciterId) {
-    setDefaults(narrationSelect, "narration");
-    setDefaults(surahSelect, "surah");
+    resetNarrationSearch(true);
+    resetSurahSearch(true);
     return;
   }
 
   const selectedReciter = allReciters.find((r) => r.id == reciterId);
   if (!selectedReciter) return;
 
-  if (selectedReciter.moshaf.length > 1) {
-    narrationSelect.innerHTML =
-      defaultOptions[lang]["narration"] +
-      selectedReciter.moshaf
-        .map(
-          (m) =>
-            `<option value="${m.id}" data-server="${m.server}" data-surahlist="${m.surah_list}">${m.name}</option>`,
-        )
-        .join("");
-    setDefaults(surahSelect, "surah");
-    // narration already focused by selectReciter(); nothing extra needed
-  } else {
-    narrationSelect.innerHTML = selectedReciter.moshaf
-      .map(
-        (m) =>
-          `<option value="${m.id}" data-server="${m.server}" data-surahlist="${m.surah_list}">${m.name}</option>`,
-      )
-      .join("");
-    setDefaults(surahSelect, "surah");
-    // Only one narration — populate surahs and jump straight to surah select
-    onNarrationChange({ autoFocus: true });
+  // Build narration list from reciter's moshaf array
+  allNarrations = selectedReciter.moshaf.map((m) => ({
+    id: String(m.id),
+    name: m.name,
+    server: m.server,
+    surahList: m.surah_list,
+  }));
+
+  resetNarrationSearch(true);
+  resetSurahSearch(true);
+
+  // If only one narration, select it automatically
+  if (allNarrations.length === 1) {
+    selectNarration(allNarrations[0]);
   }
 }
 
-// Narration Change
+// Narration selected
 
-function onNarrationChange({ autoFocus = false } = {}) {
-  setDefaults(surahSelect, "surah");
+function onNarrationSelected(narration) {
+  resetSurahSearch(true);
 
-  const selectedNarration =
-    narrationSelect.options[narrationSelect.selectedIndex];
-
-  if (!selectedNarration || !selectedNarration.value) return;
-
-  currentUserSelect.narrationID = selectedNarration.value;
-
-  const surahServer = selectedNarration.dataset.server;
-  let surahList = selectedNarration.dataset.surahlist;
-
-  if (!surahData || !surahData.suwar) {
+  if (!surahData?.suwar) {
     console.error("Surah data not loaded");
     return;
   }
 
-  const surahNames = surahData.suwar;
-  surahList = surahList.split(",");
+  const surahIds = narration.surahList.split(",");
   const reciterName = reciterSearchInput.value;
 
-  surahList.forEach((surah) => {
-    surahNames.forEach((surahName) => {
-      if (surahName.id == surah) {
+  // Build surah list for the chosen narration
+  allSurahs = [];
+  surahIds.forEach((surahId) => {
+    surahData.suwar.forEach((surahName) => {
+      if (surahName.id == surahId) {
         const paddedId = String(surahName.id).padStart(3, "0");
-        surahSelect.innerHTML += `<option value="${surahServer}${paddedId}.mp3" data-reciter="${reciterName}" id="${surahName.id}">${surahName.name}</option>`;
+        allSurahs.push({
+          value: `${narration.server}${paddedId}.mp3`,
+          id: String(surahName.id),
+          name: surahName.name,
+          reciter: reciterName,
+        });
       }
     });
   });
 
   window.dispatchEvent(new CustomEvent("surahListUpdated"));
-
-  // Auto-focus surah: always when narration changes or when called with autoFocus flag
-  setTimeout(() => surahSelect.focus(), 50);
 }
 
-// Surah Change
-
-function fetchSurah() {
-  const selectedSurah = surahSelect.options[surahSelect.selectedIndex];
-
-  if (!selectedSurah || !selectedSurah.value || selectedSurah.value === "") {
-    return;
-  }
-
-  audioPlayer.pause();
-  audioPlayer.src = selectedSurah.value;
-  audioPlayer.load();
-
-  currentUserSelect.surahServer = selectedSurah.value;
-  currentUserSelect.surahID = selectedSurah.id;
-  localStorage.setItem("quranSelections", JSON.stringify(currentUserSelect));
-}
-
-// Initialize
+// init
 
 async function initializeData() {
   lang = localStorage.getItem("language") || "en";
+  const p = searchPlaceholders[lang] || searchPlaceholders.en;
 
-  reciterSearchInput.placeholder =
-    searchPlaceholders[lang] || searchPlaceholders.en;
+  reciterSearchInput.placeholder = p.reciter;
+  narrationSearchInput.placeholder = p.narration;
+  surahSearchInput.placeholder = p.surah;
+
   resetReciterSearch(true);
-  setDefaults(narrationSelect, "narration");
-  setDefaults(surahSelect, "surah");
+  resetNarrationSearch(true);
+  resetSurahSearch(true);
 
   surahData = await fetchSurahNames();
   await fetchReciters();
 
+  // Restore last user selection if available
   const saved = localStorage.getItem("quranSelections");
   if (saved) {
     Object.assign(currentUserSelect, JSON.parse(saved));
@@ -336,70 +515,76 @@ async function loadPrevSelect() {
   if (!currentUserSelect.reciterID) return;
 
   try {
-    const api = `https://www.mp3quran.net/api/v3/reciters?language=${lang}&reciter=${currentUserSelect.reciterID}`;
-    const res = await fetch(api);
+    const res = await fetch(
+      `https://www.mp3quran.net/api/v3/reciters?language=${lang}&reciter=${currentUserSelect.reciterID}`,
+    );
     const data = await res.json();
-    if (!data.reciters || !data.reciters[0]) return;
+    if (!data.reciters?.[0]) return;
     const reciter = data.reciters[0];
 
-    // Restore search input with reciter name
+    // Restore reciter input
     reciterSearchInput.value = reciter.name;
     reciterSearchInput.dataset.selectedId = reciter.id;
 
-    // Populate narration dropdown
-    if (reciter.moshaf.length > 1) {
-      narrationSelect.innerHTML =
-        defaultOptions[lang]["narration"] +
-        reciter.moshaf
-          .map(
-            (m) =>
-              `<option value="${m.id}" data-server="${m.server}" data-surahlist="${m.surah_list}">${m.name}</option>`,
-          )
-          .join("");
-    } else {
-      narrationSelect.innerHTML = reciter.moshaf
-        .map(
-          (m) =>
-            `<option value="${m.id}" data-server="${m.server}" data-surahlist="${m.surah_list}">${m.name}</option>`,
-        )
-        .join("");
-    }
-    narrationSelect.value = currentUserSelect.narrationID;
+    // Rebuild narration list
+    allNarrations = reciter.moshaf.map((m) => ({
+      id: String(m.id),
+      name: m.name,
+      server: m.server,
+      surahList: m.surah_list,
+    }));
 
-    // Populate surah dropdown
-    const selectedNarration =
-      narrationSelect.options[narrationSelect.selectedIndex];
-    const surahServer = selectedNarration.dataset.server;
-    const surahList = selectedNarration.dataset.surahlist.split(",");
+    // Restore selected narration input
+    const savedNarration = allNarrations.find(
+      (n) => n.id === String(currentUserSelect.narrationID),
+    );
+    if (savedNarration) {
+      narrationSearchInput.value = savedNarration.name;
+      narrationSearchInput.dataset.selectedId = savedNarration.id;
 
-    surahSelect.innerHTML = defaultOptions[lang]["surah"];
-
-    surahList.forEach((surah) => {
-      surahData.suwar.forEach((surahName) => {
-        if (surahName.id == surah) {
-          const paddedId = String(surahName.id).padStart(3, "0");
-          surahSelect.innerHTML += `<option value="${surahServer}${paddedId}.mp3" data-reciter="${reciter.name}" id="${surahName.id}">${surahName.name}</option>`;
-        }
+      // Rebuild surah list for the saved narration
+      const surahIds = savedNarration.surahList.split(",");
+      allSurahs = [];
+      surahIds.forEach((surahId) => {
+        surahData.suwar.forEach((surahName) => {
+          if (surahName.id == surahId) {
+            const paddedId = String(surahName.id).padStart(3, "0");
+            allSurahs.push({
+              value: `${savedNarration.server}${paddedId}.mp3`,
+              id: String(surahName.id),
+              name: surahName.name,
+              reciter: reciter.name,
+            });
+          }
+        });
       });
-    });
 
-    surahSelect.value = currentUserSelect.surahServer;
+      // Restore selected surah input
+      const savedSurah = allSurahs.find(
+        (s) => s.value === currentUserSelect.surahServer,
+      );
+      if (savedSurah) {
+        surahSearchInput.value = savedSurah.name;
+        surahSearchInput.dataset.selectedValue = savedSurah.value;
+      }
+    }
+
     audioPlayer.src = currentUserSelect.surahServer;
-
     window.dispatchEvent(new CustomEvent("surahListUpdated"));
   } catch (error) {
     console.error("Error loading previous selections:", error);
   }
 }
 
-// Language Change
+// Language change re-init
 
 async function onLanguageChange(event) {
   lang = event.detail.lang;
+  const p = searchPlaceholders[lang] || searchPlaceholders.en;
 
-  // Update placeholder for the new language
-  reciterSearchInput.placeholder =
-    searchPlaceholders[lang] || searchPlaceholders.en;
+  reciterSearchInput.placeholder = p.reciter;
+  narrationSearchInput.placeholder = p.narration;
+  surahSearchInput.placeholder = p.surah;
 
   if (audioPlayer) {
     audioPlayer.pause();
@@ -408,16 +593,10 @@ async function onLanguageChange(event) {
 
   await initializeData();
 
-  let anyEmpty = Object.values(currentUserSelect).some(isEmptyValue);
-  if (!anyEmpty) {
-    loadPrevSelect();
-  }
+  const anyEmpty = Object.values(currentUserSelect).some(isEmptyValue);
+  if (!anyEmpty) loadPrevSelect();
 }
 
-// Event Listeners
-
-narrationSelect.addEventListener("change", onNarrationChange);
-surahSelect.addEventListener("change", fetchSurah);
 window.addEventListener("languageChanged", onLanguageChange);
 
 if (document.readyState === "loading") {
