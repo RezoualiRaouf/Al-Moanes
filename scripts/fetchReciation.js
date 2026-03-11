@@ -51,7 +51,7 @@ function isEmptyValue(v) {
   );
 }
 
-// -- Shared keyboard navigation --
+// Navigation
 
 function handleDropdownKeydown(e, listEl, onEnter, inputEl) {
   if (listEl.hidden) return;
@@ -83,7 +83,7 @@ function handleDropdownKeydown(e, listEl, onEnter, inputEl) {
   }
 }
 
-// -- Reciter search --
+// Reciter search
 
 function buildReciterList(reciters) {
   reciterList.innerHTML = "";
@@ -180,7 +180,7 @@ reciterSearchInput.addEventListener("keydown", (e) =>
   ),
 );
 
-// -- Narration search --
+// Narration search
 
 function buildNarrationList(narrations) {
   narrationList.innerHTML = "";
@@ -285,7 +285,7 @@ narrationSearchInput.addEventListener("keydown", (e) =>
   ),
 );
 
-// -- Surah search --
+// Surah search
 
 function buildSurahList(surahs) {
   surahList.innerHTML = "";
@@ -399,7 +399,7 @@ document.addEventListener("click", (e) => {
   if (!e.target.closest("#surahSearchWrapper")) hideSurahList();
 });
 
-// -- API calls --
+// API calls
 
 async function fetchSurahNames() {
   try {
@@ -425,7 +425,7 @@ async function fetchReciters() {
   }
 }
 
-// -- Reciter selected: populate narration list --
+// Reciter selected
 
 function onReciterSelected(reciterId) {
   if (!reciterId) {
@@ -454,7 +454,7 @@ function onReciterSelected(reciterId) {
   }
 }
 
-// -- Narration selected: rebuild surah list --
+// Narration selected
 
 function onNarrationSelected(narration) {
   resetSurahSearch(true);
@@ -486,7 +486,7 @@ function onNarrationSelected(narration) {
   window.dispatchEvent(new CustomEvent("surahListUpdated"));
 }
 
-// -- Init --
+// init
 
 async function initializeData() {
   lang = localStorage.getItem("language") || "en";
@@ -576,7 +576,7 @@ async function loadPrevSelect() {
   }
 }
 
-// -- Language change: re-init everything --
+// Language change re-init
 
 async function onLanguageChange(event) {
   lang = event.detail.lang;
@@ -596,8 +596,6 @@ async function onLanguageChange(event) {
   const anyEmpty = Object.values(currentUserSelect).some(isEmptyValue);
   if (!anyEmpty) loadPrevSelect();
 }
-
-// -- Event listeners --
 
 window.addEventListener("languageChanged", onLanguageChange);
 
