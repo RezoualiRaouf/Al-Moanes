@@ -51,7 +51,7 @@ function isEmptyValue(v) {
   );
 }
 
-// Navigation
+// -- Shared keyboard navigation --
 
 function handleDropdownKeydown(e, listEl, onEnter, inputEl) {
   if (listEl.hidden) return;
@@ -83,7 +83,7 @@ function handleDropdownKeydown(e, listEl, onEnter, inputEl) {
   }
 }
 
-// Reciter search
+// -- Reciter search --
 
 function buildReciterList(reciters) {
   reciterList.innerHTML = "";
@@ -180,7 +180,7 @@ reciterSearchInput.addEventListener("keydown", (e) =>
   ),
 );
 
-// Narration search
+// -- Narration search --
 
 function buildNarrationList(narrations) {
   narrationList.innerHTML = "";
@@ -285,7 +285,7 @@ narrationSearchInput.addEventListener("keydown", (e) =>
   ),
 );
 
-// Surah search
+// -- Surah search --
 
 function buildSurahList(surahs) {
   surahList.innerHTML = "";
@@ -350,7 +350,13 @@ function selectSurah(surah) {
   currentUserSelect.surahServer = surah.value;
   currentUserSelect.surahID = surah.id;
   localStorage.setItem("quranSelections", JSON.stringify(currentUserSelect));
+
+  // Keep player.js in sync
+  window.dispatchEvent(new CustomEvent("surahListUpdated"));
 }
+
+// Expose selectSurah for player.js
+window.selectSurah = selectSurah;
 
 const resetSurahSearch = (clearInput = true) => {
   if (clearInput) {
@@ -359,6 +365,7 @@ const resetSurahSearch = (clearInput = true) => {
   }
   hideSurahList();
   allSurahs = [];
+  window.allSurahs = allSurahs;
 };
 
 surahSearchInput.addEventListener("input", () => {
@@ -399,7 +406,7 @@ document.addEventListener("click", (e) => {
   if (!e.target.closest("#surahSearchWrapper")) hideSurahList();
 });
 
-// API calls
+// -- API calls --
 
 async function fetchSurahNames() {
   try {
@@ -425,7 +432,7 @@ async function fetchReciters() {
   }
 }
 
-// Reciter selected
+// -- Reciter selected: populate narration list --
 
 function onReciterSelected(reciterId) {
   if (!reciterId) {
@@ -437,24 +444,25 @@ function onReciterSelected(reciterId) {
   const selectedReciter = allReciters.find((r) => r.id == reciterId);
   if (!selectedReciter) return;
 
-  // Build narration list from reciter's moshaf array
+  // Reset first, then build
+  narrationSearchInput.value = "";
+  narrationSearchInput.dataset.selectedId = "";
+  hideNarrationList();
+  resetSurahSearch(true);
+
   allNarrations = selectedReciter.moshaf.map((m) => ({
     id: String(m.id),
     name: m.name,
     server: m.server,
     surahList: m.surah_list,
   }));
-
-  resetNarrationSearch(true);
-  resetSurahSearch(true);
-
-  // If only one narration, select it automatically
+  // Auto-select if only one narration available
   if (allNarrations.length === 1) {
     selectNarration(allNarrations[0]);
   }
 }
 
-// Narration selected
+// -- Narration selected: rebuild surah list --
 
 function onNarrationSelected(narration) {
   resetSurahSearch(true);
@@ -483,10 +491,12 @@ function onNarrationSelected(narration) {
     });
   });
 
+  // Sync with player.js
+  window.allSurahs = allSurahs;
   window.dispatchEvent(new CustomEvent("surahListUpdated"));
 }
 
-// init
+// -- Init --
 
 async function initializeData() {
   lang = localStorage.getItem("language") || "en";
@@ -559,6 +569,9 @@ async function loadPrevSelect() {
         });
       });
 
+      // Sync with player.js
+      window.allSurahs = allSurahs;
+
       // Restore selected surah input
       const savedSurah = allSurahs.find(
         (s) => s.value === currentUserSelect.surahServer,
@@ -576,7 +589,7 @@ async function loadPrevSelect() {
   }
 }
 
-// Language change re-init
+// -- Language change: re-init everything --
 
 async function onLanguageChange(event) {
   lang = event.detail.lang;
@@ -596,6 +609,8 @@ async function onLanguageChange(event) {
   const anyEmpty = Object.values(currentUserSelect).some(isEmptyValue);
   if (!anyEmpty) loadPrevSelect();
 }
+
+// -- Event listeners --
 
 window.addEventListener("languageChanged", onLanguageChange);
 

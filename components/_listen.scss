@@ -679,28 +679,3 @@ html[dir="rtl"] .listen__select {
     height: 18px;
   }
 }
-
-@media (min-width: 768px) {
-  .listen__card--aya {
-    max-width: 50%;
-    margin: 0 auto;
-    justify-self: center;
-    width: 100%;
-  }
-}
-
-@media (min-width: 1024px) {
-  .listen__card--aya {
-    max-width: 33.333%;
-  }
-}
-
-@media (max-width: 480px) {
-  .listen__card--aya {
-    max-width: 100%;
-  }
-
-  .reciter-search__list--aya {
-    max-height: 220px;
-  }
-}
