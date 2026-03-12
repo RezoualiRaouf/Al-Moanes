@@ -20,14 +20,11 @@
 }
 
 .listen__label {
-  color: var(--text-inverse);
-  text-shadow:
-    0 1px 3px rgba(4, 77, 57, 0.6),
-    0 0 8px rgba(4, 77, 57, 0.3);
   font-family: var(--font-display);
   font-weight: 800;
   font-size: 1rem;
   padding-inline-start: 5px;
+  color: var(--color-primary-dark);
 }
 
 .listen__select {
