@@ -444,18 +444,17 @@ function onReciterSelected(reciterId) {
   const selectedReciter = allReciters.find((r) => r.id == reciterId);
   if (!selectedReciter) return;
 
-  // Reset first, then build
-  narrationSearchInput.value = "";
-  narrationSearchInput.dataset.selectedId = "";
-  hideNarrationList();
-  resetSurahSearch(true);
-
+  // Build narration list from reciter's moshaf array
   allNarrations = selectedReciter.moshaf.map((m) => ({
     id: String(m.id),
     name: m.name,
     server: m.server,
     surahList: m.surah_list,
   }));
+
+  resetNarrationSearch(true);
+  resetSurahSearch(true);
+
   // Auto-select if only one narration available
   if (allNarrations.length === 1) {
     selectNarration(allNarrations[0]);

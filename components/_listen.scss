@@ -24,7 +24,10 @@
   font-weight: 800;
   font-size: 1rem;
   padding-inline-start: 5px;
-  color: var(--color-primary-dark);
+  color: var(--text-inverse);
+  text-shadow:
+    0 1px 3px rgba(4, 77, 57, 0.6),
+    0 0 8px rgba(4, 77, 57, 0.3);
 }
 
 .listen__select {
@@ -49,13 +52,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.listen__select option {
-  padding: 10px;
-  color: var(--color-primary);
-  background-color: var(--color-accent-light);
-  font-size: 0.9375rem;
 }
 
 .reciter-search {
@@ -332,12 +328,6 @@ html[dir="rtl"] .reciter-search__list {
 html[dir="rtl"] .reciter-search__input {
   background-position: unset;
   padding-inline-start: 12px;
-  padding-inline-end: 12px;
-}
-
-html[dir="rtl"] .listen__select {
-  background-position: left 12px center;
-  padding-inline-start: 40px;
   padding-inline-end: 12px;
 }
 
