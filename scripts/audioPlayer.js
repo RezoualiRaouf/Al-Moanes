@@ -17,15 +17,15 @@ const prevSecBtn = document.getElementById("prevSecBtn");
 const progressBar = document.getElementById("progressBar");
 const surahCurrentTime = document.getElementById("surahCurrentTime");
 const surahDuration = document.getElementById("surahDuration");
+const surahSearchInput = document.getElementById("surahSearchInput");
+const reciterSearchInput = document.getElementById("reciterSearchInput");
 
 export const isRTL = () => {
   return localStorage.getItem("language") === "ar";
 };
 
 function formatTime(seconds) {
-  if (!isFinite(seconds) || seconds < 0) {
-    return "00:00";
-  }
+  if (!isFinite(seconds) || seconds < 0) return "00:00";
 
   if (seconds >= 3600) {
     const h = Math.floor(seconds / 3600);
@@ -36,11 +36,11 @@ function formatTime(seconds) {
       `${m.toString().padStart(2, "0")}:` +
       `${s.toString().padStart(2, "0")}`
     );
-  } else {
-    const m = Math.floor(seconds / 60);
-    const s = Math.floor(seconds % 60);
-    return `${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
   }
+
+  const m = Math.floor(seconds / 60);
+  const s = Math.floor(seconds % 60);
+  return `${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
 }
 
 function resetPlayer() {
@@ -70,8 +70,7 @@ muteBtn.addEventListener("click", () => {
 // ── Update Progress Bar and Time Display ──
 audioPlayer.addEventListener("timeupdate", () => {
   if (isFinite(audioPlayer.duration)) {
-    let percentage = (audioPlayer.currentTime / audioPlayer.duration) * 100;
-    progressBar.value = percentage;
+    progressBar.value = (audioPlayer.currentTime / audioPlayer.duration) * 100;
     surahCurrentTime.innerText = formatTime(audioPlayer.currentTime);
     surahDuration.innerText = formatTime(audioPlayer.duration);
   }
@@ -80,12 +79,14 @@ audioPlayer.addEventListener("timeupdate", () => {
 // ── Reset when new audio starts loading ──
 audioPlayer.addEventListener("loadstart", () => {
   resetPlayer();
+  downloadBtn.disabled = true;
 });
 
 // ── Update duration when metadata is loaded ──
 audioPlayer.addEventListener("loadedmetadata", () => {
   surahDuration.innerText = formatTime(audioPlayer.duration);
   progressBar.value = 0;
+  downloadBtn.disabled = false;
 });
 
 // ── Skip Forward 10 Seconds ──
@@ -145,10 +146,8 @@ downloadBtn.addEventListener("click", async () => {
   const src = audioPlayer.src;
   if (!src || src === window.location.href) return;
 
-  const surahSelect = document.getElementById("surah");
-  const selectedSurah = surahSelect.options[surahSelect.selectedIndex];
-  const surahName = selectedSurah.text;
-  const reciterName = selectedSurah.dataset.reciter;
+  const surahName = surahSearchInput.value || "surah";
+  const reciterName = reciterSearchInput.value || "reciter";
   const filename = `${reciterName}_${surahName}.mp3`;
 
   try {
@@ -177,26 +176,25 @@ downloadBtn.addEventListener("click", async () => {
 // ── Loop Toggle ──
 loopBtn.addEventListener("click", () => {
   audioPlayer.loop = !audioPlayer.loop;
-  const isLooping = audioPlayer.loop;
-  loopBtn.setAttribute("aria-pressed", isLooping);
-  loopBtn.setAttribute("aria-label", isLooping ? "Loop on" : "Loop off");
+  loopBtn.setAttribute("aria-pressed", audioPlayer.loop);
+  loopBtn.setAttribute("aria-label", audioPlayer.loop ? "Loop on" : "Loop off");
 });
 
 // ── Next Surah ──
 nextSurahBtn.addEventListener("click", () => {
-  const surahSelect = document.getElementById("surah");
-  if (surahSelect.selectedIndex < surahSelect.options.length - 1) {
-    surahSelect.selectedIndex++;
-    surahSelect.dispatchEvent(new Event("change"));
+  const idx = getCurrentSurahIdx();
+  const surahs = window.allSurahs || [];
+  if (idx !== -1 && idx < surahs.length - 1) {
+    window.selectSurah(surahs[idx + 1]);
   }
 });
 
 // ── Prev Surah ──
 prevSurahBtn.addEventListener("click", () => {
-  const surahSelect = document.getElementById("surah");
-  if (surahSelect.selectedIndex > 0) {
-    surahSelect.selectedIndex--;
-    surahSelect.dispatchEvent(new Event("change"));
+  const idx = getCurrentSurahIdx();
+  const surahs = window.allSurahs || [];
+  if (idx > 0) {
+    window.selectSurah(surahs[idx - 1]);
   }
 });
 
@@ -217,14 +215,17 @@ window.addEventListener("surahListUpdated", updateSurahNavBtns);
 audioPlayer.addEventListener("ended", () => {
   playIcon.src = playIconUrl.href;
 
-  const surahSelect = document.getElementById("surah");
-  if (
-    !audioPlayer.loop &&
-    surahSelect.selectedIndex < surahSelect.options.length - 1
-  ) {
-    surahSelect.selectedIndex++;
-    surahSelect.dispatchEvent(new Event("change"));
+  if (!audioPlayer.loop) {
+    const idx = getCurrentSurahIdx();
+    const surahs = window.allSurahs || [];
+    if (idx !== -1 && idx < surahs.length - 1) {
+      window.selectSurah(surahs[idx + 1]);
+    }
   }
 
   updateSurahNavBtns();
 });
+
+// -- Update nav buttons when surah list is rebuilt --
+
+window.addEventListener("surahListUpdated", updateSurahNavBtns);
