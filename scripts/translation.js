@@ -2,11 +2,11 @@ const translations = {
   en: {
     // Navigation
     home: "Home",
-    recitation: "Recitaion",
-    quran: "Quarn",
+    recitation: "Recitation",
+    quran: "Quran",
     hadith: "Hadith",
     contact: "Contact Us",
-    menu: "Mune",
+    menu: "Menu",
 
     // Dropdowns
     language: "Language",
@@ -28,9 +28,6 @@ const translations = {
 
     // Conatct
     contactHeading: "Contribute",
-    contactDesc:
-      "Help improve this project by contributing code or reporting issues",
-
     // contribute links
     contactDesc:
       "Help improve this project by contributing code or reporting issues",
@@ -38,17 +35,17 @@ const translations = {
     fundTitle: "Fund project",
     fundDesc: "Not available for now!",
     contributeTitle: "View Repository",
-    contributeDesc: "Start our project",
+    contributeDesc: "Star our project",
     issueTitle: "Report Issues",
     issueDesc: "Help us find and fix bugs",
     pullReqTitle: "Submit Pull Request",
     pullReqDesc: "Contribute by code",
 
     // tool tip
-    toolTipTitle: "Form Submition",
+    toolTipTitle: "Form Submission",
 
     // conatct form
-    formTitle: "Conatct Us",
+    formTitle: "Contact Us",
     formNameHolder: "Full name *",
     formEmailHolder: "Email Address *",
     formMsgHolder: "Your message *",

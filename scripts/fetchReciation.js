@@ -138,9 +138,13 @@ function selectReciter(reciter) {
   reciterSearchInput.value = reciter.name;
   reciterSearchInput.dataset.selectedId = reciter.id;
   hideReciterList();
+
   currentUserSelect.reciterID = reciter.id;
   onReciterSelected(reciter.id);
-  setTimeout(() => narrationSearchInput.focus(), 50);
+
+  if (allNarrations.length !== 1) {
+    setTimeout(() => narrationSearchInput.focus(), 50);
+  }
 }
 
 const resetReciterSearch = (clearInput = true) => {
@@ -337,21 +341,25 @@ function hideSurahList() {
   surahList.hidden = true;
 }
 
-function selectSurah(surah) {
+function selectSurah(surah, autoPlay = true) {
   surahSearchInput.value = surah.name;
   surahSearchInput.dataset.selectedValue = surah.value;
   hideSurahList();
 
-  // Load selected surah audio
   audioPlayer.pause();
   audioPlayer.src = surah.value;
   audioPlayer.load();
+
+  if (autoPlay) {
+    audioPlayer.addEventListener("canplay", () => audioPlayer.play(), {
+      once: true,
+    });
+  }
 
   currentUserSelect.surahServer = surah.value;
   currentUserSelect.surahID = surah.id;
   localStorage.setItem("quranSelections", JSON.stringify(currentUserSelect));
 
-  // Keep player.js in sync
   window.dispatchEvent(new CustomEvent("surahListUpdated"));
 }
 
@@ -444,16 +452,17 @@ function onReciterSelected(reciterId) {
   const selectedReciter = allReciters.find((r) => r.id == reciterId);
   if (!selectedReciter) return;
 
-  // Build narration list from reciter's moshaf array
+  // rest drop downs
+  resetNarrationSearch(true);
+  resetSurahSearch(true);
+
+  // then Build narration list from reciter's moshaf array
   allNarrations = selectedReciter.moshaf.map((m) => ({
     id: String(m.id),
     name: m.name,
     server: m.server,
     surahList: m.surah_list,
   }));
-
-  resetNarrationSearch(true);
-  resetSurahSearch(true);
 
   // Auto-select if only one narration available
   if (allNarrations.length === 1) {
@@ -523,72 +532,59 @@ async function initializeData() {
 async function loadPrevSelect() {
   if (!currentUserSelect.reciterID) return;
 
-  try {
-    const res = await fetch(
-      `https://www.mp3quran.net/api/v3/reciters?language=${lang}&reciter=${currentUserSelect.reciterID}`,
-    );
-    const data = await res.json();
-    if (!data.reciters?.[0]) return;
-    const reciter = data.reciters[0];
+  const reciter = allReciters.find(
+    (r) => String(r.id) === String(currentUserSelect.reciterID),
+  );
+  if (!reciter) return;
 
-    // Restore reciter input
-    reciterSearchInput.value = reciter.name;
-    reciterSearchInput.dataset.selectedId = reciter.id;
+  reciterSearchInput.value = reciter.name;
+  reciterSearchInput.dataset.selectedId = reciter.id;
 
-    // Rebuild narration list
-    allNarrations = reciter.moshaf.map((m) => ({
-      id: String(m.id),
-      name: m.name,
-      server: m.server,
-      surahList: m.surah_list,
-    }));
+  allNarrations = reciter.moshaf.map((m) => ({
+    id: String(m.id),
+    name: m.name,
+    server: m.server,
+    surahList: m.surah_list,
+  }));
 
-    // Restore selected narration input
-    const savedNarration = allNarrations.find(
-      (n) => n.id === String(currentUserSelect.narrationID),
-    );
-    if (savedNarration) {
-      narrationSearchInput.value = savedNarration.name;
-      narrationSearchInput.dataset.selectedId = savedNarration.id;
+  const savedNarration = allNarrations.find(
+    (n) => n.id === String(currentUserSelect.narrationID),
+  );
+  if (!savedNarration) return;
 
-      // Rebuild surah list for the saved narration
-      const surahIds = savedNarration.surahList.split(",");
-      allSurahs = [];
-      surahIds.forEach((surahId) => {
-        surahData.suwar.forEach((surahName) => {
-          if (surahName.id == surahId) {
-            const paddedId = String(surahName.id).padStart(3, "0");
-            allSurahs.push({
-              value: `${savedNarration.server}${paddedId}.mp3`,
-              id: String(surahName.id),
-              name: surahName.name,
-              reciter: reciter.name,
-            });
-          }
+  narrationSearchInput.value = savedNarration.name;
+  narrationSearchInput.dataset.selectedId = savedNarration.id;
+
+  const surahIds = savedNarration.surahList.split(",");
+  allSurahs = [];
+  surahIds.forEach((surahId) => {
+    surahData.suwar.forEach((surahName) => {
+      if (surahName.id == surahId) {
+        const paddedId = String(surahName.id).padStart(3, "0");
+        allSurahs.push({
+          value: `${savedNarration.server}${paddedId}.mp3`,
+          id: String(surahName.id),
+          name: surahName.name,
+          reciter: reciter.name,
         });
-      });
-
-      // Sync with player.js
-      window.allSurahs = allSurahs;
-
-      // Restore selected surah input
-      const savedSurah = allSurahs.find(
-        (s) => s.value === currentUserSelect.surahServer,
-      );
-      if (savedSurah) {
-        surahSearchInput.value = savedSurah.name;
-        surahSearchInput.dataset.selectedValue = savedSurah.value;
       }
-    }
+    });
+  });
 
-    audioPlayer.src = currentUserSelect.surahServer;
-    window.dispatchEvent(new CustomEvent("surahListUpdated"));
-  } catch (error) {
-    console.error("Error loading previous selections:", error);
+  window.allSurahs = allSurahs;
+
+  const savedSurah = allSurahs.find(
+    (s) => s.value === currentUserSelect.surahServer,
+  );
+  if (savedSurah) {
+    // autoPlay = false — just restore state silently
+    selectSurah(savedSurah, false);
   }
+
+  window.dispatchEvent(new CustomEvent("surahListUpdated"));
 }
 
-// -- Language change: re-init everything --
+// Language change: re-init
 
 async function onLanguageChange(event) {
   lang = event.detail.lang;
@@ -604,9 +600,6 @@ async function onLanguageChange(event) {
   }
 
   await initializeData();
-
-  const anyEmpty = Object.values(currentUserSelect).some(isEmptyValue);
-  if (!anyEmpty) loadPrevSelect();
 }
 
 // -- Event listeners --
@@ -618,3 +611,5 @@ if (document.readyState === "loading") {
 } else {
   initializeData();
 }
+
+//test if it changes

@@ -83,6 +83,14 @@ muteBtn.addEventListener("click", () => {
   muteBtnIcon.src = audioPlayer.muted ? muteIconUrl.href : unmuteIconUrl.href;
 });
 
+audioPlayer.addEventListener("play", () => {
+  playIcon.src = pauseIconUrl.href;
+});
+
+audioPlayer.addEventListener("pause", () => {
+  playIcon.src = playIconUrl.href;
+});
+
 // -- Progress bar --
 
 audioPlayer.addEventListener("timeupdate", () => {
@@ -207,19 +215,14 @@ prevSurahBtn.addEventListener("click", () => {
 // -- Auto-advance on end --
 
 audioPlayer.addEventListener("ended", () => {
-  playIcon.src = playIconUrl.href;
-
   if (!audioPlayer.loop) {
     const idx = getCurrentSurahIdx();
     const surahs = window.allSurahs || [];
     if (idx !== -1 && idx < surahs.length - 1) {
-      window.selectSurah(surahs[idx + 1]);
+      window.selectSurah(surahs[idx + 1]); // autoPlay defaults to true → next surah plays automatically
     }
   }
-
   updateSurahNavBtns();
 });
-
-// -- Update nav buttons when surah list is rebuilt --
 
 window.addEventListener("surahListUpdated", updateSurahNavBtns);
